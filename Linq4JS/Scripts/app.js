@@ -28,11 +28,6 @@ var Helper = (function () {
 }());
 window.onload = function () {
     Helper.users = new Array();
-    Helper.users.Add(new User(1, "Morris", "Janatzek", 18));
-    Helper.users.Add(new User(2, "Elke", "Janatzek", 54));
-    Helper.users.Add(new User(3, "Noel", "Janatzek", 16));
-    Helper.users.Add(new User(4, "Thomas", "Janatzek", 58));
-    Helper.users.Add(new User(5, "Paul", "Mizel", 40));
     Helper.draw();
 };
 //let test: Array<Linq4JS.Entity> = [new testClass("test", 5, 1), new testClass("test5", 3, 2)];

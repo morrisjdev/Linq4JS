@@ -40,12 +40,6 @@ class Helper {
 window.onload = function () {
     Helper.users = new Array<User>();
 
-    Helper.users.Add(new User(1, "Morris", "Janatzek", 18));
-    Helper.users.Add(new User(2, "Elke", "Janatzek", 54));
-    Helper.users.Add(new User(3, "Noel", "Janatzek", 16));
-    Helper.users.Add(new User(4, "Thomas", "Janatzek", 58));
-    Helper.users.Add(new User(5, "Paul", "Mizel", 40));
-
     Helper.draw();
 };
 
