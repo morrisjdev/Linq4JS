@@ -1,0 +1,43 @@
+[
+  {
+    "outputFileName": "Scripts/Linq4JS.js",
+    "inputFiles": [
+      "Linq4JS/Entity.js",
+      "Linq4JS/OrderEntry.js",
+      "Linq4JS/Helper.js",
+      "Linq4JS/Modules/IArray.js",
+      "Linq4JS/Modules/Clone.js",
+      "Linq4JS/Modules/FindIndex.js",
+      "Linq4JS/Modules/Get.js",
+      "Linq4JS/Modules/ForEach.js",
+      "Linq4JS/Modules/Update.js",
+      "Linq4JS/Modules/UpdateRange.js",
+      "Linq4JS/Modules/Remove.js",
+      "Linq4JS/Modules/RemoveRange.js",
+      "Linq4JS/Modules/Add.js",
+      "Linq4JS/Modules/AddRange.js",
+      "Linq4JS/Modules/Insert.js",
+      "Linq4JS/Modules/Where.js",
+      "Linq4JS/Modules/Range.js",
+      "Linq4JS/Modules/Count.js",
+      "Linq4JS/Modules/Any.js",
+      "Linq4JS/Modules/First.js",
+      "Linq4JS/Modules/FirstOrDefault.js",
+      "Linq4JS/Modules/Last.js",
+      "Linq4JS/Modules/LastOrDefault.js",
+      "Linq4JS/Modules/Select.js",
+      "Linq4JS/Modules/Take.js",
+      "Linq4JS/Modules/Skip.js",
+      "Linq4JS/Modules/OrderBy.js",
+      "Linq4JS/Modules/ThenBy.js",
+      "Linq4JS/Modules/OrderByDescending.js",
+      "Linq4JS/Modules/ThenByDescending.js",
+      "Linq4JS/Modules/Move.js",
+      "Linq4JS/Modules/Distinct.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": false
+    }
+  }
+]

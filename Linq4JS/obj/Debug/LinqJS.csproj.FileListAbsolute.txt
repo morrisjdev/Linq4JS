@@ -1,0 +1,6 @@
+D:\projects\productive\LinqJS\LinqJS\bin\LinqJS.dll.config
+D:\projects\productive\LinqJS\LinqJS\bin\LinqJS.dll
+D:\projects\productive\LinqJS\LinqJS\bin\LinqJS.pdb
+D:\projects\productive\LinqJS\LinqJS\obj\Debug\LinqJS.csprojResolveAssemblyReference.cache
+D:\projects\productive\LinqJS\LinqJS\obj\Debug\LinqJS.dll
+D:\projects\productive\LinqJS\LinqJS\obj\Debug\LinqJS.pdb

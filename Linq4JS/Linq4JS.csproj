@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{137AEAE9-03F9-4C8D-BA4D-5C0AE7175286}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Linq4JS.js" />
+    <Content Include="Scripts\Linq4JS.min.js">
+      <DependentUpon>Linq4JS.js</DependentUpon>
+    </Content>
+    <Content Include="Style\app.css" />
+    <Content Include="index.html" />
+    <Content Include="Frameworks\qunit\qunit.css" />
+    <Content Include="Frameworks\qunit\qunit.js" />
+    <Content Include="Frameworks\qunit\qunit.min.css" />
+    <Content Include="Frameworks\qunit\qunit.min.js" />
+    <Content Include="test.html" />
+    <Content Include="Tests\Add.test.js" />
+    <Content Include="Tests\Any.test.js" />
+    <Content Include="Tests\Count.test.js" />
+    <Content Include="Tests\Linq4JS.test.js" />
+    <Content Include="Tests\Remove.test.js" />
+    <Content Include="Tests\Where.test.js" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Linq4JS\Entity.ts" />
+    <TypeScriptCompile Include="Linq4JS\Helper.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Add.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\AddRange.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Any.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Clone.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Count.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Distinct.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\FindIndex.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\First.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\FirstOrDefault.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\ForEach.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Get.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\IArray.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Insert.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Last.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\LastOrDefault.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Move.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\OrderBy.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\OrderByDescending.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Range.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Remove.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\RemoveRange.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Select.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Skip.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Take.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\ThenBy.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\ThenByDescending.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Update.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\UpdateRange.ts" />
+    <TypeScriptCompile Include="Linq4JS\Modules\Where.ts" />
+    <TypeScriptCompile Include="Linq4JS\OrderEntry.ts" />
+    <TypeScriptCompile Include="Scripts\app.ts" />
+    <TypeScriptCompile Include="Tests\TestClasses.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>LinqJS</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50942</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50942/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
