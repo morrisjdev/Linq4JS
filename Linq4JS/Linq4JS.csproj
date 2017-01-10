@@ -30,10 +30,10 @@
     <Content Include="Linq4JS\License.js" />
     <Content Include="Style\app.css" />
     <Content Include="index.html" />
-    <Content Include="Frameworks\qunit\qunit.css" />
-    <Content Include="Frameworks\qunit\qunit.js" />
-    <Content Include="Frameworks\qunit\qunit.min.css" />
-    <Content Include="Frameworks\qunit\qunit.min.js" />
+    <Content Include="lib\qunit\qunit.css" />
+    <Content Include="lib\qunit\qunit.js" />
+    <Content Include="lib\qunit\qunit.min.css" />
+    <Content Include="lib\qunit\qunit.min.js" />
     <Content Include="test.html" />
     <Content Include="Tests\Add.test.js" />
     <Content Include="Tests\Any.test.js" />
