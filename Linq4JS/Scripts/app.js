@@ -28,6 +28,7 @@ var Helper = (function () {
 }());
 window.onload = function () {
     Helper.users = new Array();
+    Helper.users = Helper.users.Clone();
     Helper.draw();
 };
 //let test: Array<Linq4JS.Entity> = [new testClass("test", 5, 1), new testClass("test5", 3, 2)];

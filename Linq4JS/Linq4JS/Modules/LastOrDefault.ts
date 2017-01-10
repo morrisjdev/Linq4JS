@@ -2,18 +2,18 @@
     let that: Array<T> = this;
 
     if (filter != null) {
-        let result: Array<T> = that.Where<T>(filter);
+        let result: Array<T> = that.Where(filter);
 
-        if (result.Any<T>()) {
-            return result.Get<T>(result.length - 1);
+        if (result.Any()) {
+            return result.Get(result.length - 1);
         }
         else {
             return null;
         }
     }
     else {
-        if (that.Any<T>()) {
-            return that.Get<T>(that.length - 1);
+        if (that.Any()) {
+            return that.Get(that.length - 1);
         }
         else {
             return null;

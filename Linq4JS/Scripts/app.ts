@@ -27,7 +27,7 @@ class Helper {
 
         let innerContent: string = "";
 
-        Helper.users.Select<displayClass>("u => new displayClass(u)").ForEach<displayClass>(function (u: displayClass) {
+        Helper.users.Select("u => new displayClass(u)").ForEach(function (u: displayClass) {
             innerContent += `User: ${u.TestProp} <br>`;
         });
 
@@ -40,9 +40,10 @@ class Helper {
 window.onload = function () {
     Helper.users = new Array<User>();
 
+    Helper.users = Helper.users.Clone();
+
     Helper.draw();
 };
-
 
 //let test: Array<Linq4JS.Entity> = [new testClass("test", 5, 1), new testClass("test5", 3, 2)];
 //console.log(test);

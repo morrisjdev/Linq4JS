@@ -1,5 +1,6 @@
 ﻿namespace Linq4JS {
-    export class OrderEntry{
+    export class OrderEntry implements OrderEntry{
+        test: string;
         Direction: OrderDirection;
         ValueSelector: Function;
 

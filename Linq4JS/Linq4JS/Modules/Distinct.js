@@ -9,7 +9,7 @@ Array.prototype.Distinct = function (valueSelector, takelast) {
         if (takelast == true) {
             var next = temp[i + 1];
             if (next != null) {
-                if (valueSelector(current) != valueSelector(next)) {
+                if (valueSelectorFunction(current) != valueSelectorFunction(next)) {
                     newArray.Add(current);
                 }
             }
@@ -18,7 +18,7 @@ Array.prototype.Distinct = function (valueSelector, takelast) {
             }
         }
         else {
-            if (prev != null && valueSelector(current) == valueSelector(prev)) {
+            if (prev != null && valueSelectorFunction(current) == valueSelectorFunction(prev)) {
                 continue;
             }
             else {

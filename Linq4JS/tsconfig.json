@@ -1,0 +1,13 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "dist/Linq4JS.d.ts"
+  ]
+}

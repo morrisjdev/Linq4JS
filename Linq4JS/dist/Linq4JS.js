@@ -1,7 +1,8 @@
 var Linq4JS;
 (function (Linq4JS) {
     var Entity = (function () {
-        function Entity() {
+        function Entity(_id) {
+            this.Id = _id;
         }
         return Entity;
     }());
@@ -420,7 +421,7 @@ Array.prototype.Skip = function (count) {
 Array.prototype.OrderBy = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
-    var ordered = that;
+    var ordered = that.Clone();
     ordered.Order = new Array(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Ascending, valueSelectorFunction));
     return ordered.sort(function (a, b) {
         return Linq4JS.Helper.OrderCompareFunction(valueSelectorFunction, a, b, false);
@@ -430,6 +431,9 @@ Array.prototype.OrderBy = function (valueSelector) {
 Array.prototype.ThenBy = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
+    if (that.Order == null || that.Order.Count() == 0) {
+        throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenBy";
+    }
     var ordered = that;
     ordered.Order.Add(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Ascending, valueSelectorFunction));
     return ordered.sort(function (a, b) {
@@ -447,7 +451,7 @@ Array.prototype.ThenBy = function (valueSelector) {
 Array.prototype.OrderByDescending = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
-    var ordered = that;
+    var ordered = that.Clone();
     ordered.Order = new Array(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Descending, valueSelectorFunction));
     return ordered.sort(function (a, b) {
         return Linq4JS.Helper.OrderCompareFunction(valueSelectorFunction, a, b, true);
@@ -457,6 +461,9 @@ Array.prototype.OrderByDescending = function (valueSelector) {
 Array.prototype.ThenByDescending = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
+    if (that.Order == null || that.Order.Count() == 0) {
+        throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending";
+    }
     var ordered = that;
     ordered.Order.Add(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Descending, valueSelectorFunction));
     return ordered.sort(function (a, b) {
@@ -488,7 +495,7 @@ Array.prototype.Distinct = function (valueSelector, takelast) {
         if (takelast == true) {
             var next = temp[i + 1];
             if (next != null) {
-                if (valueSelector(current) != valueSelector(next)) {
+                if (valueSelectorFunction(current) != valueSelectorFunction(next)) {
                     newArray.Add(current);
                 }
             }
@@ -497,7 +504,7 @@ Array.prototype.Distinct = function (valueSelector, takelast) {
             }
         }
         else {
-            if (prev != null && valueSelector(current) == valueSelector(prev)) {
+            if (prev != null && valueSelectorFunction(current) == valueSelectorFunction(prev)) {
                 continue;
             }
             else {

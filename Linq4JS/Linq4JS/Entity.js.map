@@ -1,1 +1,1 @@
-{"version":3,"file":"Entity.js","sourceRoot":"","sources":["Entity.ts"],"names":[],"mappings":"AAAA,IAAU,OAAO,CAIhB;AAJD,WAAU,OAAO,EAAC,CAAC;IACf;QAAA;QAEA,CAAC;QAAD,aAAC;IAAD,CAAC,AAFD,IAEC;IAFY,cAAM,SAElB,CAAA;AACL,CAAC,EAJS,OAAO,KAAP,OAAO,QAIhB"}
+{"version":3,"file":"Entity.js","sourceRoot":"","sources":["Entity.ts"],"names":[],"mappings":"AAAA,IAAU,OAAO,CAQhB;AARD,WAAU,OAAO,EAAC,CAAC;IACf;QACI,gBAAY,GAAW;YACnB,IAAI,CAAC,EAAE,GAAG,GAAG,CAAC;QAClB,CAAC;QAGL,aAAC;IAAD,CAAC,AAND,IAMC;IANY,cAAM,SAMlB,CAAA;AACL,CAAC,EARS,OAAO,KAAP,OAAO,QAQhB"}

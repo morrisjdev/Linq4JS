@@ -1,7 +1,8 @@
 var Linq4JS;
 (function (Linq4JS) {
     var Entity = (function () {
-        function Entity() {
+        function Entity(_id) {
+            this.Id = _id;
         }
         return Entity;
     }());

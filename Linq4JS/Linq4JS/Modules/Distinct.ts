@@ -3,7 +3,7 @@
 
     let valueSelectorFunction: Function = Linq4JS.Helper.ConvertFunction(valueSelector);
 
-    let temp: Array<T> = that.OrderBy<T>(valueSelectorFunction);
+    let temp: Array<T> = that.OrderBy(valueSelectorFunction);
     let newArray: Array<T> = new Array<T>();
     let prev: T;
 
@@ -14,7 +14,7 @@
             let next: T = temp[i + 1];
 
             if (next != null) {
-                if (valueSelector(current) != valueSelector(next)) {
+                if (valueSelectorFunction(current) != valueSelectorFunction(next)) {
                     newArray.Add(current);
                 }
             }
@@ -23,7 +23,7 @@
             }
         }
         else {
-            if (prev != null && valueSelector(current) == valueSelector(prev)) {
+            if (prev != null && valueSelectorFunction(current) == valueSelectorFunction(prev)) {
                 continue;
             }
             else {

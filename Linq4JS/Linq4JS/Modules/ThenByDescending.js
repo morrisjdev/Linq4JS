@@ -1,6 +1,9 @@
 Array.prototype.ThenByDescending = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
+    if (that.Order == null || that.Order.Count() == 0) {
+        throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending";
+    }
     var ordered = that;
     ordered.Order.Add(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Descending, valueSelectorFunction));
     return ordered.sort(function (a, b) {

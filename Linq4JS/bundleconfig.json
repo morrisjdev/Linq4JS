@@ -1,11 +1,11 @@
 [
   {
-    "outputFileName": "Scripts/Linq4JS.js",
+    "outputFileName": "dist/Linq4JS.js",
     "inputFiles": [
       "Linq4JS/Entity.js",
       "Linq4JS/OrderEntry.js",
       "Linq4JS/Helper.js",
-      "Linq4JS/Modules/IArray.js",
+      "Linq4JS/IArray.js",
       "Linq4JS/Modules/Clone.js",
       "Linq4JS/Modules/FindIndex.js",
       "Linq4JS/Modules/Get.js",

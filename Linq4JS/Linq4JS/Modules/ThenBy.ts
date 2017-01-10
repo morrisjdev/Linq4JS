@@ -3,6 +3,10 @@
 
     let valueSelectorFunction: Function = Linq4JS.Helper.ConvertFunction(valueSelector);
 
+    if (that.Order == null || that.Order.Count() == 0) {
+        throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenBy";
+    }
+
     let ordered: Array<T> = that;
     ordered.Order.Add(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Ascending, valueSelectorFunction));
 

@@ -23,8 +23,8 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\Linq4JS.js" />
-    <Content Include="Scripts\Linq4JS.min.js">
+    <Content Include="dist\Linq4JS.js" />
+    <Content Include="dist\Linq4JS.min.js">
       <DependentUpon>Linq4JS.js</DependentUpon>
     </Content>
     <Content Include="Style\app.css" />
@@ -45,6 +45,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Linq4JS\Entity.ts" />
     <TypeScriptCompile Include="Linq4JS\Helper.ts" />
+    <TypeScriptCompile Include="dist\Linq4JS.d.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\Add.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\AddRange.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\Any.ts" />
@@ -56,7 +57,7 @@
     <TypeScriptCompile Include="Linq4JS\Modules\FirstOrDefault.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\ForEach.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\Get.ts" />
-    <TypeScriptCompile Include="Linq4JS\Modules\IArray.ts" />
+    <TypeScriptCompile Include="Linq4JS\IArray.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\Insert.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\Last.ts" />
     <TypeScriptCompile Include="Linq4JS\Modules\LastOrDefault.ts" />
@@ -80,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <Content Include="tsconfig.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
