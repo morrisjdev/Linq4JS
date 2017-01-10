@@ -1,3 +1,4 @@
+/*! Linq4JS | (c) Morris Janatzek */
 var Linq4JS;
 (function (Linq4JS) {
     var Entity = (function () {

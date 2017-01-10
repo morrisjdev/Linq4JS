@@ -27,6 +27,7 @@
     <Content Include="dist\Linq4JS.min.js">
       <DependentUpon>Linq4JS.js</DependentUpon>
     </Content>
+    <Content Include="Linq4JS\License.js" />
     <Content Include="Style\app.css" />
     <Content Include="index.html" />
     <Content Include="Frameworks\qunit\qunit.css" />

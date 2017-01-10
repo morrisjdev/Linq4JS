@@ -2,6 +2,7 @@
   {
     "outputFileName": "dist/Linq4JS.js",
     "inputFiles": [
+      "Linq4JS/License.js",
       "Linq4JS/Entity.js",
       "Linq4JS/OrderEntry.js",
       "Linq4JS/Helper.js",
