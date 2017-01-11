@@ -1,0 +1,12 @@
+D:\projects\productive\Linq4JS\Linq4JS\bin\Linq4JS.dll.config
+D:\projects\productive\Linq4JS\Linq4JS\bin\Linq4JS.dll
+D:\projects\productive\Linq4JS\Linq4JS\bin\Linq4JS.pdb
+D:\projects\productive\Linq4JS\Linq4JS\obj\Debug\Linq4JS.csprojResolveAssemblyReference.cache
+D:\projects\productive\Linq4JS\Linq4JS\obj\Debug\Linq4JS.dll
+D:\projects\productive\Linq4JS\Linq4JS\obj\Debug\Linq4JS.pdb
+D:\projects\productive\Linq4JS\dev\Linq4JS\bin\Linq4JS.dll.config
+D:\projects\productive\Linq4JS\dev\Linq4JS\bin\Linq4JS.dll
+D:\projects\productive\Linq4JS\dev\Linq4JS\bin\Linq4JS.pdb
+D:\projects\productive\Linq4JS\dev\Linq4JS\obj\Debug\Linq4JS.csprojResolveAssemblyReference.cache
+D:\projects\productive\Linq4JS\dev\Linq4JS\obj\Debug\Linq4JS.dll
+D:\projects\productive\Linq4JS\dev\Linq4JS\obj\Debug\Linq4JS.pdb

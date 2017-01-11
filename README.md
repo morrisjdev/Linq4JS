@@ -1,7 +1,6 @@
 # Linq4JS
 Linq methods for JavaScript/TypeScript for working with Arrays
 
-
 This simple Extension works with array of complex Objects as well as simple arrays of strings etc. The whole thing is written in TypeScript but also usable in JavaScript
 
 ## Advantages
@@ -37,6 +36,12 @@ Conclusion:
 * Syntax from .NET
 
 ## Getting Started
+
+### Install using NPM
+
+```
+npm install linq4js
+```
 
 ### Using JavaScript
 
