@@ -34,7 +34,7 @@ Conclusion:
 * Angular Support (event directly in Views if using Strings as Expression-Syntax)
 * Lightweight
 * Fast
-* Syntax from .NET
+* .NET Syntax
 
 ## Getting Started
 
