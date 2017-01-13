@@ -44,6 +44,12 @@ Conclusion:
 npm install linq4js
 ```
 
+### Install using Bower
+
+```
+bower install linq4js
+```
+
 ### Using JavaScript
 
 Include this Line in your Project
