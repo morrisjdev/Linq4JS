@@ -20,7 +20,11 @@
     "node_modules",
     "lib",
     "test",
-    "demo"
+    "demo",
+    ".gitignore",
+    ".npmignore",
+    "gulpfile.js",
+    "package.json"
   ],
   "devDependencies": {
     "qunit": "^2.1.1"
