@@ -1,0 +1,28 @@
+{
+  "name": "linq4js",
+  "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
+  "main": "dist/linq4js.js",
+  "authors": [
+    "Morris Janatzek"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Linq",
+    ".NET",
+    "TypeScript",
+    "JavaScript",
+    "Array",
+    "Sorting"
+  ],
+  "homepage": "https://github.com/morrisjdev/Linq4JS",
+  "ignore": [
+    ".vscode",
+    "node_modules",
+    "lib",
+    "test",
+    "demo"
+  ],
+  "devDependencies": {
+    "qunit": "^2.1.1"
+  }
+}

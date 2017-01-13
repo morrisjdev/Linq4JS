@@ -1,10 +1,18 @@
-﻿// Type definitions for Linq4JS
-// Project: https://github.com/morrisjdev/Linq4JS
-// Definitions by: Morris Janatzek <http://morrisj.net>
-
+declare namespace Linq4JS {
+    class Entity implements Entity {
+        constructor(_id: number);
+        Id: number;
+    }
+}
+declare namespace Linq4JS {
+    class Helper implements Helper {
+        static ConvertStringFunction: Function;
+        static ConvertFunction: Function;
+        static OrderCompareFunction: Function;
+    }
+}
 interface Array<T> {
     Order: Array<Linq4JS.OrderEntry>;
-
     Clone(): Array<T>;
     FindIndex(filter: any): number;
     Get(index: number): T;
@@ -34,26 +42,15 @@ interface Array<T> {
     Move(oldIndex: number, newIndex: number): Array<T>;
     Distinct(valueSelector: any, takelast?: boolean): Array<T>;
 }
-
 declare namespace Linq4JS {
-    class Entity {
-        constructor(_id: number);
-        Id: number;
-    }
-
-    class Helper {
-        ConvertStringFunction(functionString: string): Function;
-        ConvertFunction(testFunction: any): Function;
-        OrderCompareFunction(valueSelector: Function, a: Linq4JS.Entity, b: Linq4JS.Entity, invert: boolean): number;
-    }
-
-    class OrderEntry {
-        constructor(_direction: OrderDirection, _valueSelector: Function);
+    class OrderEntry implements OrderEntry {
+        test: string;
         Direction: OrderDirection;
         ValueSelector: Function;
+        constructor(_direction: OrderDirection, _valueSelector: Function);
     }
-
     enum OrderDirection {
-        Ascending, Descending
+        Ascending = 0,
+        Descending = 1,
     }
 }
