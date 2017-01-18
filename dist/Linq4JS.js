@@ -103,9 +103,25 @@ var Linq4JS;
         OrderDirection[OrderDirection["Descending"] = 1] = "Descending";
     })(OrderDirection = Linq4JS.OrderDirection || (Linq4JS.OrderDirection = {}));
 })(Linq4JS || (Linq4JS = {}));
-Array.prototype.Add = function (object) {
+Array.prototype.Add = function (object, generateId) {
     var that = this;
     if (object != null) {
+        if (generateId == true) {
+            var newIndex_1;
+            var last = that.LastOrDefault();
+            if (last != null) {
+                newIndex_1 = last["_Id"] != null ? last["_Id"] : 1;
+                while (that.Any(function (x) {
+                    return x["_Id"] == newIndex_1;
+                })) {
+                    newIndex_1++;
+                }
+                object["_Id"] = newIndex_1;
+            }
+            else {
+                object["_Id"] = 1;
+            }
+        }
         that.push(object);
     }
     return that;

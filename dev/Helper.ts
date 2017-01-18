@@ -1,5 +1,5 @@
 ﻿namespace Linq4JS {
-    export class Helper implements Helper {
+    export class Helper {
         static ConvertStringFunction: Function = function (functionString: string): Function {
 
             if (functionString.length == 0) {

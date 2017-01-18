@@ -9,7 +9,7 @@
     UpdateRange(objects: Array<T>, primaryKeySelector?: any): Array<T>;
     Remove(object: T, primaryKeySelector?: any): Array<T>;
     RemoveRange(objects: Array<T>, primaryKeySelector?: any): Array<T>;
-    Add(object: T): Array<T>;
+    Add(object: T, generateId?: boolean): Array<T>;
     AddRange(objects: Array<T>): Array<T>;
     Insert(object: T, index: number): Array<T>;
     Where(filter: any): Array<T>;

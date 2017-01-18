@@ -29,7 +29,7 @@ gulp.task("testts", function () {
         .pipe(gulp.dest("test"));
 });
 
-gulp.task("typescriptRelease", function () {
+gulp.task("typescript", function () {
     var tsResult = gulp.src("dev/**/*.ts")
         .pipe(typescript({
             declaration: true,
@@ -42,7 +42,7 @@ gulp.task("typescriptRelease", function () {
     ]);
 });
 
-gulp.task("minifyJS", ["typescriptRelease"], function () {
+gulp.task("minifyJS", ["typescript"], function () {
     return gulp.src(["dist/**/*.js", "!dist/**/*.min.js"])
         .pipe(minify({
             ext: {
@@ -59,13 +59,13 @@ gulp.task("minifyJS", ["typescriptRelease"], function () {
 gulp.task("browsersync", function () {
     browsersync.init({
         proxy: {
-            target: "localhost:15222",
+            target: "localhost:15666",
             ws: true
         },
         ui: {
-            port: 15224
+            port: 15668
         },
-        port: 15223,
+        port: 15667,
         open: false,
         notify: false
     });
@@ -73,12 +73,12 @@ gulp.task("browsersync", function () {
 
 gulp.task("server", ["browsersync"], function () {
     connect.server({
-        port: 15222
+        port: 15666
     });
 
     gulp.watch("demo/**/*.ts", ["demots"]);
     gulp.watch("test/**/*.ts", ["testts"]);
-    gulp.watch("js/**/*.ts", ["typescript"]);
+    gulp.watch("dev/**/*.ts", ["typescript"]);
 
     gulp.watch("**/*.html").on("change", browsersync.reload);
     gulp.watch("dist/**/*.js").on("change", browsersync.reload);
