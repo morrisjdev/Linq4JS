@@ -15,6 +15,7 @@
     Where(filter: any): Array<T>;
     Range(start: number, length: number): Array<T>;
     Count(filter?: any): number;
+    All(filter: any): boolean;
     Any(filter?: any): boolean;
     First(filter?: any): T;
     FirstOrDefault(filter?: any): T;
@@ -29,4 +30,10 @@
     ThenByDescending(valueSelector: any): Array<T>;
     Move(oldIndex: number, newIndex: number): Array<T>;
     Distinct(valueSelector: any, takelast?: boolean): Array<T>;
+    Contains(object: T): boolean;
+    Concat(array: Array<T>): Array<T>;
+    Join(character: string, selector?: any): string;
+    Aggregate(method: any): string;
+    Reverse(): Array<T>;
+    Average(selector?: any, filter?: any): number;
 }

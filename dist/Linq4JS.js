@@ -19,15 +19,17 @@ var Linq4JS;
         if (functionString.length == 0) {
             throw "Linq4JS: Cannot convert empty string to function";
         }
-        var varname = functionString.substring(0, functionString.indexOf("=>")).replace(" ", "");
-        if (varname.indexOf(",") != -1) {
-            throw "Linq4JS: Cannot use '" + varname + "' as variable";
-        }
+        var varnameString = functionString.substring(0, functionString.indexOf("=>")).replace(" ", "").replace("(", "").replace(")", "");
+        var varnames = varnameString.split(",");
         var func = functionString
             .substring(functionString.indexOf("=>") + 2)
+            .replace("{", "").replace("}", "")
             .split(".match(//gi)").join("");
-        func = "return " + func;
-        return Function(varname, func);
+        /*No return outside of quotations*/
+        if (func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null) {
+            func = "return " + func;
+        }
+        return Function.apply(void 0, varnames.concat([func]));
     };
     Helper.ConvertFunction = function (testFunction) {
         var result;
@@ -133,9 +135,37 @@ Array.prototype.AddRange = function (objects) {
     });
     return that;
 };
+Array.prototype.Aggregate = function (method) {
+    var that = this;
+    var result = "";
+    var methodFunction = Linq4JS.Helper.ConvertFunction(method);
+    that.ForEach(function (x) {
+        result = methodFunction(result, x);
+    });
+    return result;
+};
+Array.prototype.All = function (filter) {
+    var that = this;
+    return that.Count(filter) == that.Count();
+};
 Array.prototype.Any = function (filter) {
     var that = this;
     return that.Count(filter) > 0;
+};
+Array.prototype.Average = function (selector, filter) {
+    var that = this;
+    var result = 0;
+    var array = that;
+    if (filter != null) {
+        array = array.Where(filter);
+    }
+    if (selector != null) {
+        array = array.Select(selector);
+    }
+    array.ForEach(function (x) {
+        result += x;
+    });
+    return result / array.Count();
 };
 Array.prototype.Clone = function () {
     var that = this;
@@ -145,6 +175,17 @@ Array.prototype.Clone = function () {
         newArray.Add(obj);
     }
     return newArray;
+};
+Array.prototype.Concat = function (array) {
+    var that = this;
+    that = that.concat(array);
+    return that;
+};
+Array.prototype.Contains = function (object) {
+    var that = this;
+    return that.Any(function (x) {
+        return x == object;
+    });
 };
 Array.prototype.Count = function (filter) {
     var that = this;
@@ -259,6 +300,14 @@ Array.prototype.Insert = function (object, index) {
     var that = this;
     that.splice(index, 0, object);
     return that;
+};
+Array.prototype.Join = function (char, selector) {
+    var that = this;
+    var array = that;
+    if (selector != null) {
+        array = array.Select(selector);
+    }
+    return array.join(char);
 };
 Array.prototype.Last = function (filter) {
     var that = this;
@@ -375,6 +424,10 @@ Array.prototype.RemoveRange = function (objects, primaryKeySelector) {
         });
     }
     return that;
+};
+Array.prototype.Reverse = function () {
+    var that = this;
+    return that.reverse();
 };
 Array.prototype.Select = function (selector) {
     var that = this;

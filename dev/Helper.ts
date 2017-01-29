@@ -6,19 +6,21 @@
                 throw "Linq4JS: Cannot convert empty string to function";
             }
 
-            let varname: string = functionString.substring(0, functionString.indexOf("=>")).replace(" ", "");
+            let varnameString: string = functionString.substring(0, functionString.indexOf("=>")).replace(" ", "").replace("(", "").replace(")", "");
 
-            if (varname.indexOf(",") != -1) {
-                throw `Linq4JS: Cannot use '${varname}' as variable`;
-            }
+            let varnames: Array<string> = varnameString.split(",");
 
             let func: string = functionString
                 .substring(functionString.indexOf("=>") + 2)
+                .replace("{", "").replace("}", "")
                 .split(".match(//gi)").join("");
 
-            func = "return " + func;
+            /*No return outside of quotations*/
+            if(func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null){
+                func = "return " + func;
+            }
 
-            return Function(varname, func);
+            return Function(...varnames, func);
         }
 
         static ConvertFunction: Function = function (testFunction: any): Function {
