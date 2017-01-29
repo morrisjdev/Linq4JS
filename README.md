@@ -242,6 +242,96 @@ array.Any("i => i.length > 2");
 array.Any("i => i == ''");
 ```
 
+### All
+
+Tests if all items in the array match the condition
+
+```javascript
+var array = ["item1", "item2", "item3", "item4", "no"];
+
+//false
+array.All("i => i.length > 2");
+```
+
+### Contains
+
+Tests if array contains specific object
+
+```javascript
+var array = ["item1", "item2", "item3", "item4", "no"];
+
+//false
+array.Contains("test");
+```
+
+### Concat
+
+Combines two arrays
+
+```javascript
+var array = ["item1", "item2", "item3"];
+var array2 = ["item4", "no"];
+
+//["item1", "item2", "item3", "item4", "no"]
+array.Concat(array2);
+```
+
+### Join
+
+Joins the entries by the given char
+
+```javascript
+var array = ["item1", "item2", "item3", "item4", "no"];
+
+//item1-item2-item3-item4-no
+array.Join("-");
+
+//item1-item2-item3-item4
+array.Join("-", "x => x.length > 2");
+```
+
+### Aggregate
+
+Combines the entries by your definition
+
+```javascript
+var array = ["item1", "item2", "item3", "item4", "no"];
+
+//no-item4-item3-item2-item1
+array.Aggregate("(str, item) => item + '-' + item");
+```
+
+### Reverse
+
+Reverses the array
+
+```javascript
+var array = ["item1", "item2", "item3", "item4", "no"];
+
+//["no", "item4", "item3", "item2", "item1"]
+array.Reverse();
+```
+
+### Average
+
+Computes the average of the elements
+
+```javascript
+var array = [{val: 5}, {val: 3}, {val: 1}];
+
+//3
+array.Average("x => x.val");
+
+//4
+array.Average("x => x.val", "x => x.val > 1");
+
+
+var array2 = [3, 4, 5];
+
+//4
+array2.Average();
+```
+
 ### First
 
 Returns the First item of the array and if a filter was set the first item that matches the filter - Throws an Exception if no item was found
