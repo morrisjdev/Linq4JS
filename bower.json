@@ -1,7 +1,7 @@
 {
   "name": "linq4js",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
-  "main": "dist/linq4js.js",
+  "main": "dist/Linq4JS.js",
   "authors": [
     "Morris Janatzek"
   ],
