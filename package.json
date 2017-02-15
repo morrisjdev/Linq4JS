@@ -1,6 +1,6 @@
 {
   "name": "linq4js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
   "main": "dist/Linq4JS.js",
   "typings": "dist/Linq4JS.d.ts",
@@ -27,14 +27,8 @@
   "devDependencies": {
     "browser-sync": "^2.18.6",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-clean-css": "^2.3.2",
-    "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
-    "gulp-connect-php": "0.0.8",
-    "gulp-less": "^3.3.0",
     "gulp-minify": "0.0.14",
-    "gulp-rename": "^1.2.2",
     "gulp-typescript": "^3.1.4",
     "merge2": "^1.0.3",
     "typescript": "^2.1.5"

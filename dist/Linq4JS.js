@@ -296,6 +296,33 @@ Array.prototype.Get = function (index) {
     var that = this;
     return that[index];
 };
+Array.prototype.GroupBy = function (selector) {
+    var that = this;
+    var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
+    var newArray = new Array();
+    var ordered = that.OrderBy(selectorFunction);
+    var prev;
+    var newSub = new Array();
+    ordered.ForEach(function (x) {
+        if (prev != null) {
+            if (selectorFunction(prev) != selectorFunction(x)) {
+                newArray.Add(newSub);
+                newSub = new Array();
+            }
+            else {
+                newSub.Add(x);
+            }
+        }
+        else {
+            newSub.Add(x);
+            prev = x;
+        }
+    });
+    if (newSub.Count() > 0) {
+        newArray.Add(newSub);
+    }
+    return newArray;
+};
 Array.prototype.Insert = function (object, index) {
     var that = this;
     that.splice(index, 0, object);
@@ -442,6 +469,21 @@ Array.prototype.Select = function (selector) {
 Array.prototype.Skip = function (count) {
     var that = this;
     return that.slice(count, that.Count());
+};
+Array.prototype.Sum = function (selector, filter) {
+    var that = this;
+    var result = 0;
+    var array = that;
+    if (filter != null) {
+        array = array.Where(filter);
+    }
+    if (selector != null) {
+        array = array.Select(selector);
+    }
+    array.ForEach(function (x) {
+        result += x;
+    });
+    return result;
 };
 Array.prototype.Take = function (count) {
     var that = this;

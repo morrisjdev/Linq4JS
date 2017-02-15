@@ -1,5 +1,5 @@
 declare namespace Linq4JS {
-    class Entity implements Entity {
+    class Entity {
         constructor(_id: number);
         Id: number;
     }
@@ -40,6 +40,7 @@ interface Array<T> {
     ThenBy(valueSelector: any): Array<T>;
     OrderByDescending(valueSelector: any): Array<T>;
     ThenByDescending(valueSelector: any): Array<T>;
+    GroupBy(selector: any): Array<Array<T>>;
     Move(oldIndex: number, newIndex: number): Array<T>;
     Distinct(valueSelector: any, takelast?: boolean): Array<T>;
     Contains(object: T): boolean;
@@ -48,6 +49,7 @@ interface Array<T> {
     Aggregate(method: any): string;
     Reverse(): Array<T>;
     Average(selector?: any, filter?: any): number;
+    Sum(selector?: any, filter?: any): number;
 }
 declare namespace Linq4JS {
     class OrderEntry {

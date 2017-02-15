@@ -1,12 +1,7 @@
-var gulp = require('gulp');
+var gulp = require("gulp");
 
 var minify = require("gulp-minify");
-var concat = require("gulp-concat");
-var rename = require("gulp-rename");
-var less = require("gulp-less");
-var cleancss = require("gulp-clean-css");
 var typescript = require("gulp-typescript");
-var autoprefixer = require("gulp-autoprefixer");
 var merge = require("merge2");
 
 var browsersync = require("browser-sync").create();
@@ -80,7 +75,7 @@ gulp.task("server", ["browsersync"], function () {
     gulp.watch("test/**/*.ts", ["testts"]);
     gulp.watch("dev/**/*.ts", ["typescript"]);
 
-    gulp.watch("**/*.html").on("change", browsersync.reload);
+    gulp.watch("demo/**/*.html").on("change", browsersync.reload);
     gulp.watch("dist/**/*.js").on("change", browsersync.reload);
     gulp.watch("demo/**/*.js").on("change", browsersync.reload);
     gulp.watch("test/**/*.js").on("change", browsersync.reload);
