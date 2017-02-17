@@ -1,5 +1,6 @@
 ﻿interface Array<T> {
     Order: Array<Linq4JS.OrderEntry>;
+    GroupValue: any;
 
     Clone(): Array<T>;
     FindIndex(filter: any): number;

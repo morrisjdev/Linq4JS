@@ -308,15 +308,14 @@ Array.prototype.GroupBy = function (selector) {
             if (selectorFunction(prev) != selectorFunction(x)) {
                 newArray.Add(newSub);
                 newSub = new Array();
-            }
-            else {
-                newSub.Add(x);
+                newSub.GroupValue = selectorFunction(x);
             }
         }
         else {
-            newSub.Add(x);
-            prev = x;
+            newSub.GroupValue = selectorFunction(x);
         }
+        newSub.Add(x);
+        prev = x;
     });
     if (newSub.Count() > 0) {
         newArray.Add(newSub);

@@ -332,6 +332,26 @@ var array2 = [3, 4, 5];
 array2.Average();
 ```
 
+### Sum
+
+Computes the sum of the elements
+
+```javascript
+var array = [{val: 5}, {val: 3}, {val: 1}];
+
+//9
+array.Sum("x => x.val");
+
+//8
+array.Sum("x => x.val", "x => x.val > 1");
+
+
+var array2 = [3, 4, 5];
+
+//12
+array2.Sum();
+```
+
 ### First
 
 Returns the First item of the array and if a filter was set the first item that matches the filter - Throws an Exception if no item was found
@@ -434,6 +454,25 @@ var array = ["item1", "item2", "item3", "item4"];
 
 //["item3", "item4"]
 array.Skip(2);
+```
+
+### GroupBy
+
+Group Array by Property
+
+```javascript
+var array = [
+	{name: "Max", age: 17},
+	{name: "Emily", age: 54},
+	{name: "max", age: 32},
+	{name: "emily", age: 12}
+];
+
+//[
+//	[{name: "Emily", age: 54},{name: "emily", age: 12}],
+//	[{name: "Max", age: 17},{name: "max", age: 32}]
+//]
+array.GroupBy("i => i.name.toLowerCase()");
 ```
 
 ### OrderBy & OrderByDescending
