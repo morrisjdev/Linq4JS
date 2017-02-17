@@ -4,7 +4,11 @@
     let actionFunction: Function = Linq4JS.Helper.ConvertFunction(action);
 
     for (let obj of that) {
-        actionFunction(obj);
+        let result = actionFunction(obj);
+
+        if(result != null && result == true){
+            break;
+        }
     }
 
     return that;

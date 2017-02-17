@@ -1,6 +1,6 @@
 {
   "name": "linq4js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
   "main": "dist/Linq4JS.js",
   "typings": "dist/Linq4JS.d.ts",

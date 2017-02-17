@@ -30,7 +30,7 @@ array.Where("x => x.Name == 'Max'");
 
 Conclusion:
 
-* Works with multiple Browsers
+* Works with multiple Browsers (even IE)
 * Angular Support (event directly in Views if using Strings as Expression-Syntax)
 * Lightweight
 * Fast
