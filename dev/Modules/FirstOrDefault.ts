@@ -1,4 +1,4 @@
-﻿Array.prototype.FirstOrDefault = function<T> (filter?: any): T {
+﻿Array.prototype.FirstOrDefault = function<T> (filter?: ((item: T) => boolean) | string): T {
     let that: Array<T> = this;
 
     if (filter != null) {

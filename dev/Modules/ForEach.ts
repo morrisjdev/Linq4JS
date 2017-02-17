@@ -1,7 +1,7 @@
-﻿Array.prototype.ForEach = function<T> (action: any): Array<T> {
+﻿Array.prototype.ForEach = function<T> (action: ((item: T) => boolean | any) | string): Array<T> {
     let that: Array<T> = this;
 
-    let actionFunction: Function = Linq4JS.Helper.ConvertFunction(action);
+    let actionFunction = Linq4JS.Helper.ConvertFunction<(item: T) => boolean | any>(action);
 
     for (let obj of that) {
         let result = actionFunction(obj);

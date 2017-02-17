@@ -1,10 +1,9 @@
 ﻿namespace Linq4JS {
     export class OrderEntry{
-        test: string;
         Direction: OrderDirection;
-        ValueSelector: Function;
+        ValueSelector: (item: any) => any;
 
-        constructor(_direction: OrderDirection, _valueSelector: Function) {
+        constructor(_direction: OrderDirection, _valueSelector: (item: any) => any) {
             this.Direction = _direction;
             this.ValueSelector = _valueSelector;
         }

@@ -1,7 +1,7 @@
-﻿Array.prototype.GroupBy = function<T> (selector: any): Array<Array<T>> {
+﻿Array.prototype.GroupBy = function<T> (selector: ((item: T) => any) | string): Array<Array<T>> {
     let that: Array<T> = this;
 
-    let selectorFunction: Function = Linq4JS.Helper.ConvertFunction(selector);
+    let selectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(selector);
 
     let newArray: Array<Array<T>> = new Array();
 

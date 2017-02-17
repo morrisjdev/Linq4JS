@@ -1,13 +1,13 @@
-﻿Array.prototype.FindIndex = function<T> (filter: any): number {
+﻿Array.prototype.FindIndex = function<T> (filter: ((item: T) => boolean) | string): number {
     let that: Array<T> = this;
 
     if (filter != null) {
-        let filterFunction: Function = Linq4JS.Helper.ConvertFunction(filter);
+        let filterFunction = Linq4JS.Helper.ConvertFunction<(item: T) => boolean>(filter);
 
         for (let i = 0; i < that.length; i++) {
             let obj: T = that[i];
 
-            if (filter(obj) == true) {
+            if (filterFunction(obj) == true) {
                 return i;
             }
         }

@@ -97,6 +97,17 @@ var array = ["item1", "item2", "item3", "item4", "no"];
 array.Get(2);
 ```
 
+### Repeat
+
+Repeats an object in the array
+
+```javascript
+var array = ["item1", "item2", "item3", "item4"];
+
+//["item1", "item2", "item3", "item4", "example", "example", "example"]
+array.Repeat("example", 3);
+```
+
 ### ForEach
 
 Executes a method for each item in the array
@@ -225,6 +236,22 @@ array.Count();
 array.Count("i => i.match(/item/gi)");
 ```
 
+### SequenceEqual
+
+Compares to sequences of objects
+
+```javascript
+var array = ["item1", "item2", "item3"];
+var array2 = ["item1", "item2", "item3"];
+var array3 = ["item", "item2", "item3"];
+
+//true
+array.SequenceEqual(array2);
+
+//false
+array.SequenceEqual(array3);
+```
+
 ### Any
 
 Tests if any item is in the array and if set matches the filter
@@ -276,6 +303,30 @@ var array2 = ["item4", "no"];
 array.Concat(array2);
 ```
 
+### Intersect
+
+Combines two arrays but only applies values that are in both arrays
+
+```javascript
+var array = ["item1", "item2", "item3"];
+var array2 = ["item1", "unique", "item2", "item3"];
+
+//["item1", "item2", "item3"]
+array.Intersect(array2);
+```
+
+### Union
+
+Combines two arrays without duplicates
+
+```javascript
+var array = ["item1", "item2", "item3"];
+var array2 = ["item1", "unique", "item2", "item3"];
+
+//["item1", "item2", "item3", "unique"]
+array.Union(array2);
+```
+
 ### Join
 
 Joins the entries by the given char
@@ -292,13 +343,39 @@ array.Join("-", "x => x.length > 2");
 
 ### Aggregate
 
-Combines the entries by your definition
+Combines the entries using a custom function
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
 
 //no-item4-item3-item2-item1
 array.Aggregate("(str, item) => item + '-' + item");
+```
+
+### ToDictionary
+
+Converts the array to a dictionary
+
+```javascript
+var array = [{OtherId: 1, Value: "item1"}, {OtherId: 2, Value: "item2"}];
+
+//{1: {OtherId: 1, Value: "item1"}, 2: {OtherId: 2, Value: "item2"}}
+array.ToDictionary("x => x.OtherId");
+
+//{1: "item1", 2: "item2"}
+array.ToDictionary("x => x.OtherId", "x => x.Value");
+```
+
+### Zip
+
+Combines the entries of two arrays using a custom function
+
+```javascript
+var array = [0, 1, 2, 3, 4];
+var array2 = ["zero", "one", "two", "three"];
+
+//["0 zero", "1 one", "2 two", "3 three"]
+array.Zip(array2, "(x, y) => x + ' ' + y");
 ```
 
 ### Reverse
@@ -386,6 +463,22 @@ array.FirstOrDefault("i => i.match(/item/gi)");
 array.First("i => i == 'notgiven'");
 ```
 
+### Min
+
+Returns the smallest element in array
+
+```javascript
+var array = [0, 8, 1, 5, -3];
+
+//-3
+array.Min();
+
+var array = [{name: "test", age: 3}, {name: "test2", age: 18}];
+
+//{name: "test", age: 3}
+array.Min("x => x.age");
+```
+
 ### Last
 
 Returns the Last item of the array and if a filter was set the last item that matches the filter - Throws an Exception if no item was found
@@ -420,6 +513,22 @@ array.LastOrDefault("i => i.match(/item/gi)");
 array.LastOrDefault("i => i == 'notgiven'");
 ```
 
+### Max
+
+Returns the greates element in array
+
+```javascript
+var array = [0, 8, 1, 5, -3];
+
+//8
+array.Max();
+
+var array = [{name: "test", age: 3}, {name: "test2", age: 18}];
+
+//{name: "test2", age: 18}
+array.Max("x => x.age");
+```
+
 ### Select
 
 Select the properties for a new array
@@ -443,6 +552,41 @@ var array = ["item1", "item2", "item3", "item4"];
 
 //["item1", "item2"]
 array.Take(2);
+```
+
+### TakeWhile
+
+Takes entries as long as a condition is true
+
+```javascript
+var array = ["item1", "item2", "item3", "item2", "item4"];
+var item2count = 0;
+
+//["item1", "item2", "item3"]
+array.TakeWhile(function(x){
+	if(x == "item2"){
+		item2count++;
+	}
+
+	return item2count < 2;
+});
+```
+
+This is the basic usage. But if you want conditional executes for e.g. with counting this can get a little bit messy.
+
+```javascript
+var array = ["item1", "item2", "item3", "item2", "item4"];
+
+//["item1", "item2", "item3"]
+array.TakeWhile(function(item, storage){
+	return item != "item2" || storage.count < 1; //Condition
+}, function(storage){
+	storage.count = 0; //Init the Storage
+}, function(item, storage){
+	if(item == "item2"){
+		storage.count++; //After executing the condition
+	}
+});
 ```
 
 ### Skip

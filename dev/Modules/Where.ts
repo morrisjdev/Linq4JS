@@ -1,8 +1,8 @@
-﻿Array.prototype.Where = function<T> (filter: any): Array<T> {
+﻿Array.prototype.Where = function<T> (filter: ((item: T) => boolean) | string): Array<T> {
     let that: Array<T> = this;
 
     if (filter != null) {
-        let filterFunction: Function = Linq4JS.Helper.ConvertFunction(filter);
+        let filterFunction = Linq4JS.Helper.ConvertFunction<(item: T) => boolean>(filter);
 
         let newArray: Array<T> = new Array<T>();
 

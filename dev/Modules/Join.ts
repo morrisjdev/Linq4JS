@@ -1,4 +1,4 @@
-﻿Array.prototype.Join = function <T>(char: string, selector?: any): string {
+﻿Array.prototype.Join = function <T>(char: string, selector?: ((item: T) => any) | string): string {
     let that: Array<T> = this;
 
     let array: Array<any> = that;

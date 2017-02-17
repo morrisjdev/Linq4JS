@@ -1,7 +1,7 @@
-﻿Array.prototype.Select = function<T> (selector: any): any[] {
+﻿Array.prototype.Select = function<T> (selector: ((item: T) => any) | string): any[] {
     let that: Array<T> = this;
 
-    let selectorFunction: Function = Linq4JS.Helper.ConvertFunction(selector);
+    let selectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(selector);
 
     let newArray: any[] = new Array();
 

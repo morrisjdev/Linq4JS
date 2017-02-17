@@ -135,9 +135,15 @@ Array.prototype.AddRange = function (objects) {
     });
     return that;
 };
-Array.prototype.Aggregate = function (method) {
+Array.prototype.Aggregate = function (method, startVal) {
     var that = this;
-    var result = "";
+    var result;
+    if (startVal != null) {
+        result = startVal;
+    }
+    else {
+        result = "";
+    }
     var methodFunction = Linq4JS.Helper.ConvertFunction(method);
     that.ForEach(function (x) {
         result = methodFunction(result, x);
@@ -196,36 +202,19 @@ Array.prototype.Count = function (filter) {
         return that.length;
     }
 };
-Array.prototype.Distinct = function (valueSelector, takelast) {
+Array.prototype.Distinct = function (valueSelector) {
     var that = this;
-    var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
-    var temp = that.OrderBy(valueSelectorFunction);
-    var newArray = new Array();
-    var prev;
-    for (var i = 0; i < temp.length; i++) {
-        var current = temp[i];
-        if (takelast == true) {
-            var next = temp[i + 1];
-            if (next != null) {
-                if (valueSelectorFunction(current) != valueSelectorFunction(next)) {
-                    newArray.Add(current);
-                }
-            }
-            else {
-                newArray.Add(current);
-            }
-        }
-        else {
-            if (prev != null && valueSelectorFunction(current) == valueSelectorFunction(prev)) {
-                continue;
-            }
-            else {
-                newArray.Add(current);
-                prev = current;
-            }
-        }
+    if (valueSelector != null) {
+        var valueSelectorFunction_1 = Linq4JS.Helper.ConvertFunction(valueSelector);
+        return that.filter(function (value, index, self) {
+            return self.FindIndex(function (x) { return valueSelectorFunction_1(x) == valueSelectorFunction_1(value); }) == index;
+        });
     }
-    return newArray;
+    else {
+        return that.filter(function (value, index, self) {
+            return self.indexOf(value) == index;
+        });
+    }
 };
 Array.prototype.FindIndex = function (filter) {
     var that = this;
@@ -233,7 +222,7 @@ Array.prototype.FindIndex = function (filter) {
         var filterFunction = Linq4JS.Helper.ConvertFunction(filter);
         for (var i = 0; i < that.length; i++) {
             var obj = that[i];
-            if (filter(obj) == true) {
+            if (filterFunction(obj) == true) {
                 return i;
             }
         }
@@ -330,6 +319,21 @@ Array.prototype.Insert = function (object, index) {
     that.splice(index, 0, object);
     return that;
 };
+Array.prototype.Intersect = function (array) {
+    var that = this;
+    var newArray = new Array();
+    that.ForEach(function (x) {
+        if (array.Contains(x)) {
+            newArray.Add(x);
+        }
+    });
+    array.ForEach(function (x) {
+        if (that.Contains(x)) {
+            newArray.Add(x);
+        }
+    });
+    return newArray.Distinct();
+};
 Array.prototype.Join = function (char, selector) {
     var that = this;
     var array = that;
@@ -376,6 +380,26 @@ Array.prototype.LastOrDefault = function (filter) {
         else {
             return null;
         }
+    }
+};
+Array.prototype.Max = function (valueSelector) {
+    var that = this;
+    if (valueSelector != null) {
+        var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
+        return that.OrderBy(valueSelector).LastOrDefault();
+    }
+    else {
+        return that.OrderBy(function (x) { return x; }).LastOrDefault();
+    }
+};
+Array.prototype.Min = function (valueSelector) {
+    var that = this;
+    if (valueSelector != null) {
+        var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
+        return that.OrderBy(valueSelector).FirstOrDefault();
+    }
+    else {
+        return that.OrderBy(function (x) { return x; }).FirstOrDefault();
     }
 };
 Array.prototype.Move = function (oldIndex, newIndex) {
@@ -454,6 +478,13 @@ Array.prototype.RemoveRange = function (objects, primaryKeySelector) {
     }
     return that;
 };
+Array.prototype.Repeat = function (object, count) {
+    var that = this;
+    for (var i = 0; i < count; i++) {
+        that.Add(object);
+    }
+    return that;
+};
 Array.prototype.Reverse = function () {
     var that = this;
     return that.reverse();
@@ -467,6 +498,22 @@ Array.prototype.Select = function (selector) {
         newArray.Add(selectorFunction(obj));
     }
     return newArray;
+};
+Array.prototype.SequenceEqual = function (array) {
+    var that = this;
+    if (that.Count() != array.Count()) {
+        return false;
+    }
+    for (var i = 0; i < that.length; i++) {
+        var keys = Object.keys(that[i]);
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var key = keys_1[_i];
+            if (that[i][key] != array[i][key]) {
+                return false;
+            }
+        }
+    }
+    return true;
 };
 Array.prototype.Skip = function (count) {
     var that = this;
@@ -490,6 +537,33 @@ Array.prototype.Sum = function (selector, filter) {
 Array.prototype.Take = function (count) {
     var that = this;
     return that.slice(0, count);
+};
+Array.prototype.TakeWhile = function (condition, initial, after) {
+    var that = this;
+    var conditionFunction = Linq4JS.Helper.ConvertFunction(condition);
+    var storage = {};
+    if (initial != null) {
+        var initialFunction = Linq4JS.Helper.ConvertFunction(initial);
+        initialFunction(storage);
+    }
+    var afterFunction;
+    if (after != null) {
+        afterFunction = Linq4JS.Helper.ConvertFunction(after);
+    }
+    var result = new Array();
+    for (var _i = 0, that_4 = that; _i < that_4.length; _i++) {
+        var object = that_4[_i];
+        if (conditionFunction(object, storage) == true) {
+            result.Add(object);
+            if (afterFunction != null) {
+                afterFunction(object, storage);
+            }
+        }
+        else {
+            break;
+        }
+    }
+    return result;
 };
 Array.prototype.ThenBy = function (valueSelector) {
     var that = this;
@@ -529,6 +603,27 @@ Array.prototype.ThenByDescending = function (valueSelector) {
         return 0;
     });
 };
+Array.prototype.ToDictionary = function (keySelector, valueSelector) {
+    var that = this;
+    var keySelectorFunction = Linq4JS.Helper.ConvertFunction(keySelector);
+    var returnObject = {};
+    if (valueSelector != null) {
+        var valueSelectorFunction_2 = Linq4JS.Helper.ConvertFunction(valueSelector);
+        that.ForEach(function (x) {
+            returnObject[keySelectorFunction(x)] = valueSelectorFunction_2(x);
+        });
+    }
+    else {
+        that.ForEach(function (x) {
+            returnObject[keySelectorFunction(x)] = x;
+        });
+    }
+    return returnObject;
+};
+Array.prototype.Union = function (array) {
+    var that = this;
+    return that.Concat(array).Distinct();
+};
 Array.prototype.Update = function (object, primaryKeySelector) {
     var that = this;
     var targetIndex;
@@ -553,8 +648,8 @@ Array.prototype.Update = function (object, primaryKeySelector) {
     }
     if (targetIndex != -1) {
         var keys = Object.keys(object);
-        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-            var key = keys_1[_i];
+        for (var _i = 0, keys_2 = keys; _i < keys_2.length; _i++) {
+            var key = keys_2[_i];
             if (key != "Id") {
                 that[targetIndex][key] = object[key];
             }
@@ -596,4 +691,15 @@ Array.prototype.Where = function (filter) {
     else {
         throw "Linq4JS: You must define a filter";
     }
+};
+Array.prototype.Zip = function (array, result) {
+    var that = this;
+    var resultFunction = Linq4JS.Helper.ConvertFunction(result);
+    var newArray = new Array();
+    for (var i = 0; i < that.length; i++) {
+        if (array[i] != null) {
+            newArray.Add(resultFunction(that[i], array[i]));
+        }
+    }
+    return newArray;
 };

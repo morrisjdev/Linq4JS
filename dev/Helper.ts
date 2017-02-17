@@ -1,6 +1,6 @@
 ﻿namespace Linq4JS {
     export class Helper {
-        static ConvertStringFunction: Function = function (functionString: string): Function {
+        static ConvertStringFunction = function (functionString: string): any {
 
             if (functionString.length == 0) {
                 throw "Linq4JS: Cannot convert empty string to function";
@@ -23,9 +23,9 @@
             return Function(...varnames, func);
         }
 
-        static ConvertFunction: Function = function (testFunction: any): Function {
+        static ConvertFunction = function<T> (testFunction: any): T {
 
-            let result: Function;
+            let result: T;
 
             if (typeof testFunction == "function") {
                 result = testFunction;
@@ -40,9 +40,9 @@
             return result;
         }
 
-        static OrderCompareFunction: Function = function (valueSelector: Function, a: Linq4JS.Entity, b: Linq4JS.Entity, invert: boolean): number {
-            let value_a: any = valueSelector(a);
-            let value_b: any = valueSelector(b);
+        static OrderCompareFunction = function<T> (valueSelector: (item: T) => any, a: T, b: T, invert: boolean): number {
+            let value_a = valueSelector(a);
+            let value_b = valueSelector(b);
 
             let type = typeof value_a;
 

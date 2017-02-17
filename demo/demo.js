@@ -31,6 +31,15 @@ window.onload = function () {
     Helper.users = Helper.users.Clone();
     Helper.draw();
 };
+var test = [new User(1, "Max", "Mustermann", 18), new User(2, "John", "Doe", 89), new User(2, "John", "Doe", 18)];
+console.log(test.Where(function (x) { return x.Age > 10; }));
+var result = test.Aggregate(function (x, y) {
+    return x += y.Age;
+});
+console.log(result);
+var array = ["item1", "item2", "item3", "item2", "item4"];
+var res2 = array.TakeWhile('(x, s) => x != "item2" || s.c < 1', 's => s.c = 0', '(x, s) => x == "item2" && s.c++');
+console.log(res2);
 //let test: Array<Linq4JS.Entity> = [new testClass("test", 5, 1), new testClass("test5", 3, 2)];
 //console.log(test);
 //console.log("Foreach");

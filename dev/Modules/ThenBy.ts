@@ -1,7 +1,7 @@
-﻿Array.prototype.ThenBy = function<T> (valueSelector: any): Array<T> {
+﻿Array.prototype.ThenBy = function<T> (valueSelector: ((item: T) => any) | string): Array<T> {
     let that: Array<T> = this;
 
-    let valueSelectorFunction: Function = Linq4JS.Helper.ConvertFunction(valueSelector);
+    let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
     if (that.Order == null || that.Order.Count() == 0) {
         throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenBy";

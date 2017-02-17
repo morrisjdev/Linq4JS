@@ -6,58 +6,66 @@ declare namespace Linq4JS {
 }
 declare namespace Linq4JS {
     class Helper {
-        static ConvertStringFunction: Function;
-        static ConvertFunction: Function;
-        static OrderCompareFunction: Function;
+        static ConvertStringFunction: (functionString: string) => any;
+        static ConvertFunction: <T>(testFunction: any) => T;
+        static OrderCompareFunction: <T>(valueSelector: (item: T) => any, a: T, b: T, invert: boolean) => number;
     }
 }
 interface Array<T> {
     Order: Array<Linq4JS.OrderEntry>;
     GroupValue: any;
     Clone(): Array<T>;
-    FindIndex(filter: any): number;
+    FindIndex(filter: ((item: T) => boolean) | string): number;
     Get(index: number): T;
-    ForEach(action: any): Array<T>;
-    Update(object: T, primaryKeySelector?: any): Array<T>;
-    UpdateRange(objects: Array<T>, primaryKeySelector?: any): Array<T>;
-    Remove(object: T, primaryKeySelector?: any): Array<T>;
-    RemoveRange(objects: Array<T>, primaryKeySelector?: any): Array<T>;
+    ForEach(action: ((item: T) => boolean | any) | string): Array<T>;
+    Update(object: T, primaryKeySelector?: ((item: T) => any) | string): Array<T>;
+    UpdateRange(objects: Array<T>, primaryKeySelector?: ((item: T) => any) | string): Array<T>;
+    Remove(object: T, primaryKeySelector?: ((item: T) => any) | string): Array<T>;
+    RemoveRange(objects: Array<T>, primaryKeySelector?: ((item: T) => any) | string): Array<T>;
     Add(object: T, generateId?: boolean): Array<T>;
     AddRange(objects: Array<T>): Array<T>;
     Insert(object: T, index: number): Array<T>;
-    Where(filter: any): Array<T>;
+    Where(filter: ((item: T) => boolean) | string): Array<T>;
     Range(start: number, length: number): Array<T>;
-    Count(filter?: any): number;
-    All(filter: any): boolean;
-    Any(filter?: any): boolean;
-    First(filter?: any): T;
-    FirstOrDefault(filter?: any): T;
-    Last(filter?: any): T;
-    LastOrDefault(filter?: any): T;
-    Select(selector: any): any[];
+    Repeat(object: T, count: number): Array<T>;
+    Count(filter?: ((item: T) => boolean) | string): number;
+    All(filter: ((item: T) => boolean) | string): boolean;
+    Any(filter?: ((item: T) => boolean) | string): boolean;
+    First(filter?: ((item: T) => boolean) | string): T;
+    FirstOrDefault(filter?: ((item: T) => boolean) | string): T;
+    Last(filter?: ((item: T) => boolean) | string): T;
+    LastOrDefault(filter?: ((item: T) => boolean) | string): T;
+    Select(selector: ((item: T) => any) | string): any[];
     Take(count: number): Array<T>;
+    TakeWhile(condition: ((item: T, storage?: any) => boolean) | string, initial?: ((storage: any) => void) | string, after?: ((item: T, storage: any) => void) | string): Array<T>;
     Skip(count: number): Array<T>;
-    OrderBy(valueSelector: any): Array<T>;
-    ThenBy(valueSelector: any): Array<T>;
-    OrderByDescending(valueSelector: any): Array<T>;
-    ThenByDescending(valueSelector: any): Array<T>;
-    GroupBy(selector: any): Array<Array<T>>;
+    OrderBy(valueSelector: ((item: T) => any) | string): Array<T>;
+    ThenBy(valueSelector: ((item: T) => any) | string): Array<T>;
+    OrderByDescending(valueSelector: ((item: T) => any) | string): Array<T>;
+    ThenByDescending(valueSelector: ((item: T) => any) | string): Array<T>;
+    Min(valueSelector?: ((item: T) => any) | string): T;
+    Max(valueSelector?: ((item: T) => any) | string): T;
+    GroupBy(selector: ((item: T) => any) | string): Array<Array<T>>;
     Move(oldIndex: number, newIndex: number): Array<T>;
-    Distinct(valueSelector: any, takelast?: boolean): Array<T>;
+    Distinct(valueSelector?: ((item: T) => any) | string): Array<T>;
     Contains(object: T): boolean;
     Concat(array: Array<T>): Array<T>;
-    Join(character: string, selector?: any): string;
-    Aggregate(method: any): string;
+    Intersect(array: Array<T>): Array<T>;
+    Join(character: string, selector?: ((item: T) => any) | string): string;
+    Aggregate(method: ((result: any, item: T) => any) | string, startVal?: any): string;
     Reverse(): Array<T>;
-    Average(selector?: any, filter?: any): number;
-    Sum(selector?: any, filter?: any): number;
+    Average(selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number;
+    Sum(selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number;
+    SequenceEqual(array: Array<T>): boolean;
+    Zip<T, X>(array: Array<X>, result: ((first: T, second: X) => any) | string): Array<any>;
+    Union(array: Array<T>): Array<T>;
+    ToDictionary(keySelector: ((item: T) => any) | string, valueSelector?: ((item: T) => any) | string): any;
 }
 declare namespace Linq4JS {
     class OrderEntry {
-        test: string;
         Direction: OrderDirection;
-        ValueSelector: Function;
-        constructor(_direction: OrderDirection, _valueSelector: Function);
+        ValueSelector: (item: any) => any;
+        constructor(_direction: OrderDirection, _valueSelector: (item: any) => any);
     }
     enum OrderDirection {
         Ascending = 0,

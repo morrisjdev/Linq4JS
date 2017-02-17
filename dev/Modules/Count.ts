@@ -1,4 +1,4 @@
-﻿Array.prototype.Count = function <T>(filter?: any): number {
+﻿Array.prototype.Count = function <T>(filter?: ((item: T) => boolean) | string): number {
     let that: Array<T> = this;
 
     if (filter != null) {

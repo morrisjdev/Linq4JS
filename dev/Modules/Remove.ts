@@ -1,4 +1,4 @@
-﻿Array.prototype.Remove = function<T> (object: T, primaryKeySelector?: any): Array<T> {
+﻿Array.prototype.Remove = function<T> (object: T, primaryKeySelector?: ((item: T) => any) | string): Array<T> {
     let that: Array<T> = this;
 
     let targetIndex: number;
@@ -8,7 +8,7 @@
     }
 
     if (primaryKeySelector != null) {
-        let selector: Function = Linq4JS.Helper.ConvertFunction(primaryKeySelector);
+        let selector = Linq4JS.Helper.ConvertFunction<(item: T) => any>(primaryKeySelector);
 
         targetIndex = that.FindIndex(function (x: T) {
             return selector(x) == selector(object);

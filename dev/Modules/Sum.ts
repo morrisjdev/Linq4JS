@@ -1,4 +1,4 @@
-﻿Array.prototype.Sum = function <T>(selector?: any, filter?: any): number {
+﻿Array.prototype.Sum = function <T>(selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number {
     let that: Array<T> = this;
 
     let result: number = 0;
