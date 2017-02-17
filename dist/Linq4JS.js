@@ -288,7 +288,10 @@ Array.prototype.ForEach = function (action) {
     var actionFunction = Linq4JS.Helper.ConvertFunction(action);
     for (var _i = 0, that_2 = that; _i < that_2.length; _i++) {
         var obj = that_2[_i];
-        actionFunction(obj);
+        var result = actionFunction(obj);
+        if (result != null && result == true) {
+            break;
+        }
     }
     return that;
 };
