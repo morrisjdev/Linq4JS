@@ -1,9 +1,6 @@
 ﻿namespace Linq4JS {
-    export class Entity {
-        constructor(_id: number) {
-            this.Id = _id;
-        }
-
+    export class GeneratedEntity{
+        _GeneratedId_: number;
         Id: number;
     }
 }

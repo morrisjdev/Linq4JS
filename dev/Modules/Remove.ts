@@ -7,6 +7,8 @@
         throw "Linq4JS: The object cannot be null";
     }
 
+    let castedObject: Linq4JS.GeneratedEntity = object as any;
+
     if (primaryKeySelector != null) {
         let selector = Linq4JS.Helper.ConvertFunction<(item: T) => any>(primaryKeySelector);
 
@@ -14,9 +16,14 @@
             return selector(x) == selector(object);
         });
     }
-    else if (object["Id"] != null) {
-        targetIndex = that.FindIndex(function (x: T) {
-            return x["Id"] == object["Id"];
+    else if (castedObject._GeneratedId_ != null) {
+        targetIndex = that.FindIndex(function (x: any) {
+            return (x as Linq4JS.GeneratedEntity)._GeneratedId_ == castedObject._GeneratedId_;
+        });
+    }
+    else if (castedObject.Id != null) {
+        targetIndex = that.FindIndex(function (x: any) {
+            return (x as Linq4JS.GeneratedEntity).Id == castedObject.Id;
         });
     }
     else {

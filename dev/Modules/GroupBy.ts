@@ -7,7 +7,7 @@
 
     let ordered = that.OrderBy(selectorFunction);
 
-    let prev;
+    let prev: T;
     let newSub = new Array();
 
     ordered.ForEach(x => {

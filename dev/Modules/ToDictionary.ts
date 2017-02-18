@@ -3,7 +3,7 @@ Array.prototype.ToDictionary = function<T> (keySelector: ((item: T) => any) | st
 
     let keySelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(keySelector);
 
-    let returnObject = {};
+    let returnObject: any = {};
 
     if(valueSelector != null){
         let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);

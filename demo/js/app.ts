@@ -48,15 +48,15 @@ window.onload = function () {
 let test: Array<User> = [new User(1, "Max", "Mustermann", 18), new User(2, "John", "Doe", 89), new User(2, "John", "Doe", 18)];
 console.log(test.Where(x => x.Age > 10));
 
+test.Add(new User(5, "User", "Test", 12), true);
+
 let result = test.Aggregate((x, y) => {
     return x += y.Age;
 });
 
 console.log(result);
 
-
 let array = ["item1", "item2", "item3", "item2", "item4"];
-
 let res2 = array.TakeWhile('(x, s) => x != "item2" || s.c < 1', 's => s.c = 0', '(x, s) => x == "item2" && s.c++');
 
 console.log(res2);

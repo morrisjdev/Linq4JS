@@ -6,21 +6,21 @@
         if (generateId == true) {
             let newIndex: number;
 
-            let last: T = that.LastOrDefault();
+            let castedObject: Linq4JS.GeneratedEntity = object as any;
+            let last: Linq4JS.GeneratedEntity = that.LastOrDefault() as any;
             if(last != null){
+                newIndex = last._GeneratedId_ != null ? last._GeneratedId_ : 1;
 
-                newIndex = last["_Id"] != null ? last["_Id"] : 1;
-
-                while(that.Any(function(x){
-                    return x["_Id"] == newIndex;
+                while(that.Any(function(x: any){
+                    return (x as Linq4JS.GeneratedEntity)._GeneratedId_ == newIndex;
                 })){
                     newIndex++;
                 }
 
-                object["_Id"] = newIndex;
+                castedObject._GeneratedId_ = newIndex;
             }
             else{
-                object["_Id"] = 1;
+                castedObject._GeneratedId_ = 1;
             }
         }
 

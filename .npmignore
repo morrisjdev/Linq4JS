@@ -1,8 +1,7 @@
 .vscode
 node_modules
-lib
+bower_components
 test
 demo
-.bowerrc
 bower.json
 gulpfile.js

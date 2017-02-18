@@ -18,7 +18,7 @@
   "ignore": [
     ".vscode",
     "node_modules",
-    "lib",
+    "bower_components",
     "test",
     "demo",
     ".gitignore",

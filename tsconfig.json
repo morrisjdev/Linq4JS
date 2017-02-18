@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "alwaysStrict": true,
+        "target": "es5"
+    },
+    "include": [
+        "dev/**/*",
+        "demo/js/**/*"
+    ]
+}

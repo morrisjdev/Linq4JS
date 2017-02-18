@@ -35,6 +35,9 @@ Conclusion:
 * Lightweight
 * Fast
 * Syntax from .NET
+* Build on top of array-prototype and no changes in code are required for usage
+* Integrates seamlessly into the project
+* TypeScript definitions
 
 ## Getting Started
 
@@ -52,7 +55,7 @@ bower install linq4js
 
 ### Using JavaScript
 
-Include this Line in your Project
+Include this line in your project
 
 ```html
 <script type="text/javascript" src="Linq4JS.js"></script>
@@ -60,13 +63,13 @@ Include this Line in your Project
 
 ### Using TypeScript
 
-Same thing, but also copy `Linq4JS.d.ts` to your project Folder to get the tooling support.
+Same thing, but also copy `Linq4JS.d.ts` to your project folder to get the tooling support.
 
 ## Usage
 
 ### Clone
 
-Create a copy of the array
+Creates a copy of the array
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
@@ -77,7 +80,7 @@ array.Clone();
 
 ### FindIndex
 
-Get the Index of the first item found by a filter
+Gets the index of the first item found by a filter
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
@@ -119,9 +122,9 @@ array.ForEach("i => console.log(i)");
 
 ### Update & UpdateRange
 
-Updates in Object in the array
+Updates object(s) in the array
 
-By default this method uses the property **Id** to Identify the Objects. If The property is not set this methods tries to compare the objects directly.
+By default this method uses the property **Id** to identify the objects. If the property is not set this methods tries to compare the objects directly.
 
 ```javascript
 var array = [{Id: 1, Value: "item1"}, {Id: 2, Value: "item2"}];
@@ -130,7 +133,7 @@ var array = [{Id: 1, Value: "item1"}, {Id: 2, Value: "item2"}];
 array.Update({Id: 1, Value: "item3"});
 ```
 
-If you want this method to use other Fields for Identification define a selector function as second parameter.
+If you want this method to use other fields for identification define a selector function as second parameter.
 
 ```javascript
 var array = [{OtherId: 1, Value: "item1"}, {OtherId: 2, Value: "item2"}];
@@ -154,7 +157,7 @@ array.UpdateRange(
 
 Removes item(s) from array
 
-By default this method uses the property **Id** to Identify the Objects. If The property is not set this methods tries to compare the objects directly.
+By default this method uses the property **Id** to identify the objects. If the property is not set this methods tries to compare the objects directly.
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
@@ -166,7 +169,7 @@ array.Remove("no");
 array.RemoveRange(["item4", "item3"]);
 ```
 
-If you want this method to use other Fields for Identification define a selector function as second parameter.
+If you want this method to use other fields for identification define a selector function as second parameter.
 
 ```javascript
 var array = [{OtherId: 1, Value: "item1"}, {OtherId: 2, Value: "item2"}];
@@ -202,7 +205,7 @@ array.Insert("item2.5", 2);
 
 ### Where
 
-Search for all items in array that match the filter
+Searches for all items in array that match the given filter
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
@@ -254,7 +257,7 @@ array.SequenceEqual(array3);
 
 ### Any
 
-Tests if any item is in the array and if set matches the filter
+Tests if any item is in the array and if a filter is set if any item of the array matches the filter
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4", "no"];
@@ -431,7 +434,7 @@ array2.Sum();
 
 ### First
 
-Returns the First item of the array and if a filter was set the first item that matches the filter - Throws an Exception if no item was found
+Returns the first item of the array and if a filter was set the first item that matches the filter - Throws an exception if no item was found
 
 ```javascript
 var array = ["no", "item1", "item2", "item3", "item4", "no"];
@@ -448,7 +451,7 @@ array.First("i => i == 'notgiven'");
 
 ### FirstOrDefault
 
-Returns the First item of the array and if a filter was set the first item that matches the filter - returns `null` if no suitable item was found
+Returns the first item of the array and if a filter was set the first item that matches the filter - returns `null` if no suitable item was found
 
 ```javascript
 var array = ["no", "item1", "item2", "item3", "item4", "no"];
@@ -481,7 +484,7 @@ array.Min("x => x.age");
 
 ### Last
 
-Returns the Last item of the array and if a filter was set the last item that matches the filter - Throws an Exception if no item was found
+Returns the last item of the array and if a filter was set the last item that matches the filter - Throws an exception if no item was found
 
 ```javascript
 var array = ["no", "item1", "item2", "item3", "item4", "no"];
@@ -498,7 +501,7 @@ array.Last("i => i == 'notgiven'");
 
 ### LastOrDefault
 
-Returns the Last item of the array and if a filter was set the last item that matches the filter - returns `null` if no suitable item was found
+Returns the last item of the array and if a filter was set the last item that matches the filter - returns `null` if no suitable item was found
 
 ```javascript
 var array = ["no", "item1", "item2", "item3", "item4", "no"];
@@ -545,7 +548,7 @@ array.Select("i => {Custom: i.Id, Name: i.Value}");
 
 ### Take
 
-Limits the Number of entries taken
+Limits the number of entries taken
 
 ```javascript
 var array = ["item1", "item2", "item3", "item4"];
@@ -602,7 +605,7 @@ array.Skip(2);
 
 ### GroupBy
 
-Group Array by Property
+Groups array by property
 
 ```javascript
 var array = [
@@ -621,7 +624,7 @@ array.GroupBy("i => i.name.toLowerCase()");
 
 ### OrderBy & OrderByDescending
 
-Order Array by Property or Value
+Orders array by property or value
 
 ```javascript
 var array = ["item3", "item1", "item2", "item4"];
@@ -633,7 +636,7 @@ array.OrderByDescending("i => i");
 array.OrderBy("i => i");
 ```
 
-Also supports complex Properties
+Also supports complex properties
 
 ```javascript
 var array = [
@@ -655,7 +658,7 @@ array.OrderBy("i => i.Lastname");
 
 ### ThenBy & ThenByDescending
 
-Order Array by additional Properties in combination with OrderBy/OrderByDescending
+Orders array by additional properties in combination with OrderBy/OrderByDescending
 
 ```javascript
 var array = [
@@ -690,15 +693,7 @@ var array = ["item1", "item2", "item2", "item3", "item4"];
 
 //["item1", "item2", "item3", "item4"]
 array.Distinct("x => x");
-```
-
-If you want to select the last value in the order set a second parameter to true
-
-```javascript
-var array = ["item1", "item2", "item2", "item3", "item4"];
-
-//["item1", "item2", "item3", "item4"]
-array.Distinct("x => x", true);
+array.Distinct();
 ```
 
 ## Author

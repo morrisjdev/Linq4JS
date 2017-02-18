@@ -1,13 +1,14 @@
+"use strict";
 var Linq4JS;
 (function (Linq4JS) {
-    var Entity = (function () {
-        function Entity(_id) {
-            this.Id = _id;
+    var GeneratedEntity = (function () {
+        function GeneratedEntity() {
         }
-        return Entity;
+        return GeneratedEntity;
     }());
-    Linq4JS.Entity = Entity;
+    Linq4JS.GeneratedEntity = GeneratedEntity;
 })(Linq4JS || (Linq4JS = {}));
+"use strict";
 var Linq4JS;
 (function (Linq4JS) {
     var Helper = (function () {
@@ -89,6 +90,9 @@ var Linq4JS;
     };
     Linq4JS.Helper = Helper;
 })(Linq4JS || (Linq4JS = {}));
+"use strict";
+"use strict";
+"use strict";
 var Linq4JS;
 (function (Linq4JS) {
     var OrderEntry = (function () {
@@ -105,29 +109,32 @@ var Linq4JS;
         OrderDirection[OrderDirection["Descending"] = 1] = "Descending";
     })(OrderDirection = Linq4JS.OrderDirection || (Linq4JS.OrderDirection = {}));
 })(Linq4JS || (Linq4JS = {}));
+"use strict";
 Array.prototype.Add = function (object, generateId) {
     var that = this;
     if (object != null) {
         if (generateId == true) {
             var newIndex_1;
+            var castedObject = object;
             var last = that.LastOrDefault();
             if (last != null) {
-                newIndex_1 = last["_Id"] != null ? last["_Id"] : 1;
+                newIndex_1 = last._GeneratedId_ != null ? last._GeneratedId_ : 1;
                 while (that.Any(function (x) {
-                    return x["_Id"] == newIndex_1;
+                    return x._GeneratedId_ == newIndex_1;
                 })) {
                     newIndex_1++;
                 }
-                object["_Id"] = newIndex_1;
+                castedObject._GeneratedId_ = newIndex_1;
             }
             else {
-                object["_Id"] = 1;
+                castedObject._GeneratedId_ = 1;
             }
         }
         that.push(object);
     }
     return that;
 };
+"use strict";
 Array.prototype.AddRange = function (objects) {
     var that = this;
     objects.ForEach(function (x) {
@@ -135,6 +142,7 @@ Array.prototype.AddRange = function (objects) {
     });
     return that;
 };
+"use strict";
 Array.prototype.Aggregate = function (method, startVal) {
     var that = this;
     var result;
@@ -150,14 +158,17 @@ Array.prototype.Aggregate = function (method, startVal) {
     });
     return result;
 };
+"use strict";
 Array.prototype.All = function (filter) {
     var that = this;
     return that.Count(filter) == that.Count();
 };
+"use strict";
 Array.prototype.Any = function (filter) {
     var that = this;
     return that.Count(filter) > 0;
 };
+"use strict";
 Array.prototype.Average = function (selector, filter) {
     var that = this;
     var result = 0;
@@ -173,6 +184,7 @@ Array.prototype.Average = function (selector, filter) {
     });
     return result / array.Count();
 };
+"use strict";
 Array.prototype.Clone = function () {
     var that = this;
     var newArray = new Array();
@@ -182,17 +194,20 @@ Array.prototype.Clone = function () {
     }
     return newArray;
 };
+"use strict";
 Array.prototype.Concat = function (array) {
     var that = this;
     that = that.concat(array);
     return that;
 };
+"use strict";
 Array.prototype.Contains = function (object) {
     var that = this;
     return that.Any(function (x) {
         return x == object;
     });
 };
+"use strict";
 Array.prototype.Count = function (filter) {
     var that = this;
     if (filter != null) {
@@ -202,6 +217,7 @@ Array.prototype.Count = function (filter) {
         return that.length;
     }
 };
+"use strict";
 Array.prototype.Distinct = function (valueSelector) {
     var that = this;
     if (valueSelector != null) {
@@ -216,6 +232,7 @@ Array.prototype.Distinct = function (valueSelector) {
         });
     }
 };
+"use strict";
 Array.prototype.FindIndex = function (filter) {
     var that = this;
     if (filter != null) {
@@ -232,6 +249,7 @@ Array.prototype.FindIndex = function (filter) {
         throw "Linq4JS: You must define a filter";
     }
 };
+"use strict";
 Array.prototype.First = function (filter) {
     var that = this;
     if (filter != null) {
@@ -252,6 +270,7 @@ Array.prototype.First = function (filter) {
         }
     }
 };
+"use strict";
 Array.prototype.FirstOrDefault = function (filter) {
     var that = this;
     if (filter != null) {
@@ -272,6 +291,7 @@ Array.prototype.FirstOrDefault = function (filter) {
         }
     }
 };
+"use strict";
 Array.prototype.ForEach = function (action) {
     var that = this;
     var actionFunction = Linq4JS.Helper.ConvertFunction(action);
@@ -284,10 +304,12 @@ Array.prototype.ForEach = function (action) {
     }
     return that;
 };
+"use strict";
 Array.prototype.Get = function (index) {
     var that = this;
     return that[index];
 };
+"use strict";
 Array.prototype.GroupBy = function (selector) {
     var that = this;
     var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
@@ -314,11 +336,13 @@ Array.prototype.GroupBy = function (selector) {
     }
     return newArray;
 };
+"use strict";
 Array.prototype.Insert = function (object, index) {
     var that = this;
     that.splice(index, 0, object);
     return that;
 };
+"use strict";
 Array.prototype.Intersect = function (array) {
     var that = this;
     var newArray = new Array();
@@ -334,6 +358,7 @@ Array.prototype.Intersect = function (array) {
     });
     return newArray.Distinct();
 };
+"use strict";
 Array.prototype.Join = function (char, selector) {
     var that = this;
     var array = that;
@@ -342,6 +367,7 @@ Array.prototype.Join = function (char, selector) {
     }
     return array.join(char);
 };
+"use strict";
 Array.prototype.Last = function (filter) {
     var that = this;
     if (filter != null) {
@@ -362,6 +388,7 @@ Array.prototype.Last = function (filter) {
         }
     }
 };
+"use strict";
 Array.prototype.LastOrDefault = function (filter) {
     var that = this;
     if (filter != null) {
@@ -382,6 +409,7 @@ Array.prototype.LastOrDefault = function (filter) {
         }
     }
 };
+"use strict";
 Array.prototype.Max = function (valueSelector) {
     var that = this;
     if (valueSelector != null) {
@@ -392,6 +420,7 @@ Array.prototype.Max = function (valueSelector) {
         return that.OrderBy(function (x) { return x; }).LastOrDefault();
     }
 };
+"use strict";
 Array.prototype.Min = function (valueSelector) {
     var that = this;
     if (valueSelector != null) {
@@ -402,11 +431,13 @@ Array.prototype.Min = function (valueSelector) {
         return that.OrderBy(function (x) { return x; }).FirstOrDefault();
     }
 };
+"use strict";
 Array.prototype.Move = function (oldIndex, newIndex) {
     var that = this;
     that.splice(newIndex, 0, that.splice(oldIndex, 1)[0]);
     return that;
 };
+"use strict";
 Array.prototype.OrderBy = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
@@ -416,6 +447,7 @@ Array.prototype.OrderBy = function (valueSelector) {
         return Linq4JS.Helper.OrderCompareFunction(valueSelectorFunction, a, b, false);
     });
 };
+"use strict";
 Array.prototype.OrderByDescending = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
@@ -425,6 +457,7 @@ Array.prototype.OrderByDescending = function (valueSelector) {
         return Linq4JS.Helper.OrderCompareFunction(valueSelectorFunction, a, b, true);
     });
 };
+"use strict";
 Array.prototype.Range = function (start, length) {
     var that = this;
     var newArray = new Array();
@@ -433,21 +466,28 @@ Array.prototype.Range = function (start, length) {
     }
     return newArray;
 };
+"use strict";
 Array.prototype.Remove = function (object, primaryKeySelector) {
     var that = this;
     var targetIndex;
     if (object == null) {
         throw "Linq4JS: The object cannot be null";
     }
+    var castedObject = object;
     if (primaryKeySelector != null) {
         var selector_1 = Linq4JS.Helper.ConvertFunction(primaryKeySelector);
         targetIndex = that.FindIndex(function (x) {
             return selector_1(x) == selector_1(object);
         });
     }
-    else if (object["Id"] != null) {
+    else if (castedObject._GeneratedId_ != null) {
         targetIndex = that.FindIndex(function (x) {
-            return x["Id"] == object["Id"];
+            return x._GeneratedId_ == castedObject._GeneratedId_;
+        });
+    }
+    else if (castedObject.Id != null) {
+        targetIndex = that.FindIndex(function (x) {
+            return x.Id == castedObject.Id;
         });
     }
     else {
@@ -463,6 +503,7 @@ Array.prototype.Remove = function (object, primaryKeySelector) {
     }
     return that;
 };
+"use strict";
 Array.prototype.RemoveRange = function (objects, primaryKeySelector) {
     var that = this;
     if (primaryKeySelector != null) {
@@ -478,6 +519,7 @@ Array.prototype.RemoveRange = function (objects, primaryKeySelector) {
     }
     return that;
 };
+"use strict";
 Array.prototype.Repeat = function (object, count) {
     var that = this;
     for (var i = 0; i < count; i++) {
@@ -485,10 +527,12 @@ Array.prototype.Repeat = function (object, count) {
     }
     return that;
 };
+"use strict";
 Array.prototype.Reverse = function () {
     var that = this;
     return that.reverse();
 };
+"use strict";
 Array.prototype.Select = function (selector) {
     var that = this;
     var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
@@ -499,6 +543,7 @@ Array.prototype.Select = function (selector) {
     }
     return newArray;
 };
+"use strict";
 Array.prototype.SequenceEqual = function (array) {
     var that = this;
     if (that.Count() != array.Count()) {
@@ -515,10 +560,12 @@ Array.prototype.SequenceEqual = function (array) {
     }
     return true;
 };
+"use strict";
 Array.prototype.Skip = function (count) {
     var that = this;
     return that.slice(count, that.Count());
 };
+"use strict";
 Array.prototype.Sum = function (selector, filter) {
     var that = this;
     var result = 0;
@@ -534,10 +581,12 @@ Array.prototype.Sum = function (selector, filter) {
     });
     return result;
 };
+"use strict";
 Array.prototype.Take = function (count) {
     var that = this;
     return that.slice(0, count);
 };
+"use strict";
 Array.prototype.TakeWhile = function (condition, initial, after) {
     var that = this;
     var conditionFunction = Linq4JS.Helper.ConvertFunction(condition);
@@ -565,6 +614,7 @@ Array.prototype.TakeWhile = function (condition, initial, after) {
     }
     return result;
 };
+"use strict";
 Array.prototype.ThenBy = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
@@ -584,6 +634,7 @@ Array.prototype.ThenBy = function (valueSelector) {
         return 0;
     });
 };
+"use strict";
 Array.prototype.ThenByDescending = function (valueSelector) {
     var that = this;
     var valueSelectorFunction = Linq4JS.Helper.ConvertFunction(valueSelector);
@@ -603,6 +654,7 @@ Array.prototype.ThenByDescending = function (valueSelector) {
         return 0;
     });
 };
+"use strict";
 Array.prototype.ToDictionary = function (keySelector, valueSelector) {
     var that = this;
     var keySelectorFunction = Linq4JS.Helper.ConvertFunction(keySelector);
@@ -620,25 +672,33 @@ Array.prototype.ToDictionary = function (keySelector, valueSelector) {
     }
     return returnObject;
 };
+"use strict";
 Array.prototype.Union = function (array) {
     var that = this;
     return that.Concat(array).Distinct();
 };
+"use strict";
 Array.prototype.Update = function (object, primaryKeySelector) {
     var that = this;
     var targetIndex;
     if (object == null) {
         throw "Linq4JS: The object cannot be null";
     }
+    var castedObject = object;
     if (primaryKeySelector != null) {
         var selector_3 = Linq4JS.Helper.ConvertFunction(primaryKeySelector);
         targetIndex = that.FindIndex(function (x) {
             return selector_3(x) == selector_3(object);
         });
     }
-    else if (object["Id"] != null) {
+    else if (castedObject._GeneratedId_ != null) {
         targetIndex = that.FindIndex(function (x) {
-            return x["Id"] == object["Id"];
+            return x._GeneratedId_ == castedObject._GeneratedId_;
+        });
+    }
+    else if (castedObject.Id != null) {
+        targetIndex = that.FindIndex(function (x) {
+            return x.Id == castedObject.Id;
         });
     }
     else {
@@ -660,6 +720,7 @@ Array.prototype.Update = function (object, primaryKeySelector) {
     }
     return that;
 };
+"use strict";
 Array.prototype.UpdateRange = function (objects, primaryKeySelector) {
     var that = this;
     if (primaryKeySelector != null) {
@@ -675,6 +736,7 @@ Array.prototype.UpdateRange = function (objects, primaryKeySelector) {
     }
     return that;
 };
+"use strict";
 Array.prototype.Where = function (filter) {
     var that = this;
     if (filter != null) {
@@ -692,6 +754,7 @@ Array.prototype.Where = function (filter) {
         throw "Linq4JS: You must define a filter";
     }
 };
+"use strict";
 Array.prototype.Zip = function (array, result) {
     var that = this;
     var resultFunction = Linq4JS.Helper.ConvertFunction(result);

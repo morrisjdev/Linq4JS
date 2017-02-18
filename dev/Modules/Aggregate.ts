@@ -1,7 +1,7 @@
 ﻿Array.prototype.Aggregate = function<T> (method: ((result: any, item: T) => any) | string, startVal?: any): string {
     let that: Array<T> = this;
 
-    let result;
+    let result: any;
 
     if(startVal != null){
         result = startVal;

@@ -9,7 +9,7 @@ Array.prototype.SequenceEqual = function<T> (array: Array<T>): boolean {
         let keys = Object.keys(that[i]);
 
         for(let key of keys){
-            if(that[i][key] != array[i][key]){
+            if((that[i] as any)[key] != (array[i] as any)[key]){
                 return false;
             }
         }

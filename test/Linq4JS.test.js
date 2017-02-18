@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/qunit/qunit.js" />
+﻿/// <reference path="../bower_components/qunit/qunit.js" />
 /// <reference path="../dist/Linq4JS.js" />
 /// <reference path="TestClasses.js" />
 
