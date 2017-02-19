@@ -2,16 +2,9 @@ var gulp = require("gulp");
 
 var minify = require("gulp-minify");
 var typescript = require("gulp-typescript");
-var devTS = typescript.createProject("tsconfig.json", {
-    outFile: "linq4js.js",
-    declaration: true
-});
-var demoTS = typescript.createProject("tsconfig.json", {
-    outFile: "demo.js"
-});
-var testTS = typescript.createProject("tsconfig.json", {
-    outFile: "test.js"
-});
+var devTS = typescript.createProject("tsconfig.json");
+var demoTS = typescript.createProject("demo/tsconfig.json");
+var testTS = typescript.createProject("test/tsconfig.json");
 
 var merge = require("merge2");
 
@@ -20,19 +13,19 @@ var connect = require("gulp-connect");
 
 /*JS*/
 gulp.task("demots", function () {
-    return gulp.src(["demo/**/*.ts", "dist/linq4js.d.ts"])
+    return demoTS.src()
         .pipe(demoTS())
         .pipe(gulp.dest("demo"));
 });
 
 gulp.task("testts", function () {
-    return gulp.src("test/**/*.ts")
+    return testTS.src()
         .pipe(testTS())
         .pipe(gulp.dest("test"));
 });
 
 gulp.task("typescript", function () {
-    var tsResult = gulp.src("dev/**/*.ts")
+    var tsResult = devTS.src()
         .pipe(devTS());
 
     return merge([

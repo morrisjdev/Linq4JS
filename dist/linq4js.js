@@ -93,23 +93,6 @@ var Linq4JS;
 "use strict";
 "use strict";
 "use strict";
-var Linq4JS;
-(function (Linq4JS) {
-    var OrderEntry = (function () {
-        function OrderEntry(_direction, _valueSelector) {
-            this.Direction = _direction;
-            this.ValueSelector = _valueSelector;
-        }
-        return OrderEntry;
-    }());
-    Linq4JS.OrderEntry = OrderEntry;
-    var OrderDirection;
-    (function (OrderDirection) {
-        OrderDirection[OrderDirection["Ascending"] = 0] = "Ascending";
-        OrderDirection[OrderDirection["Descending"] = 1] = "Descending";
-    })(OrderDirection = Linq4JS.OrderDirection || (Linq4JS.OrderDirection = {}));
-})(Linq4JS || (Linq4JS = {}));
-"use strict";
 Array.prototype.Add = function (object, generateId) {
     var that = this;
     if (object != null) {
@@ -135,10 +118,10 @@ Array.prototype.Add = function (object, generateId) {
     return that;
 };
 "use strict";
-Array.prototype.AddRange = function (objects) {
+Array.prototype.AddRange = function (objects, generateId) {
     var that = this;
     objects.ForEach(function (x) {
-        that.Add(x);
+        that.Add(x, generateId);
     });
     return that;
 };
@@ -782,3 +765,20 @@ Array.prototype.Zip = function (array, result) {
     }
     return newArray;
 };
+"use strict";
+var Linq4JS;
+(function (Linq4JS) {
+    var OrderEntry = (function () {
+        function OrderEntry(_direction, _valueSelector) {
+            this.Direction = _direction;
+            this.ValueSelector = _valueSelector;
+        }
+        return OrderEntry;
+    }());
+    Linq4JS.OrderEntry = OrderEntry;
+    var OrderDirection;
+    (function (OrderDirection) {
+        OrderDirection[OrderDirection["Ascending"] = 0] = "Ascending";
+        OrderDirection[OrderDirection["Descending"] = 1] = "Descending";
+    })(OrderDirection = Linq4JS.OrderDirection || (Linq4JS.OrderDirection = {}));
+})(Linq4JS || (Linq4JS = {}));

@@ -4,10 +4,10 @@
         "noImplicitReturns": true,
         "alwaysStrict": true,
         "target": "es5",
-        "outFile": "linq4js.js",
-        "declaration": true
+        "outFile": "demo.js"
     },
     "include": [
-        "dev/**/*"
+        "../dist/linq4js.d.ts",
+        "./**/*"
     ]
 }

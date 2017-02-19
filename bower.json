@@ -24,8 +24,5 @@
     ".gitignore",
     ".npmignore",
     "gulpfile.js"
-  ],
-  "devDependencies": {
-    "qunit": "^2.1.1"
-  }
+  ]
 }

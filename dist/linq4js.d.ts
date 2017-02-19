@@ -71,9 +71,8 @@ interface Array<T> {
     /**
      * Adds objects to the array
      * @param objects The array of objects to add
-     * @param generateId Auto-generate a property to identify objects in later processes
      */
-    AddRange(objects: Array<T>): Array<T>;
+    AddRange(objects: Array<T>, generateId?: boolean): Array<T>;
     /**
      * Inserts an entry at a specific position
      * @param object The object to insert
