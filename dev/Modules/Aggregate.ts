@@ -1,5 +1,5 @@
-﻿Array.prototype.Aggregate = function<T> (this: Array<T>, method: ((result: any, item: T) => any) | string, startVal?: any): string {
-    let that: Array<T> = this;
+﻿Array.prototype.Aggregate = function<T> (this: T[], method: ((result: any, item: T) => any) | string, startVal?: any): string {
+    let that: T[] = this;
 
     let result: any;
 

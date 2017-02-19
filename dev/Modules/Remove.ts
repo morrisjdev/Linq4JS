@@ -1,5 +1,5 @@
-﻿Array.prototype.Remove = function<T> (this: Array<T>, object: T, primaryKeySelector?: ((item: T) => any) | string): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Remove = function<T> (this: T[], object: T, primaryKeySelector?: ((item: T) => any) | string): T[] {
+    let that: T[] = this;
 
     let targetIndex: number;
 

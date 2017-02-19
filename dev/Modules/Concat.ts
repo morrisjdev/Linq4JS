@@ -1,5 +1,5 @@
-﻿Array.prototype.Concat = function<T> (this: Array<T>, array: Array<T>): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Concat = function<T> (this: T[], array: T[]): T[] {
+    let that: T[] = this;
     that = that.concat(array); 
     return that;
 };

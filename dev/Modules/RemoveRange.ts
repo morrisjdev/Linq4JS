@@ -1,5 +1,5 @@
-﻿Array.prototype.RemoveRange = function<T> (this: Array<T>, objects: Array<T>, primaryKeySelector?: ((item: T) => any) | string): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.RemoveRange = function<T> (this: T[], objects: T[], primaryKeySelector?: ((item: T) => any) | string): T[] {
+    let that: T[] = this;
 
     if (primaryKeySelector != null) {
         let selector = Linq4JS.Helper.ConvertFunction<(item: T) => any>(primaryKeySelector);

@@ -1,5 +1,5 @@
-Array.prototype.Zip = function<T, X> (this: Array<T>, array: Array<X>, result: ((first: T, second: X) => any) | string): Array<any> {
-    let that: Array<T> = this;
+Array.prototype.Zip = function<T, X> (this: T[], array: Array<X>, result: ((first: T, second: X) => any) | string): Array<any> {
+    let that: T[] = this;
 
     let resultFunction = Linq4JS.Helper.ConvertFunction<(first: T, second: X) => any>(result);
 

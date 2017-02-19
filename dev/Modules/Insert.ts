@@ -1,5 +1,5 @@
-﻿Array.prototype.Insert = function<T> (this: Array<T>, object: T, index: number): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Insert = function<T> (this: T[], object: T, index: number): T[] {
+    let that: T[] = this;
 
     that.splice(index, 0, object);
 

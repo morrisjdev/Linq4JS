@@ -1,5 +1,5 @@
-﻿Array.prototype.ForEach = function<T> (this: Array<T>, action: ((item: T, index?: number) => boolean | any) | string): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.ForEach = function<T> (this: T[], action: ((item: T, index?: number) => boolean | any) | string): T[] {
+    let that: T[] = this;
 
     let actionFunction = Linq4JS.Helper.ConvertFunction<(item: T, index?: number) => boolean | any>(action);
 

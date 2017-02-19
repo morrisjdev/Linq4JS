@@ -1,5 +1,5 @@
-Array.prototype.SequenceEqual = function<T> (this: Array<T>, array: Array<T>): boolean {
-    let that: Array<T> = this;
+Array.prototype.SequenceEqual = function<T> (this: T[], array: T[]): boolean {
+    let that: T[] = this;
 
     if(that.Count() != array.Count()){
         return false;

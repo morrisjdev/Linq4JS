@@ -1,7 +1,7 @@
-﻿Array.prototype.Clone = function<T> (this: Array<T>): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Clone = function<T> (this: T[]): T[] {
+    let that: T[] = this;
 
-    let newArray: Array<T> = new Array<T>();
+    let newArray: T[] = [];
 
     for (let obj of that) {
         newArray.Add(obj);

@@ -1,5 +1,5 @@
-﻿Array.prototype.AddRange = function<T> (this: Array<T>, objects: Array<T>, generateId: boolean): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.AddRange = function<T> (this: T[], objects: T[], generateId: boolean): T[] {
+    let that: T[] = this;
 
     objects.ForEach(function (x: T) {
         that.Add(x, generateId);

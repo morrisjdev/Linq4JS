@@ -1,5 +1,5 @@
-﻿Array.prototype.Get = function <T>(this: Array<T>, index: number): T {
-    let that: Array<T> = this;
+﻿Array.prototype.Get = function <T>(this: T[], index: number): T {
+    let that: T[] = this;
 
     return that[index];
 };

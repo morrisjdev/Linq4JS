@@ -1,5 +1,5 @@
-﻿Array.prototype.FindLastIndex = function<T> (this: Array<T>, filter: ((item: T) => boolean) | string): number {
-    let that: Array<T> = this;
+﻿Array.prototype.FindLastIndex = function<T> (this: T[], filter: ((item: T) => boolean) | string): number {
+    let that: T[] = this;
 
     if (filter != null) {
         let filterFunction = Linq4JS.Helper.ConvertFunction<(item: T) => boolean>(filter);

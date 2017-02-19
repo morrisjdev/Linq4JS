@@ -1,9 +1,9 @@
-﻿Array.prototype.GroupBy = function<T> (this: Array<T>, selector: ((item: T) => any) | string): Array<Array<T>> {
-    let that: Array<T> = this;
+﻿Array.prototype.GroupBy = function<T> (this: T[], selector: ((item: T) => any) | string): Array<T[]> {
+    let that: T[] = this;
 
     let selectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(selector);
 
-    let newArray: Array<Array<T>> = new Array();
+    let newArray: T[][] = [];
 
     let ordered = that.OrderBy(selectorFunction);
 

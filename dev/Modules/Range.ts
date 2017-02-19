@@ -1,7 +1,7 @@
-﻿Array.prototype.Range = function<T> (this: Array<T>, start: number, length: number): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Range = function<T> (this: T[], start: number, length: number): T[] {
+    let that: T[] = this;
 
-    let newArray: Array<T> = new Array<T>();
+    let newArray: T[] = [];
 
     for (let i = start; i < start + length; i++) {
         newArray.Add(that.Get(i));

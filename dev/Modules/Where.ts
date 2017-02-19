@@ -1,10 +1,10 @@
-﻿Array.prototype.Where = function<T> (this: Array<T>, filter: ((item: T, index?: number) => boolean) | string): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Where = function<T> (this: T[], filter: ((item: T, index?: number) => boolean) | string): T[] {
+    let that: T[] = this;
 
     if (filter != null) {
         let filterFunction = Linq4JS.Helper.ConvertFunction<(item: T, index?: number) => boolean>(filter);
 
-        let newArray: Array<T> = new Array<T>();
+        let newArray: T[] = [];
 
         for (let i = 0; i < that.length; i++) {
             let obj: T = that[i];

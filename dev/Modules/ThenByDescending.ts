@@ -1,5 +1,5 @@
-﻿Array.prototype.ThenByDescending = function<T> (this: Array<T>, valueSelector: ((item: T) => any) | string): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.ThenByDescending = function<T> (this: T[], valueSelector: ((item: T) => any) | string): T[] {
+    let that: T[] = this;
 
     let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
@@ -7,7 +7,7 @@
         throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending";
     }
 
-    let ordered: Array<T> = that;
+    let ordered: T[] = that;
     ordered.Order.Add(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Descending, valueSelectorFunction));
 
     return ordered.sort(function (a, b) {

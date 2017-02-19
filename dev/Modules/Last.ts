@@ -1,8 +1,8 @@
-﻿Array.prototype.Last = function<T> (this: Array<T>, filter?: ((item: T) => boolean) | string): T {
-    let that: Array<T> = this;
+﻿Array.prototype.Last = function<T> (this: T[], filter?: ((item: T) => boolean) | string): T {
+    let that: T[] = this;
 
     if (filter != null) {
-        let result: Array<T> = that.Where(filter);
+        let result: T[] = that.Where(filter);
 
         if (result.Any()) {
             return result.Get(result.length - 1);

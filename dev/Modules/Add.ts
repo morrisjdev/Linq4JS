@@ -1,5 +1,5 @@
-﻿Array.prototype.Add = function<T> (this: Array<T>, object: T, generateId?: boolean): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Add = function<T> (this: T[], object: T, generateId?: boolean): T[] {
+    let that: T[] = this;
 
     if (object != null) {
         if (generateId == true) {

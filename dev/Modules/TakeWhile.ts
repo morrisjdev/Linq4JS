@@ -1,9 +1,9 @@
 ﻿Array.prototype.TakeWhile = function<T> (
-    this: Array<T>, 
+    this: T[], 
     condition: ((item: T, storage?: any) => boolean) | string, 
     initial?: ((storage: any) => void) | string, 
-    after?: ((item: T, storage: any) => void) | string): Array<T> {
-    let that: Array<T> = this;
+    after?: ((item: T, storage: any) => void) | string): T[] {
+    let that: T[] = this;
 
     let conditionFunction = Linq4JS.Helper.ConvertFunction<(item: T, storage?: any) => boolean>(condition);
 
@@ -20,7 +20,7 @@
         afterFunction = Linq4JS.Helper.ConvertFunction<(item: T, storage: any) => void>(after);
     }
 
-    let result = new Array<T>();
+    let result: T[] = [];
 
     for(let object of that){
         if(conditionFunction(object, storage) == true){

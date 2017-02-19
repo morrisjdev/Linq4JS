@@ -1,5 +1,5 @@
-Array.prototype.Min = function <T>(this: Array<T>, valueSelector?: ((item: T) => any) | string): (T | null) {
-    let that: Array<T> = this;
+Array.prototype.Min = function <T>(this: T[], valueSelector?: ((item: T) => any) | string): (T | null) {
+    let that: T[] = this;
 
     if(valueSelector != null){
         let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);

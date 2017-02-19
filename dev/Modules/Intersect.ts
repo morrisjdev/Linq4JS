@@ -1,7 +1,7 @@
-Array.prototype.Intersect = function<T> (this: Array<T>, array: Array<T>): Array<T> {
-    let that: Array<T> = this;
+Array.prototype.Intersect = function<T> (this: T[], array: T[]): T[] {
+    let that: T[] = this;
 
-    let newArray = new Array<T>();
+    let newArray: T[] = [];
 
     that.ForEach(x => {
         if(array.Contains(x)){

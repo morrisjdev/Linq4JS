@@ -92,7 +92,6 @@ var Linq4JS;
 })(Linq4JS || (Linq4JS = {}));
 "use strict";
 "use strict";
-"use strict";
 Array.prototype.Add = function (object, generateId) {
     var that = this;
     if (object != null) {
@@ -170,7 +169,7 @@ Array.prototype.Average = function (selector, filter) {
 "use strict";
 Array.prototype.Clone = function () {
     var that = this;
-    var newArray = new Array();
+    var newArray = [];
     for (var _i = 0, that_1 = that; _i < that_1.length; _i++) {
         var obj = that_1[_i];
         newArray.Add(obj);
@@ -312,7 +311,7 @@ Array.prototype.Get = function (index) {
 Array.prototype.GroupBy = function (selector) {
     var that = this;
     var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
-    var newArray = new Array();
+    var newArray = [];
     var ordered = that.OrderBy(selectorFunction);
     var prev;
     var newSub = new Array();
@@ -344,7 +343,7 @@ Array.prototype.Insert = function (object, index) {
 "use strict";
 Array.prototype.Intersect = function (array) {
     var that = this;
-    var newArray = new Array();
+    var newArray = [];
     that.ForEach(function (x) {
         if (array.Contains(x)) {
             newArray.Add(x);
@@ -459,7 +458,7 @@ Array.prototype.OrderByDescending = function (valueSelector) {
 "use strict";
 Array.prototype.Range = function (start, length) {
     var that = this;
-    var newArray = new Array();
+    var newArray = [];
     for (var i = start; i < start + length; i++) {
         newArray.Add(that.Get(i));
     }
@@ -598,7 +597,7 @@ Array.prototype.TakeWhile = function (condition, initial, after) {
     if (after != null) {
         afterFunction = Linq4JS.Helper.ConvertFunction(after);
     }
-    var result = new Array();
+    var result = [];
     for (var _i = 0, that_3 = that; _i < that_3.length; _i++) {
         var object = that_3[_i];
         if (conditionFunction(object, storage) == true) {
@@ -740,7 +739,7 @@ Array.prototype.Where = function (filter) {
     var that = this;
     if (filter != null) {
         var filterFunction = Linq4JS.Helper.ConvertFunction(filter);
-        var newArray = new Array();
+        var newArray = [];
         for (var i = 0; i < that.length; i++) {
             var obj = that[i];
             if (filterFunction(obj, i) == true) {

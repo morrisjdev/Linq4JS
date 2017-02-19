@@ -1,4 +1,4 @@
-﻿Array.prototype.Reverse = function <T>(this: Array<T>): Array<T> {
-    let that: Array<T> = this;
+﻿Array.prototype.Reverse = function <T>(this: T[]): T[] {
+    let that: T[] = this;
     return that.reverse();
 };
