@@ -2,7 +2,6 @@
     let that: Array<T> = this;
 
     if (object != null) {
-
         if (generateId == true) {
             let newIndex: number;
 

@@ -1,9 +1,9 @@
 {
   "name": "linq4js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
-  "main": "dist/Linq4JS.js",
-  "typings": "dist/Linq4JS.d.ts",
+  "main": "dist/linq4js.js",
+  "typings": "dist/linq4js.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/morrisjdev/Linq4JS"

@@ -1,10 +1,10 @@
-﻿Array.prototype.ForEach = function<T> (action: ((item: T) => boolean | any) | string): Array<T> {
+﻿Array.prototype.ForEach = function<T> (action: ((item: T, index?: number) => boolean | any) | string): Array<T> {
     let that: Array<T> = this;
 
-    let actionFunction = Linq4JS.Helper.ConvertFunction<(item: T) => boolean | any>(action);
+    let actionFunction = Linq4JS.Helper.ConvertFunction<(item: T, index?: number) => boolean | any>(action);
 
-    for (let obj of that) {
-        let result = actionFunction(obj);
+    for (let i = 0; i < that.length; i++) {
+        let result = actionFunction(that[i], i);
 
         if(result != null && result == true){
             break;

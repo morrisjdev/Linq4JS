@@ -89,6 +89,17 @@ var array = ["item1", "item2", "item3", "item4", "no"];
 array.FindIndex("x => x == 'item3'");
 ```
 
+### FindLastIndex
+
+Gets the index of the last item found by a filter
+
+```javascript
+var array = ["item1", "item2", "item3", "item2", "item4", "no"];
+
+//3
+array.FindIndex("x => x == 'item2'");
+```
+
 ### Get
 
 Gets the item with the index

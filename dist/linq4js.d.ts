@@ -24,6 +24,11 @@ interface Array<T> {
      */
     FindIndex(filter: ((item: T) => boolean) | string): number;
     /**
+     * Gets the index of the last item found by a filter
+     * @param filter A function (or function-string) that returns a boolean when matching element was found
+     */
+    FindLastIndex(filter: ((item: T) => boolean) | string): number;
+    /**
      * Gets the item with the index
      * @param index Item index
      */
@@ -32,7 +37,7 @@ interface Array<T> {
      * Executes a method for each item in the array
      * @param action A function (or function-string) that gets executed for each element. If it returns false the loop stops.
      */
-    ForEach(action: ((item: T) => boolean | any) | string): Array<T>;
+    ForEach(action: ((item: T, index?: number) => boolean | any) | string): Array<T>;
     /**
      * Updates an object in the array
      * @param object The object to update
@@ -79,7 +84,7 @@ interface Array<T> {
      * Searches for all items in array that match the given filter
      * @param filter A function (or function-string) that returns a boolean when matching element was found
      */
-    Where(filter: ((item: T) => boolean) | string): Array<T>;
+    Where(filter: ((item: T, index?: number) => boolean) | string): Array<T>;
     /**
      * Takes items in a specific range
      * @param start The start position

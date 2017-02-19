@@ -4,13 +4,13 @@
     if(valueSelector != null){
         let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
-        return that.filter((value, index, self) => {
-            return self.FindIndex(x => valueSelectorFunction(x) == valueSelectorFunction(value)) == index;
-        });
+        return that.Where((x, i) => {
+            return that.FindIndex(y => valueSelectorFunction(y) == valueSelectorFunction(x)) == i;
+        })
     }
     else{
-        return that.filter((value, index, self) => {
-            return self.indexOf(value) == index;
-        });
+        return that.Where((x, i) => {
+            return that.FindIndex(y => y == x) == i;
+        })
     }
 };

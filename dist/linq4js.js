@@ -222,13 +222,13 @@ Array.prototype.Distinct = function (valueSelector) {
     var that = this;
     if (valueSelector != null) {
         var valueSelectorFunction_1 = Linq4JS.Helper.ConvertFunction(valueSelector);
-        return that.filter(function (value, index, self) {
-            return self.FindIndex(function (x) { return valueSelectorFunction_1(x) == valueSelectorFunction_1(value); }) == index;
+        return that.Where(function (x, i) {
+            return that.FindIndex(function (y) { return valueSelectorFunction_1(y) == valueSelectorFunction_1(x); }) == i;
         });
     }
     else {
-        return that.filter(function (value, index, self) {
-            return self.indexOf(value) == index;
+        return that.Where(function (x, i) {
+            return that.FindIndex(function (y) { return y == x; }) == i;
         });
     }
 };
@@ -238,6 +238,23 @@ Array.prototype.FindIndex = function (filter) {
     if (filter != null) {
         var filterFunction = Linq4JS.Helper.ConvertFunction(filter);
         for (var i = 0; i < that.length; i++) {
+            var obj = that[i];
+            if (filterFunction(obj) == true) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    else {
+        throw "Linq4JS: You must define a filter";
+    }
+};
+"use strict";
+Array.prototype.FindLastIndex = function (filter) {
+    var that = this;
+    if (filter != null) {
+        var filterFunction = Linq4JS.Helper.ConvertFunction(filter);
+        for (var i = that.length - 1; i >= 0; i--) {
             var obj = that[i];
             if (filterFunction(obj) == true) {
                 return i;
@@ -295,9 +312,8 @@ Array.prototype.FirstOrDefault = function (filter) {
 Array.prototype.ForEach = function (action) {
     var that = this;
     var actionFunction = Linq4JS.Helper.ConvertFunction(action);
-    for (var _i = 0, that_2 = that; _i < that_2.length; _i++) {
-        var obj = that_2[_i];
-        var result = actionFunction(obj);
+    for (var i = 0; i < that.length; i++) {
+        var result = actionFunction(that[i], i);
         if (result != null && result == true) {
             break;
         }
@@ -537,8 +553,8 @@ Array.prototype.Select = function (selector) {
     var that = this;
     var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
     var newArray = new Array();
-    for (var _i = 0, that_3 = that; _i < that_3.length; _i++) {
-        var obj = that_3[_i];
+    for (var _i = 0, that_2 = that; _i < that_2.length; _i++) {
+        var obj = that_2[_i];
         newArray.Add(selectorFunction(obj));
     }
     return newArray;
@@ -600,8 +616,8 @@ Array.prototype.TakeWhile = function (condition, initial, after) {
         afterFunction = Linq4JS.Helper.ConvertFunction(after);
     }
     var result = new Array();
-    for (var _i = 0, that_4 = that; _i < that_4.length; _i++) {
-        var object = that_4[_i];
+    for (var _i = 0, that_3 = that; _i < that_3.length; _i++) {
+        var object = that_3[_i];
         if (conditionFunction(object, storage) == true) {
             result.Add(object);
             if (afterFunction != null) {
@@ -744,7 +760,7 @@ Array.prototype.Where = function (filter) {
         var newArray = new Array();
         for (var i = 0; i < that.length; i++) {
             var obj = that[i];
-            if (filterFunction(obj) == true) {
+            if (filterFunction(obj, i) == true) {
                 newArray.push(obj);
             }
         }

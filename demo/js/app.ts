@@ -61,6 +61,8 @@ let res2 = array.TakeWhile('(x, s) => x != "item2" || s.c < 1', 's => s.c = 0', 
 
 console.log(res2);
 
+console.log(array.FindLastIndex(x => x == "item2"));
+
 //let test: Array<Linq4JS.Entity> = [new testClass("test", 5, 1), new testClass("test5", 3, 2)];
 //console.log(test);
 

@@ -1,7 +1,7 @@
 {
   "name": "linq4js",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
-  "main": "dist/Linq4JS.js",
+  "main": "dist/linq4js.js",
   "authors": [
     "Morris Janatzek"
   ],
@@ -23,8 +23,7 @@
     "demo",
     ".gitignore",
     ".npmignore",
-    "gulpfile.js",
-    "package.json"
+    "gulpfile.js"
   ],
   "devDependencies": {
     "qunit": "^2.1.1"
