@@ -1,4 +1,4 @@
-﻿Array.prototype.UpdateRange = function<T> (objects: Array<T>, primaryKeySelector?: ((item: T) => any) | string): Array<T> {
+﻿Array.prototype.UpdateRange = function<T> (this: Array<T>, objects: Array<T>, primaryKeySelector?: ((item: T) => any) | string): Array<T> {
     let that: Array<T> = this;
 
     if (primaryKeySelector != null) {

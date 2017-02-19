@@ -1,4 +1,4 @@
-﻿Array.prototype.OrderBy = function<T> (valueSelector: ((item: T) => any) | string): Array<T> {
+﻿Array.prototype.OrderBy = function<T> (this: Array<T>, valueSelector: ((item: T) => any) | string): Array<T> {
     let that: Array<T> = this;
 
     let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);

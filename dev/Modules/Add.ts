@@ -1,4 +1,4 @@
-﻿Array.prototype.Add = function<T> (object: T, generateId?: boolean): Array<T> {
+﻿Array.prototype.Add = function<T> (this: Array<T>, object: T, generateId?: boolean): Array<T> {
     let that: Array<T> = this;
 
     if (object != null) {

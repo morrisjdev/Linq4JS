@@ -1,4 +1,4 @@
-Array.prototype.Intersect = function<T> (array: Array<T>): Array<T> {
+Array.prototype.Intersect = function<T> (this: Array<T>, array: Array<T>): Array<T> {
     let that: Array<T> = this;
 
     let newArray = new Array<T>();

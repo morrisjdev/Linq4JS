@@ -1,4 +1,4 @@
-Array.prototype.Max = function <T>(valueSelector?: ((item: T) => any) | string): T {
+Array.prototype.Max = function <T>(this: Array<T>, valueSelector?: ((item: T) => any) | string): (T | null) {
     let that: Array<T> = this;
 
     if(valueSelector != null){

@@ -1,4 +1,4 @@
-﻿Array.prototype.Distinct = function<T> (valueSelector?: ((item: T) => any) | string): Array<T> {
+﻿Array.prototype.Distinct = function<T> (this: Array<T>, valueSelector?: ((item: T) => any) | string): Array<T> {
     let that: Array<T> = this;
 
     if(valueSelector != null){

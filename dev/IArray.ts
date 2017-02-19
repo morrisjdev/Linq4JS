@@ -127,7 +127,7 @@
      * Returns the first item of the array - returns `null` if no suitable item was found
      * @param filter If set the function returns the first item that matches the filter
      */
-    FirstOrDefault(filter?: ((item: T) => boolean) | string): T;
+    FirstOrDefault(filter?: ((item: T) => boolean) | string): (T | null);
 
     /**
      * Returns the last item of the array - Throws an exception if no item was found
@@ -139,7 +139,7 @@
      * Returns the last item of the array - returns `null` if no suitable item was found
      * @param filter If set the function returns the last item that matches the filter
      */
-    LastOrDefault(filter?: ((item: T) => boolean) | string): T;
+    LastOrDefault(filter?: ((item: T) => boolean) | string): (T | null);
 
     /**
      * Select the properties for a new array
@@ -195,13 +195,13 @@
      * Returns the smallest element in array
      * @param valueSelector The selector-function (or function-string) that selects the property for comparison
      */
-    Min(valueSelector?: ((item: T) => any) | string): T;
+    Min(valueSelector?: ((item: T) => any) | string): (T | null);
 
     /**
      * Returns the greates element in array
      * @param valueSelector The selector-function (or function-string) that selects the property for comparison
      */
-    Max(valueSelector?: ((item: T) => any) | string): T;
+    Max(valueSelector?: ((item: T) => any) | string): (T | null);
 
     /**
      * Groups array by property

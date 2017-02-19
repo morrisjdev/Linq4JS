@@ -1,4 +1,5 @@
 ﻿Array.prototype.TakeWhile = function<T> (
+    this: Array<T>, 
     condition: ((item: T, storage?: any) => boolean) | string, 
     initial?: ((storage: any) => void) | string, 
     after?: ((item: T, storage: any) => void) | string): Array<T> {

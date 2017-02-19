@@ -1,4 +1,4 @@
-﻿Array.prototype.Last = function<T> (filter?: ((item: T) => boolean) | string): T {
+﻿Array.prototype.Last = function<T> (this: Array<T>, filter?: ((item: T) => boolean) | string): T {
     let that: Array<T> = this;
 
     if (filter != null) {

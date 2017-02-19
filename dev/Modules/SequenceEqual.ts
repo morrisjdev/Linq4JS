@@ -1,4 +1,4 @@
-Array.prototype.SequenceEqual = function<T> (array: Array<T>): boolean {
+Array.prototype.SequenceEqual = function<T> (this: Array<T>, array: Array<T>): boolean {
     let that: Array<T> = this;
 
     if(that.Count() != array.Count()){

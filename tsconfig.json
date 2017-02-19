@@ -2,6 +2,8 @@
     "compilerOptions": {
         "noImplicitAny": true,
         "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
         "alwaysStrict": true,
         "target": "es5",
         "outFile": "linq4js.js",

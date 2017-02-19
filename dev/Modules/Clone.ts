@@ -1,4 +1,4 @@
-﻿Array.prototype.Clone = function<T> (): Array<T> {
+﻿Array.prototype.Clone = function<T> (this: Array<T>): Array<T> {
     let that: Array<T> = this;
 
     let newArray: Array<T> = new Array<T>();

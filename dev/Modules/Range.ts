@@ -1,4 +1,4 @@
-﻿Array.prototype.Range = function<T> (start: number, length: number): Array<T> {
+﻿Array.prototype.Range = function<T> (this: Array<T>, start: number, length: number): Array<T> {
     let that: Array<T> = this;
 
     let newArray: Array<T> = new Array<T>();

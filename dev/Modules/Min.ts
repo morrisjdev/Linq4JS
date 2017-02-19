@@ -1,4 +1,4 @@
-Array.prototype.Min = function <T>(valueSelector?: ((item: T) => any) | string): T {
+Array.prototype.Min = function <T>(this: Array<T>, valueSelector?: ((item: T) => any) | string): (T | null) {
     let that: Array<T> = this;
 
     if(valueSelector != null){

@@ -1,4 +1,4 @@
-﻿Array.prototype.Where = function<T> (filter: ((item: T, index?: number) => boolean) | string): Array<T> {
+﻿Array.prototype.Where = function<T> (this: Array<T>, filter: ((item: T, index?: number) => boolean) | string): Array<T> {
     let that: Array<T> = this;
 
     if (filter != null) {

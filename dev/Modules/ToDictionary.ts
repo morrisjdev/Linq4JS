@@ -1,4 +1,4 @@
-Array.prototype.ToDictionary = function<T> (keySelector: ((item: T) => any) | string, valueSelector?: ((item: T) => any) | string): any {
+Array.prototype.ToDictionary = function<T> (this: Array<T>, keySelector: ((item: T) => any) | string, valueSelector?: ((item: T) => any) | string): any {
     let that: Array<T> = this;
 
     let keySelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(keySelector);

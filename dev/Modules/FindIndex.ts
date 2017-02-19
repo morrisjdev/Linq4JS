@@ -1,4 +1,4 @@
-﻿Array.prototype.FindIndex = function<T> (filter: ((item: T) => boolean) | string): number {
+﻿Array.prototype.FindIndex = function<T> (this: Array<T>, filter: ((item: T) => boolean) | string): number {
     let that: Array<T> = this;
 
     if (filter != null) {
