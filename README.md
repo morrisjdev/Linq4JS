@@ -58,12 +58,12 @@ bower install linq4js
 Include this line in your project
 
 ```html
-<script type="text/javascript" src="Linq4JS.js"></script>
+<script type="text/javascript" src="linq4js.js"></script>
 ```
 
 ### Using TypeScript
 
-Same thing, but also copy `Linq4JS.d.ts` to your project folder to get the tooling support.
+Same thing, but also copy `linq4js.d.ts` to your project folder to get the tooling support.
 
 ## Usage
 
