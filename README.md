@@ -1,4 +1,4 @@
-# Linq4JS
+# Linq4JS [![Build Status](https://travis-ci.org/morrisjdev/Linq4JS.svg?branch=master)](https://travis-ci.org/morrisjdev/Linq4JS)
 
 Linq methods for JavaScript/TypeScript for working with Arrays
 
