@@ -99,7 +99,7 @@ var Linq4JS;
 Array.prototype.Add = function (object, generateId) {
     var that = this;
     if (object != null) {
-        if (generateId === true) {
+        if (generateId == true) {
             var newIndex_1;
             var castedObject = object;
             var last = that.LastOrDefault();

@@ -2,7 +2,7 @@
     let that: T[] = this;
 
     if (object != null) {
-        if (generateId === true) {
+        if (generateId == true) {
             let newIndex: number;
 
             let castedObject: Linq4JS.GeneratedEntity = object as any;
