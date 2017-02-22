@@ -66,13 +66,32 @@ var testFiles = [
     "test/test.js"
 ];
 
-gulp.task("test", ["testts"], function(){
+gulp.task("unittests", ["testts"], function(){
     return gulp.src(testFiles)
         .pipe(concat("all.js"))
         .pipe(gulp.dest("test"))
         .pipe(jasmine({
             verbose: true
         }));
+});
+
+gulp.task("tslint", function(){
+    return devTS.src()
+        .pipe(tslint({
+            formatter: "stylish"
+        }))
+        .pipe(tslint.report({
+            emitError: true,
+            summarizeFailureOutput: true
+        }));
+});
+
+gulp.task("lint", ["tslint"], function(){
+
+});
+
+gulp.task("test", ["lint", "unittests"], function(){
+
 });
 
 gulp.task("testserver", function(){
