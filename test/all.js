@@ -868,12 +868,6 @@ describe("Function Converter", function () {
     });
 });
 "use strict";
-describe("Fail", function () {
-    it("should fail", function () {
-        expect(1).toBe(2);
-    });
-});
-"use strict";
 describe("Add", function () {
     it("string", function () {
         Fruits.Add("Fruit");
