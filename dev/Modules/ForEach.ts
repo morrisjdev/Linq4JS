@@ -6,7 +6,7 @@
     for (let i = 0; i < that.length; i++) {
         let result = actionFunction(that[i], i);
 
-        if(result != null && result == true){
+        if (result != null && result === true) {
             break;
         }
     }

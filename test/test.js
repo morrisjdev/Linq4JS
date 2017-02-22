@@ -1,255 +1,4 @@
 "use strict";
-QUnit.module("Function Converter");
-QUnit.test("empty string", function (assert) {
-    assert.throws(function () {
-        Linq4JS.Helper.ConvertFunction("");
-    }, /Linq4JS/);
-});
-QUnit.test("number", function (assert) {
-    assert.throws(function () {
-        Linq4JS.Helper.ConvertFunction(12);
-    }, /Linq4JS/);
-});
-QUnit.test("false string", function (assert) {
-    assert.throws(function () {
-        Linq4JS.Helper.ConvertFunction("x = x.age");
-    });
-});
-"use strict";
-QUnit.module("Add");
-QUnit.test("string", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    array.Add("Fruit");
-    x.equal(array.Count(), 9, "Count is 9");
-});
-QUnit.test("number", function (x) {
-    var array = getNumberArray();
-    x.equal(array.Count(), 14, "Count is 14");
-    array.Add(12);
-    x.equal(array.Count(), 15, "Count is 15");
-});
-QUnit.test("user", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.Add(getNewUser());
-    x.equal(array.Count(), 17, "Count is 17");
-});
-QUnit.test("null", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.Add(null);
-    x.equal(array.Count(), 16, "Count is 16");
-});
-QUnit.test("user autogenerate", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    var newUser = getNewUser();
-    array.Add(newUser, true);
-    x.equal(array.Count(), 17, "Count is 17");
-    x.equal(newUser._GeneratedId_, 1, "Auto Generated ID is 1");
-});
-"use strict";
-QUnit.module("AddRange");
-QUnit.test("strings", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    array.AddRange(["Fruit2", "test"]);
-    x.equal(array.Count(), 10, "Count is 10");
-});
-QUnit.test("numbers", function (x) {
-    var array = getNumberArray();
-    x.equal(array.Count(), 14, "Count is 14");
-    array.AddRange([12, 13]);
-    x.equal(array.Count(), 16, "Count is 16");
-});
-QUnit.test("users", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.AddRange([getNewUser(), getNewUser()]);
-    x.equal(array.Count(), 18, "Count is 18");
-});
-QUnit.test("nulls", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.AddRange([null, null]);
-    x.equal(array.Count(), 16, "Count is 16");
-});
-QUnit.test("users autogenerate", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    var newUser1 = getNewUser();
-    var newUser2 = getNewUser();
-    array.AddRange([newUser1, newUser2], true);
-    x.equal(array.Count(), 18, "Count is 18");
-    x.equal(newUser1._GeneratedId_, 1, "Auto Generated ID of newUser1 is 1");
-    x.equal(newUser2._GeneratedId_, 2, "Auto Generated ID of newUser2 is 2");
-});
-"use strict";
-QUnit.module("Any");
-QUnit.test("any", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any(), true, "Array contains any elements");
-});
-QUnit.test("age > 70", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any(function (x) { return x.Age > 70; }), true, "Array contains elements with age > 70");
-});
-QUnit.test("age > 90", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any(function (x) { return x.Age > 90; }), false, "Array contains no elements with age > 90");
-});
-QUnit.test("age < 18", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any(function (x) { return x.Age < 18; }), false, "Array contains no elements with age < 18");
-});
-QUnit.module("Any string");
-QUnit.test("any", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any(), true, "Array contains any elements");
-});
-QUnit.test("age > 70", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any("x => x.Age > 70"), true, "Array contains elements with age > 70");
-});
-QUnit.test("age > 90", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any("x => x.Age > 90"), false, "Array contains no elements with age > 90");
-});
-QUnit.test("age < 18", function (x) {
-    var array = getUserArray();
-    x.equal(array.Any("x => x.Age < 18"), false, "Array contains no elements with age < 18");
-});
-"use strict";
-QUnit.module("Count");
-QUnit.test("all", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count(), 16, "Count is 16");
-});
-QUnit.test("age > 80", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count(function (u) { return u.Age > 80; }), 2, "Count of age > 80 is 2");
-});
-QUnit.test("age < 18", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count(function (u) { return u.Age < 18; }), 0, "Count of age < 18 is 0");
-});
-QUnit.module("Count string");
-QUnit.test("all", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count(), 16, "Count is 16");
-});
-QUnit.test("age > 80", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count("u => u.Age > 80"), 2, "Count of age > 80 is 2");
-});
-QUnit.test("age < 18", function (assert) {
-    var array = getUserArray();
-    assert.equal(array.Count("u => u.Age < 18"), 0, "Count of age < 18 is 0");
-});
-"use strict";
-QUnit.module("Remove");
-QUnit.test("apple", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    array.Remove("Apple");
-    x.equal(array.Count(), 7, "Count is 7");
-});
-QUnit.test("unknown", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    x.throws(function () {
-        array.Remove("unknown");
-    }, /Linq4JS/);
-    x.equal(array.Count(), 8, "Count is 8");
-});
-QUnit.test("63", function (x) {
-    var array = getNumberArray();
-    x.equal(array.Count(), 14, "Count is 14");
-    array.Remove(63);
-    x.equal(array.Count(), 13, "Count is 13");
-});
-QUnit.test("user", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.Remove(array[3]);
-    x.equal(array.Count(), 15, "Count is 15");
-});
-QUnit.test("keyselector", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.Remove(array[3], function (x) { return x.Id; });
-    x.equal(array.Count(), 15, "Count is 15");
-});
-QUnit.test("null", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    x.throws(function () {
-        array.Remove(null);
-    }, /Linq4JS/);
-    x.equal(array.Count(), 16, "Count is 16");
-});
-"use strict";
-QUnit.module("RemoveRange");
-QUnit.test("apple, banana", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    array.RemoveRange(["Apple", "Banana"]);
-    x.equal(array.Count(), 6, "Count is 6");
-});
-QUnit.test("unknown, apple", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    x.throws(function () {
-        array.RemoveRange(["unknown", "Apple"]);
-    }, /Linq4JS/);
-    x.equal(array.Count(), 8, "Count is 8");
-});
-QUnit.test("apple, unknown", function (x) {
-    var array = getStringArray();
-    x.equal(array.Count(), 8, "Count is 8");
-    x.throws(function () {
-        array.RemoveRange(["Apple", "unknown"]);
-    }, /Linq4JS/);
-    x.equal(array.Count(), 7, "Count is 7");
-});
-QUnit.test("63, 63", function (x) {
-    var array = getNumberArray();
-    x.equal(array.Count(), 14, "Count is 14");
-    array.RemoveRange([63, 63]);
-    x.equal(array.Count(), 12, "Count is 12");
-});
-QUnit.test("users", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.RemoveRange(array.Range(2, 2));
-    x.equal(array.Count(), 14, "Count is 14");
-});
-QUnit.test("keyselector", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    array.RemoveRange(array.Range(2, 2), function (x) { return x.Id; });
-    x.equal(array.Count(), 14, "Count is 14");
-});
-QUnit.test("nulls", function (x) {
-    var array = getUserArray();
-    x.equal(array.Count(), 16, "Count is 16");
-    x.throws(function () {
-        array.RemoveRange([null, null]);
-    }, /Linq4JS/);
-    x.equal(array.Count(), 16, "Count is 16");
-});
-"use strict";
-QUnit.module("Where");
-QUnit.test("age > 70", function (x) {
-    var array = getUserArray();
-    x.equal(array.Where(function (x) { return x.Age > 70; }).Count(), 3, "Array contains 3 elements with age > 70");
-});
-QUnit.test("age > 80 && id > 10", function (x) {
-    var array = getUserArray();
-    x.equal(array.Where(function (x) { return x.Age > 80 && x.Id > 10; }).Count(), 1, "Array contains 1 element with age > 80 && id > 10");
-});
-"use strict";
 var User = (function () {
     function User(_id, _firstName, _name, _age) {
         this.Id = _id;
@@ -259,39 +8,271 @@ var User = (function () {
     }
     return User;
 }());
-var userArray = [
-    new User(1, "Brenda", "Thompson", 49),
-    new User(2, "Kelly", "Grady", 62),
-    new User(3, "Lavina", "Baskin", 34),
-    new User(4, "Corey", "Medina", 53),
-    new User(5, "Walter", "Pankey", 61),
-    new User(6, "Virginia", "Ayala", 54),
-    new User(7, "Allison", "Israel", 38),
-    new User(8, "Christine", "Starkey", 19),
-    new User(9, "Robert", "Humphreys", 22),
-    new User(10, "Daniel", "Stanley", 85),
-    new User(11, "Frank", "Brown", 73),
-    new User(12, "Juan", "Barnhart", 56),
-    new User(13, "Timothy", "Olson", 29),
-    new User(14, "Christina", "Holland", 81),
-    new User(15, "Albert", "Dunn", 58),
-    new User(16, "Kelly", "Grady", 48)
-];
-function getUserArray() {
-    return userArray.Clone();
-}
-function getNewUser() {
-    return new User(17, "Robert", "Dunnman", 32);
-}
-var stringArray = [
-    "Banana", "Apple", "Pineapple", "Coconat", "banana", "Strawberry", "Melon", "Tomato"
-];
-function getStringArray() {
-    return stringArray.Clone();
-}
-var numberArray = [
-    76, 122, 63, 782, 85, 87, 55, 63, 35, 1, -10, 63.2, 627, 1000
-];
-function getNumberArray() {
-    return numberArray.Clone();
-}
+"use strict";
+var Users = [];
+var Fruits = [];
+var Numbers = [];
+var Booleans = [];
+beforeEach(function () {
+    Users = [
+        new User(1, "Brenda", "Thompson", 49),
+        new User(2, "Kelly", "Grady", 62),
+        new User(3, "Lavina", "Baskin", 34),
+        new User(4, "Corey", "Medina", 53),
+        new User(5, "Walter", "Pankey", 61),
+        new User(6, "Virginia", "Ayala", 54),
+        new User(7, "Allison", "Israel", 38),
+        new User(8, "Christine", "Starkey", 19),
+        new User(9, "Robert", "Humphreys", 22),
+        new User(10, "Daniel", "Stanley", 85),
+        new User(11, "Frank", "Brown", 73),
+        new User(12, "Juan", "Barnhart", 56),
+        new User(13, "Timothy", "Olson", 29),
+        new User(14, "Christina", "Holland", 81),
+        new User(15, "Albert", "Dunn", 58),
+        new User(16, "Kelly", "Grady", 48)
+    ];
+    Fruits = [
+        "Banana",
+        "Apple",
+        "Pineapple",
+        "Coconut",
+        "Strawberry",
+        "Melon",
+        "Apricot",
+        "Peach",
+        "Nectarine",
+        "Pear",
+        "Quince",
+        "Lemon",
+        "Orange",
+        "Mandarin",
+        "Cherry"
+    ];
+    Numbers = [
+        76, 122, 63, 782, 85, 87, 55, 63, 35, 1, -10, 63.2, 627, 1000
+    ];
+    Booleans = [
+        true, false, false, true, false, true, true, false, false, false, true
+    ];
+});
+"use strict";
+describe("Function Converter", function () {
+    it("correct string", function () {
+        expect(function () {
+            Linq4JS.Helper.ConvertFunction("x => x");
+        }).not.toThrow();
+    });
+    it("empty string", function () {
+        expect(function () {
+            Linq4JS.Helper.ConvertFunction("");
+        }).toThrow();
+    });
+    it("number", function () {
+        expect(function () {
+            Linq4JS.Helper.ConvertFunction(12);
+        }).toThrow();
+    });
+    it("false string", function () {
+        expect(function () {
+            Linq4JS.Helper.ConvertFunction("x = x.age");
+        }).toThrow();
+    });
+});
+"use strict";
+describe("Fail", function () {
+    it("should fail", function () {
+        expect(1).toBe(2);
+    });
+});
+"use strict";
+describe("Add", function () {
+    it("string", function () {
+        Fruits.Add("Fruit");
+        expect(Fruits.Count()).toBe(16);
+    });
+    it("number", function () {
+        Numbers.Add(12);
+        expect(Numbers.Count()).toBe(15);
+    });
+    it("user", function () {
+        Users.Add(new User(5, "Walter", "Pankey", 61));
+        expect(Users.Count()).toBe(17);
+    });
+    it("null", function () {
+        Users.Add(null);
+        expect(Users.Count()).toBe(16);
+    });
+    it("auto generate", function () {
+        var newUser = new User(5, "Walter", "Pankey", 61);
+        Users.Add(newUser, true);
+        expect(Users.Count()).toBe(17);
+        expect(newUser._GeneratedId_).toBe(1);
+        var newUser2 = new User(5, "Walter", "Pankey", 61);
+        Users.Add(newUser2, true);
+        expect(Users.Count()).toBe(18);
+        expect(newUser2._GeneratedId_).toBe(2);
+    });
+});
+"use strict";
+describe("AddRange", function () {
+    it("strings", function () {
+        Fruits.AddRange(["Fruit", "another Fruit"]);
+        expect(Fruits.Count()).toBe(17);
+    });
+    it("numbers", function () {
+        Numbers.AddRange([12, 13]);
+        expect(Numbers.Count()).toBe(16);
+    });
+    it("users", function () {
+        Users.AddRange([new User(5, "Walter", "Pankey", 61), new User(6, "Walter", "Pankey", 61)]);
+        expect(Users.Count()).toBe(18);
+    });
+    it("null", function () {
+        Users.AddRange([null, null]);
+        expect(Users.Count()).toBe(16);
+    });
+    it("auto generate", function () {
+        var newUser = new User(5, "Walter", "Pankey", 61);
+        var newUser2 = new User(5, "Walter", "Pankey", 61);
+        Users.AddRange([newUser, newUser2], true);
+        expect(Users.Count()).toBe(18);
+        expect(newUser._GeneratedId_).toBe(1);
+        expect(newUser2._GeneratedId_).toBe(2);
+    });
+});
+"use strict";
+describe("Any", function () {
+    it("any", function () {
+        expect(Users.Any()).toBe(true);
+    });
+    it("age > 70", function () {
+        expect(Users.Any(function (x) { return x.Age > 70; })).toBe(true);
+    });
+    it("age > 70 (string)", function () {
+        expect(Users.Any("x => x.Age > 70")).toBe(true);
+    });
+    it("age > 90", function () {
+        expect(Users.Any(function (x) { return x.Age > 90; })).toBe(false);
+    });
+    it("age > 90 (string)", function () {
+        expect(Users.Any("x => x.Age > 90")).toBe(false);
+    });
+    it("age < 18", function () {
+        expect(Users.Any(function (x) { return x.Age < 18; })).toBe(false);
+    });
+    it("age < 18 (string)", function () {
+        expect(Users.Any("x => x.Age < 18")).toBe(false);
+    });
+});
+"use strict";
+describe("Count", function () {
+    it("all", function () {
+        expect(Users.Count()).toBe(16);
+    });
+    it("age > 80", function () {
+        expect(Users.Count(function (x) { return x.Age > 80; })).toBe(2);
+    });
+    it("age > 80 (string)", function () {
+        expect(Users.Count("x => x.Age > 80")).toBe(2);
+    });
+    it("age < 18", function () {
+        expect(Users.Count(function (x) { return x.Age < 18; })).toBe(0);
+    });
+    it("age < 18 (string)", function () {
+        expect(Users.Count("x => x.Age < 18")).toBe(0);
+    });
+});
+"use strict";
+describe("Distinct", function () {
+    it("numbers", function () {
+        expect(Numbers.Distinct().Count()).toBe(13);
+    });
+    it("booleans", function () {
+        expect(Booleans.Distinct().Count()).toBe(2);
+    });
+});
+"use strict";
+describe("Remove", function () {
+    it("apple", function () {
+        expect(Fruits.Remove("Apple").Count()).toBe(14);
+    });
+    it("unknown", function () {
+        expect(function () {
+            Fruits.Remove("unknown");
+        }).toThrow();
+        expect(Fruits.Count()).toBe(15);
+    });
+    it("63", function () {
+        expect(Numbers.Remove(63).Count()).toBe(13);
+    });
+    it("user", function () {
+        expect(Users.Remove(Users[3]).Count()).toBe(15);
+    });
+    it("user keyselector", function () {
+        expect(Users.Remove(Users[3], function (x) { return x.Id; }).Count()).toBe(15);
+    });
+    it("null", function () {
+        expect(function () {
+            Users.Remove(null);
+        }).toThrow();
+        expect(Users.Count()).toBe(16);
+    });
+});
+"use strict";
+describe("RemoveRange", function () {
+    it("apple, banana", function () {
+        expect(Fruits.RemoveRange(["Apple", "Banana"]).Count()).toBe(13);
+    });
+    it("unknown, apple", function () {
+        expect(function () {
+            Fruits.RemoveRange(["unknown", "Apple"]);
+        }).toThrow();
+    });
+    it("apple, unknown", function () {
+        expect(function () {
+            Fruits.RemoveRange(["Apple", "unknown"]);
+        }).toThrow();
+    });
+    it("63, 63", function () {
+        expect(Numbers.RemoveRange([63, 63]).Count()).toBe(12);
+    });
+    it("users", function () {
+        expect(Users.RemoveRange(Users.Range(2, 2)).Count()).toBe(14);
+    });
+    it("users keyselector", function () {
+        expect(Users.RemoveRange(Users.Range(2, 2), function (x) { return x.Id; }).Count()).toBe(14);
+    });
+    it("nulls", function () {
+        expect(function () {
+            Users.RemoveRange([null, null]);
+        }).toThrow();
+    });
+});
+"use strict";
+describe("Where", function () {
+    it("age > 70", function () {
+        expect(Users.Where(function (x) { return x.Age > 70; }).Count()).toEqual(3);
+    });
+    it("age > 70 (string)", function () {
+        expect(Users.Where("x => x.Age > 70").Count()).toEqual(3);
+    });
+    it("age > 70 && id > 10", function () {
+        expect(Users.Where(function (x) { return x.Age > 70 && x.Id > 10; }).Count()).toEqual(2);
+    });
+    it("age > 70 && id > 10 (string)", function () {
+        expect(Users.Where("x => x.Age > 70 && x.Id > 10").Count()).toEqual(2);
+    });
+    it("age > 70 && firstname.length > 6", function () {
+        expect(Users.Where(function (x) { return x.Age > 70 && x.FirstName.length > 6; }).Count()).toEqual(1);
+    });
+    it("age > 70 && firstname.length > 6 (string)", function () {
+        expect(Users.Where("x => x.Age > 70 && x.FirstName.length > 6").Count()).toEqual(1);
+    });
+    it("name contains 'in'", function () {
+        expect(Users.Where(function (x) { return x.FirstName.match(/in/) != null; }).Count()).toEqual(4);
+    });
+    it("name contains 'in' (string)", function () {
+        expect(Users.Where("x => x.FirstName.match(/in/) != null").Count()).toEqual(4);
+    });
+});

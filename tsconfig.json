@@ -4,6 +4,8 @@
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "alwaysStrict": true,
         "target": "es5",
         "outFile": "linq4js.js",

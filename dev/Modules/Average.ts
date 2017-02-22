@@ -2,13 +2,13 @@
     let that: T[] = this;
 
     let result: number = 0;
-    let array: Array<any> = that;
+    let array: any[] = that;
 
     if (filter != null) {
         array = array.Where(filter);
     }
 
-    if(selector != null){
+    if (selector != null) {
         array = array.Select(selector);
     }
 

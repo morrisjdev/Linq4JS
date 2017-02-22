@@ -3,13 +3,12 @@
 
     let result: any;
 
-    if(startVal != null){
+    if (startVal != null) {
         result = startVal;
-    }
-    else{
+    } else {
         result = "";
     }
-    
+
     let methodFunction = Linq4JS.Helper.ConvertFunction<(result: any, item: T) => any>(method);
 
     that.ForEach(function(x){

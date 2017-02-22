@@ -17,12 +17,13 @@
   "homepage": "https://github.com/morrisjdev/Linq4JS",
   "ignore": [
     ".vscode",
-    "node_modules",
     "bower_components",
-    "test",
     "demo",
+    "node_modules",
+    "test",
     ".gitignore",
     ".npmignore",
+    ".travis.yml",
     "gulpfile.js"
   ]
 }

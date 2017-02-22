@@ -7,14 +7,13 @@
         for (let i = 0; i < that.length; i++) {
             let obj: T = that[i];
 
-            if (filterFunction(obj) == true) {
+            if (filterFunction(obj) === true) {
                 return i;
             }
         }
 
         return -1;
-    }
-    else {
-        throw "Linq4JS: You must define a filter";
+    } else {
+        throw new Error("Linq4JS: You must define a filter");
     }
 };

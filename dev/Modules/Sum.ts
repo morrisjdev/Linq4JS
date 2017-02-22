@@ -2,14 +2,14 @@
     let that: T[] = this;
 
     let result: number = 0;
-    let array: Array<any> = that;
+    let array: any[] = [];
 
     if (filter != null) {
-        array = array.Where(filter);
+        array = that.Where(filter);
     }
 
-    if(selector != null){
-        array = array.Select(selector);
+    if (selector != null) {
+        array = that.Select(selector);
     }
 
     array.ForEach(function(x){

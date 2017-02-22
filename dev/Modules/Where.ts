@@ -9,15 +9,14 @@
         for (let i = 0; i < that.length; i++) {
             let obj: T = that[i];
 
-            if (filterFunction(obj, i) == true) {
+            if (filterFunction(obj, i) === true) {
                 newArray.push(obj);
             }
         }
 
         return newArray;
-    }
-    else {
-        throw "Linq4JS: You must define a filter";
+    } else {
+        throw new Error("Linq4JS: You must define a filter");
     }
 
 };

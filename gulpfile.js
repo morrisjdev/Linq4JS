@@ -1,12 +1,18 @@
 var gulp = require("gulp");
 
+var merge = require("merge2");
+var concat = require("gulp-concat");
 var minify = require("gulp-minify");
+var tslint = require("gulp-tslint");
+var watch = require("gulp-watch");
+
+var jasmine = require("gulp-jasmine");
+var jasmineBrowser = require("gulp-jasmine-browser");
+
 var typescript = require("gulp-typescript");
 var devTS = typescript.createProject("tsconfig.json");
 var demoTS = typescript.createProject("demo/tsconfig.json");
 var testTS = typescript.createProject("test/tsconfig.json");
-
-var merge = require("merge2");
 
 var browsersync = require("browser-sync").create();
 var connect = require("gulp-connect");
@@ -18,14 +24,15 @@ gulp.task("demots", function () {
         .pipe(gulp.dest("demo"));
 });
 
-gulp.task("testts", function () {
-    return testTS.src()
-        .pipe(testTS())
-        .pipe(gulp.dest("test"));
-});
-
 gulp.task("typescript", function () {
     var tsResult = devTS.src()
+        .pipe(tslint({
+            formatter: "prose"
+        }))
+        .pipe(tslint.report({
+            emitError: false,
+            summarizeFailureOutput: true
+        }))
         .pipe(devTS());
 
     return merge([
@@ -45,6 +52,34 @@ gulp.task("minifyJS", ["typescript"], function () {
             mangle: false
         }))
         .pipe(gulp.dest("dist"));
+});
+
+/*Test*/
+gulp.task("testts", function(){
+    return testTS.src()
+        .pipe(testTS())
+        .pipe(gulp.dest("test"));
+});
+
+var testFiles = [
+    "dist/linq4js.js", 
+    "test/test.js"
+];
+
+gulp.task("test", ["testts"], function(){
+    return gulp.src(testFiles)
+        .pipe(concat("all.js"))
+        .pipe(gulp.dest("test"))
+        .pipe(jasmine({
+            verbose: true
+        }));
+});
+
+gulp.task("testserver", function(){
+    return gulp.src(testFiles)
+        .pipe(watch(testFiles))
+        .pipe(jasmineBrowser.specRunner())
+        .pipe(jasmineBrowser.server({port: 15665}));
 });
 
 /*BrowserSync*/
@@ -69,11 +104,10 @@ gulp.task("server", ["browsersync"], function () {
     });
 
     gulp.watch("demo/**/*.ts", ["demots"]);
-    gulp.watch("test/**/*.ts", ["testts"]);
+    gulp.watch("test/**/*.ts", ["test"]);
     gulp.watch("dev/**/*.ts", ["typescript"]);
 
     gulp.watch("demo/**/*.html").on("change", browsersync.reload);
     gulp.watch("dist/**/*.js").on("change", browsersync.reload);
     gulp.watch("demo/**/*.js").on("change", browsersync.reload);
-    gulp.watch("test/**/*.js").on("change", browsersync.reload);
 });

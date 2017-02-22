@@ -1,8 +1,10 @@
 .vscode
-.gitignore
-node_modules
 bower_components
-test
 demo
+node_modules
+test
+.gitignore
+.npmignore
+.travis.yml
 bower.json
 gulpfile.js

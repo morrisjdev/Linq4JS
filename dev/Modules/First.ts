@@ -6,17 +6,14 @@
 
         if (result.Any()) {
             return result.Get(0);
+        } else {
+            throw new Error("Linq4JS: The First Entry was not found");
         }
-        else {
-            throw "Linq4JS: The First Entry was not found";
-        }
-    }
-    else {
+    } else {
         if (that.Any()) {
             return that.Get(0);
-        }
-        else {
-            throw "Linq4JS: The First Entry was not found";
+        } else {
+            throw new Error("Linq4JS: The First Entry was not found");
         }
     }
 };

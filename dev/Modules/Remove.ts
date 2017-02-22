@@ -4,7 +4,7 @@
     let targetIndex: number;
 
     if (object == null) {
-        throw "Linq4JS: The object cannot be null";
+        throw new Error("Linq4JS: The object cannot be null");
     }
 
     let castedObject: Linq4JS.GeneratedEntity = object as any;
@@ -13,30 +13,26 @@
         let selector = Linq4JS.Helper.ConvertFunction<(item: T) => any>(primaryKeySelector);
 
         targetIndex = that.FindIndex(function (x: T) {
-            return selector(x) == selector(object);
+            return selector(x) === selector(object);
         });
-    }
-    else if (castedObject._GeneratedId_ != null) {
+    } else if (castedObject._GeneratedId_ != null) {
         targetIndex = that.FindIndex(function (x: any) {
-            return (x as Linq4JS.GeneratedEntity)._GeneratedId_ == castedObject._GeneratedId_;
+            return (x as Linq4JS.GeneratedEntity)._GeneratedId_ === castedObject._GeneratedId_;
         });
-    }
-    else if (castedObject.Id != null) {
+    } else if (castedObject.Id != null) {
         targetIndex = that.FindIndex(function (x: any) {
-            return (x as Linq4JS.GeneratedEntity).Id == castedObject.Id;
+            return (x as Linq4JS.GeneratedEntity).Id === castedObject.Id;
         });
-    }
-    else {
+    } else {
         targetIndex = that.FindIndex(function (x: T) {
-            return x == object;
+            return x === object;
         });
     }
 
-    if (targetIndex != -1) {
+    if (targetIndex !== -1) {
         that.splice(targetIndex, 1);
-    }
-    else {
-        throw "Linq4JS: Nothing found to Remove";
+    } else {
+        throw new Error("Linq4JS: Nothing found to Remove");
     }
 
     return that;

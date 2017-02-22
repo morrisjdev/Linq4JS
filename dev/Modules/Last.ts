@@ -6,17 +6,14 @@
 
         if (result.Any()) {
             return result.Get(result.length - 1);
+        } else {
+            throw new Error("Linq4JS: The Last Entry was not found");
         }
-        else {
-            throw "Linq4JS: The Last Entry was not found";
-        }
-    }
-    else {
+    } else {
         if (that.Any()) {
             return that.Get(that.length - 1);
-        }
-        else {
-            throw "Linq4JS: The Last Entry was not found";
+        } else {
+            throw new Error("Linq4JS: The Last Entry was not found");
         }
     }
 };

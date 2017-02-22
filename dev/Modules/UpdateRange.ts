@@ -7,8 +7,7 @@
         objects.ForEach(function (x: T) {
             that.Update(x, selector);
         });
-    }
-    else {
+    } else {
         objects.ForEach(function (x: T) {
             that.Update(x);
         });

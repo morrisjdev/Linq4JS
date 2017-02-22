@@ -3,8 +3,7 @@
 
     if (filter != null) {
         return that.Where(filter).length;
-    }
-    else {
+    } else {
         return that.length;
     }
 };

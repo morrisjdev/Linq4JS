@@ -6,16 +6,13 @@
 
         if (result.Any()) {
             return result.Get(result.length - 1);
-        }
-        else {
+        } else {
             return null;
         }
-    }
-    else {
+    } else {
         if (that.Any()) {
             return that.Get(that.length - 1);
-        }
-        else {
+        } else {
             return null;
         }
     }

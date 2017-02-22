@@ -1,6 +1,6 @@
 ﻿namespace Linq4JS {
-    export class GeneratedEntity{
-        _GeneratedId_: number;
-        Id: number;
+    export class GeneratedEntity {
+        public _GeneratedId_: number;
+        public Id: number;
     }
 }

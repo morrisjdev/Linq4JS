@@ -8,6 +8,6 @@
     },
     "include": [
         "../dist/linq4js.d.ts",
-        "./**/*"
+        "./**/*.ts"
     ]
 }

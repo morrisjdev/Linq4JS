@@ -3,8 +3,8 @@
 
     let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
-    if (that.Order == null || that.Order.Count() == 0) {
-        throw "Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending";
+    if (that.Order == null || that.Order.Count() === 0) {
+        throw new Error("Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending");
     }
 
     let ordered: T[] = that;
@@ -13,9 +13,9 @@
     return ordered.sort(function (a, b) {
 
         for (let entry of ordered.Order) {
-            let result: number = Linq4JS.Helper.OrderCompareFunction(entry.ValueSelector, a, b, entry.Direction == Linq4JS.OrderDirection.Descending);
+            let result: number = Linq4JS.Helper.OrderCompareFunction(entry.ValueSelector, a, b, entry.Direction === Linq4JS.OrderDirection.Descending);
 
-            if (result != 0) {
+            if (result !== 0) {
                 return result;
             }
         }

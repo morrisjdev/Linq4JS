@@ -1,9 +1,13 @@
 {
   "typescript.tsdk": "./node_modules/typescript/lib",
   "files.exclude": {
-    ".vscode": false,
-    "dist": false,
-    "node_modules": false,
-    "bower_components": false
+    ".vscode": true,
+    "dist": true,
+    "node_modules": true,
+    "bower_components": true,
+    "test/*.js": true,
+    "demo/*.js": true,
+    ".gitignore": true,
+    ".npmignore": true
   }
 }
