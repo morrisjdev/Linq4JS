@@ -3,8 +3,9 @@ var gulp = require("gulp");
 var merge = require("merge2");
 var concat = require("gulp-concat");
 var minify = require("gulp-minify");
-var tslint = require("gulp-tslint");
 var watch = require("gulp-watch");
+var tslint = require("gulp-tslint");
+var eslint = require("gulp-eslint");
 
 var jasmine = require("gulp-jasmine");
 var jasmineBrowser = require("gulp-jasmine-browser");
@@ -25,14 +26,9 @@ gulp.task("demots", function () {
 });
 
 gulp.task("typescript", function () {
+    gulp.start("tslint");
+
     var tsResult = devTS.src()
-        .pipe(tslint({
-            formatter: "prose"
-        }))
-        .pipe(tslint.report({
-            emitError: false,
-            summarizeFailureOutput: true
-        }))
         .pipe(devTS());
 
     return merge([
@@ -86,7 +82,16 @@ gulp.task("tslint", function(){
         }));
 });
 
-gulp.task("lint", ["tslint"], function(){
+gulp.task("eslint", function(){
+    return gulp.src(["dist/**/*.js", "!dist/**/*.min.js"])
+        .pipe(eslint({
+            configFile: ".eslintrc.json"
+        }))
+        .pipe(eslint.format("stylish"))
+        .pipe(eslint.failAfterError());
+});
+
+gulp.task("lint", ["tslint", "eslint"], function(){
 
 });
 
@@ -122,11 +127,19 @@ gulp.task("server", ["browsersync"], function () {
         port: 15666
     });
 
-    gulp.watch("demo/**/*.ts", ["demots"]);
     gulp.watch("test/**/*.ts", ["test"]);
+    gulp.watch("demo/**/*.ts", ["demots"]);
     gulp.watch("dev/**/*.ts", ["typescript"]);
 
     gulp.watch("demo/**/*.html").on("change", browsersync.reload);
-    gulp.watch("dist/**/*.js").on("change", browsersync.reload);
+    gulp.watch("dist/**/*.js", ["eslint"]).on("change", browsersync.reload);
     gulp.watch("demo/**/*.js").on("change", browsersync.reload);
+});
+
+gulp.task("edit", function(){
+    gulp.watch("test/**/*.ts", ["test"]);
+    gulp.watch("dev/**/*.ts", ["typescript"]);
+    gulp.watch("dist/**/*.js", ["eslint"]);
+    gulp.watch("tslint.json", ["tslint"]);
+    gulp.watch(".eslintrc.json", ["eslint"]);
 });
