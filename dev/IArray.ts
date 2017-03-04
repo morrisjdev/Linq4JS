@@ -3,6 +3,12 @@
     GroupValue: any;
 
     /**
+     * Executes actions defined in the command-string
+     * @param command The command-string for execution
+     */
+    Evaluate(command: string): any;
+
+    /**
      * Creates a copy of the array
      */
     Clone(): T[];

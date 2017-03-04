@@ -1,38 +1,44 @@
 ﻿namespace Linq4JS {
     export class Helper {
-        private static ConvertStringFunction(functionString: string): any {
+        private static ConvertStringFunction(functionString: string, noAutoReturn?: boolean, noBracketReplace?: boolean): any {
             if (functionString.length === 0) {
                 throw new Error("Linq4JS: Cannot convert empty string to function");
             }
 
             let varnameString: string = functionString
                 .substring(0, functionString.indexOf("=>"))
-                .replace(" ", "")
-                .replace("(", "")
-                .replace(")", "");
+                .split(" ").join("")
+                .split("(").join("")
+                .split(")").join("");
 
             let varnames: string[] = varnameString.split(",");
 
             let func: string = functionString
-                .substring(functionString.indexOf("=>") + ("=>").length)
-                .replace("{", "").replace("}", "")
-                .split(".match(//gi)").join("");
+                .substring(functionString.indexOf("=>") + ("=>").length);
 
-            /*No return outside of quotations*/
-            if (func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null) {
-                func = "return " + func;
+            if (noBracketReplace == null || noBracketReplace === false) {
+                func.replace("{", "").replace("}", "");
+            }
+
+            func.split(".match(//gi)").join("");
+
+            if (noAutoReturn == null || noAutoReturn === false) {
+                /*No return outside of quotations*/
+                if (func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null) {
+                    func = "return " + func;
+                }
             }
 
             return Function(...varnames, func);
         }
 
-        public static ConvertFunction<T>(testFunction: string | T): T {
+        public static ConvertFunction<T>(testFunction: string | T, noAutoReturn?: boolean, noBracketReplace?: boolean): T {
             let result: T;
 
             if (typeof testFunction === "function") {
                 result = testFunction;
             } else if (typeof testFunction === "string") {
-                result = Linq4JS.Helper.ConvertStringFunction(testFunction);
+                result = Linq4JS.Helper.ConvertStringFunction(testFunction, noAutoReturn, noBracketReplace);
             } else {
                 throw new Error(`Linq4JS: Cannot use '${testFunction}' as function`);
             }
@@ -82,5 +88,82 @@
                 throw new Error(`Linq4JS: Cannot map type '${type}' for compare`);
             }
         }
+
+        public static SplitCommand(command: string): string[] {
+            let splitIndexes: number[] = [];
+
+            for (let cmd of this.Commands) {
+                for (let split of cmd.SplitRegex) {
+                     while (true) {
+                        let result = split.exec(command);
+                        if (result != null) {
+                            splitIndexes.push(result.index);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            let parts: string[] = [];
+
+            splitIndexes = splitIndexes.Distinct().OrderBy(x => x);
+
+            for (let i = 0; i < splitIndexes.length; i++) {
+                if (i === splitIndexes.length - 1) {
+                    parts.push(command.substr(splitIndexes[i]));
+                } else {
+                    parts.push(command.substr(splitIndexes[i], splitIndexes[i + 1] - splitIndexes[i]));
+                }
+            }
+
+            return parts;
+        }
+
+        public static MatchCommand(cmd: string): EvaluateCommandResult {
+
+            for (let command of this.Commands) {
+
+                for (let regex of command.Finder) {
+
+                    let result: RegExpMatchArray | null = cmd.match(regex);
+
+                    if (result != null) {
+                        return new EvaluateCommandResult(command.Command, result[1]);
+                    }
+                }
+
+            }
+
+            throw new Error(`Linq4JS: No matching command was found for '${cmd}'`);
+        }
+
+        public static Commands: EvaluateCommand[] = [
+            new EvaluateCommand("Clone", "clone"),
+            new EvaluateCommand("Reverse", "reverse"),
+            new EvaluateCommand("Where", "where {x}"),
+            new EvaluateCommand("Select", "select {x}"),
+            new EvaluateCommand("Get", "get {x}"),
+            new EvaluateCommand("ForEach", "foreach {x}", "for each {x}"),
+            new EvaluateCommand("Count", "count", "count {x}"),
+            new EvaluateCommand("All", "all {x}"),
+            new EvaluateCommand("Any", "any {x}", "any"),
+            new EvaluateCommand("Take", "take {x}"),
+            new EvaluateCommand("Skip", "skip {x}"),
+            new EvaluateCommand("Min", "min {x}", "min"),
+            new EvaluateCommand("Max", "max {x}", "max"),
+            new EvaluateCommand("GroupBy", "groupby {x}", "group by {x}"),
+            new EvaluateCommand("Distinct", "distinct {x}", "distinct"),
+            new EvaluateCommand("FindLastIndex", "findlastindex {x}", "find last index {x}", "findindex {x} last", "find index {x} last"),
+            new EvaluateCommand("FindIndex", "findfirstindex {x}", "find first index {x}", "findindex {x} first", "find index {x} first", "findindex {x}", "find index {x}"),
+            new EvaluateCommand("OrderByDescending", "orderby {x} descending", "order by {x} descending", "orderby descending {x}", "orderbydescending {x}", "order by descending {x}"),
+            new EvaluateCommand("OrderBy", "orderby {x} ascending", "order by {x} ascending", "orderbyascending {x}", "order by ascending {x}", "orderby {x}", "order by {x}"),
+            new EvaluateCommand("FirstOrDefault", "firstordefault {x}", "first or default {x}", "firstordefault", "first or default"),
+            new EvaluateCommand("LastOrDefault", "lastordefault {x}", "last or default {x}", "lastordefault", "last or default"),
+            new EvaluateCommand("First", "first {x}", "first"),
+            new EvaluateCommand("Last", "last {x}", "last"),
+            new EvaluateCommand("ThenByDescending", "thenby {x} descending", "then by {x} descending", "thenbydescending {x}", "then by descending {x}"),
+            new EvaluateCommand("ThenBy", "thenby {x} ascending", "then by {x} ascending", "thenbyascending {x}", "then by ascending {x}", "thenby {x}", "then by {x}")
+        ];
     }
 }

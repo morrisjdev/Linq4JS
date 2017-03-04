@@ -11,36 +11,86 @@ var Linq4JS;
 "use strict";
 var Linq4JS;
 (function (Linq4JS) {
+    var EvaluateCommand = (function () {
+        function EvaluateCommand(command) {
+            var identifier = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                identifier[_i - 1] = arguments[_i];
+            }
+            this.SplitRegex = [];
+            this.Finder = [];
+            this.Command = command;
+            for (var _a = 0, identifier_1 = identifier; _a < identifier_1.length; _a++) {
+                var id = identifier_1[_a];
+                var sSplitRegex = void 0;
+                var sFinder = void 0;
+                if (id.indexOf("{x}") !== -1) {
+                    if (id.indexOf("{x}") === id.length - 3) {
+                        sSplitRegex = "\\b" + id.replace(" {x}", "") + "\\b";
+                        sFinder = "\\b" + id.replace(" {x}", "\\b (.*)");
+                    }
+                    else {
+                        sSplitRegex = "\\b" + id.replace(" {x}", "\\b .*? \\b") + "\\b";
+                        sFinder = "\\b" + id.replace(" {x} ", "\\b (.*) \\b") + "\\b";
+                    }
+                }
+                else {
+                    sSplitRegex = "\\b" + id + "\\b";
+                    sFinder = "\\b" + id + "\\b";
+                }
+                this.Finder.push(new RegExp(sFinder, "i"));
+                this.SplitRegex.push(new RegExp(sSplitRegex, "gi"));
+            }
+        }
+        return EvaluateCommand;
+    }());
+    Linq4JS.EvaluateCommand = EvaluateCommand;
+    var EvaluateCommandResult = (function () {
+        function EvaluateCommandResult(cmd, fn) {
+            this.Command = cmd;
+            this.DynamicFunction = fn;
+        }
+        return EvaluateCommandResult;
+    }());
+    Linq4JS.EvaluateCommandResult = EvaluateCommandResult;
+})(Linq4JS || (Linq4JS = {}));
+"use strict";
+var Linq4JS;
+(function (Linq4JS) {
     var Helper = (function () {
         function Helper() {
         }
-        Helper.ConvertStringFunction = function (functionString) {
+        Helper.ConvertStringFunction = function (functionString, noAutoReturn, noBracketReplace) {
             if (functionString.length === 0) {
                 throw new Error("Linq4JS: Cannot convert empty string to function");
             }
             var varnameString = functionString
                 .substring(0, functionString.indexOf("=>"))
-                .replace(" ", "")
-                .replace("(", "")
-                .replace(")", "");
+                .split(" ").join("")
+                .split("(").join("")
+                .split(")").join("");
             var varnames = varnameString.split(",");
             var func = functionString
-                .substring(functionString.indexOf("=>") + ("=>").length)
-                .replace("{", "").replace("}", "")
-                .split(".match(//gi)").join("");
-            /*No return outside of quotations*/
-            if (func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null) {
-                func = "return " + func;
+                .substring(functionString.indexOf("=>") + ("=>").length);
+            if (noBracketReplace == null || noBracketReplace === false) {
+                func.replace("{", "").replace("}", "");
+            }
+            func.split(".match(//gi)").join("");
+            if (noAutoReturn == null || noAutoReturn === false) {
+                /*No return outside of quotations*/
+                if (func.match(/return(?=([^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/g) == null) {
+                    func = "return " + func;
+                }
             }
             return Function.apply(void 0, varnames.concat([func]));
         };
-        Helper.ConvertFunction = function (testFunction) {
+        Helper.ConvertFunction = function (testFunction, noAutoReturn, noBracketReplace) {
             var result;
             if (typeof testFunction === "function") {
                 result = testFunction;
             }
             else if (typeof testFunction === "string") {
-                result = Linq4JS.Helper.ConvertStringFunction(testFunction);
+                result = Linq4JS.Helper.ConvertStringFunction(testFunction, noAutoReturn, noBracketReplace);
             }
             else {
                 throw new Error("Linq4JS: Cannot use '" + testFunction + "' as function");
@@ -90,8 +140,77 @@ var Linq4JS;
                 throw new Error("Linq4JS: Cannot map type '" + type + "' for compare");
             }
         };
+        Helper.SplitCommand = function (command) {
+            var splitIndexes = [];
+            for (var _i = 0, _a = this.Commands; _i < _a.length; _i++) {
+                var cmd = _a[_i];
+                for (var _b = 0, _c = cmd.SplitRegex; _b < _c.length; _b++) {
+                    var split = _c[_b];
+                    while (true) {
+                        var result = split.exec(command);
+                        if (result != null) {
+                            splitIndexes.push(result.index);
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+            }
+            var parts = [];
+            splitIndexes = splitIndexes.Distinct().OrderBy(function (x) { return x; });
+            for (var i = 0; i < splitIndexes.length; i++) {
+                if (i === splitIndexes.length - 1) {
+                    parts.push(command.substr(splitIndexes[i]));
+                }
+                else {
+                    parts.push(command.substr(splitIndexes[i], splitIndexes[i + 1] - splitIndexes[i]));
+                }
+            }
+            return parts;
+        };
+        Helper.MatchCommand = function (cmd) {
+            for (var _i = 0, _a = this.Commands; _i < _a.length; _i++) {
+                var command = _a[_i];
+                for (var _b = 0, _c = command.Finder; _b < _c.length; _b++) {
+                    var regex = _c[_b];
+                    var result = cmd.match(regex);
+                    if (result != null) {
+                        return new Linq4JS.EvaluateCommandResult(command.Command, result[1]);
+                    }
+                }
+            }
+            throw new Error("Linq4JS: No matching command was found for '" + cmd + "'");
+        };
         return Helper;
     }());
+    Helper.Commands = [
+        new Linq4JS.EvaluateCommand("Clone", "clone"),
+        new Linq4JS.EvaluateCommand("Reverse", "reverse"),
+        new Linq4JS.EvaluateCommand("Where", "where {x}"),
+        new Linq4JS.EvaluateCommand("Select", "select {x}"),
+        new Linq4JS.EvaluateCommand("Get", "get {x}"),
+        new Linq4JS.EvaluateCommand("ForEach", "foreach {x}", "for each {x}"),
+        new Linq4JS.EvaluateCommand("Count", "count", "count {x}"),
+        new Linq4JS.EvaluateCommand("All", "all {x}"),
+        new Linq4JS.EvaluateCommand("Any", "any {x}", "any"),
+        new Linq4JS.EvaluateCommand("Take", "take {x}"),
+        new Linq4JS.EvaluateCommand("Skip", "skip {x}"),
+        new Linq4JS.EvaluateCommand("Min", "min {x}", "min"),
+        new Linq4JS.EvaluateCommand("Max", "max {x}", "max"),
+        new Linq4JS.EvaluateCommand("GroupBy", "groupby {x}", "group by {x}"),
+        new Linq4JS.EvaluateCommand("Distinct", "distinct {x}", "distinct"),
+        new Linq4JS.EvaluateCommand("FindLastIndex", "findlastindex {x}", "find last index {x}", "findindex {x} last", "find index {x} last"),
+        new Linq4JS.EvaluateCommand("FindIndex", "findfirstindex {x}", "find first index {x}", "findindex {x} first", "find index {x} first", "findindex {x}", "find index {x}"),
+        new Linq4JS.EvaluateCommand("OrderByDescending", "orderby {x} descending", "order by {x} descending", "orderby descending {x}", "orderbydescending {x}", "order by descending {x}"),
+        new Linq4JS.EvaluateCommand("OrderBy", "orderby {x} ascending", "order by {x} ascending", "orderbyascending {x}", "order by ascending {x}", "orderby {x}", "order by {x}"),
+        new Linq4JS.EvaluateCommand("FirstOrDefault", "firstordefault {x}", "first or default {x}", "firstordefault", "first or default"),
+        new Linq4JS.EvaluateCommand("LastOrDefault", "lastordefault {x}", "last or default {x}", "lastordefault", "last or default"),
+        new Linq4JS.EvaluateCommand("First", "first {x}", "first"),
+        new Linq4JS.EvaluateCommand("Last", "last {x}", "last"),
+        new Linq4JS.EvaluateCommand("ThenByDescending", "thenby {x} descending", "then by {x} descending", "thenbydescending {x}", "then by descending {x}"),
+        new Linq4JS.EvaluateCommand("ThenBy", "thenby {x} ascending", "then by {x} ascending", "thenbyascending {x}", "then by ascending {x}", "thenby {x}", "then by {x}")
+    ];
     Linq4JS.Helper = Helper;
 })(Linq4JS || (Linq4JS = {}));
 "use strict";
@@ -219,6 +338,18 @@ Array.prototype.Distinct = function (valueSelector) {
     }
 };
 "use strict";
+Array.prototype.Evaluate = function (command) {
+    var that = this;
+    var commandParts = Linq4JS.Helper.SplitCommand(command);
+    var computeObject = that;
+    for (var _i = 0, commandParts_1 = commandParts; _i < commandParts_1.length; _i++) {
+        var cmd = commandParts_1[_i];
+        var cmdResult = Linq4JS.Helper.MatchCommand(cmd);
+        computeObject = computeObject[cmdResult.Command](cmdResult.DynamicFunction);
+    }
+    return computeObject;
+};
+"use strict";
 Array.prototype.FindIndex = function (filter) {
     var that = this;
     if (filter != null) {
@@ -297,7 +428,7 @@ Array.prototype.FirstOrDefault = function (filter) {
 "use strict";
 Array.prototype.ForEach = function (action) {
     var that = this;
-    var actionFunction = Linq4JS.Helper.ConvertFunction(action);
+    var actionFunction = Linq4JS.Helper.ConvertFunction(action, true);
     for (var i = 0; i < that.length; i++) {
         var result = actionFunction(that[i], i);
         if (result != null && result === true) {
@@ -537,7 +668,34 @@ Array.prototype.Reverse = function () {
 "use strict";
 Array.prototype.Select = function (selector) {
     var that = this;
-    var selectorFunction = Linq4JS.Helper.ConvertFunction(selector);
+    var selectorWork = selector;
+    if (typeof selectorWork === "string") {
+        var selectStatement = selectorWork.substr(selectorWork.indexOf("=>") + ("=>").length);
+        if (selectStatement.match(/^\s*{.*}\s*$/) != null) {
+            selectStatement = selectStatement.replace(/^\s*{(.*)}\s*$/, "$1");
+            var parts = selectStatement.split(",");
+            var newContent = "";
+            for (var i = 0; i < parts.length; i++) {
+                var part = parts[i];
+                if (part.indexOf(":") !== -1) {
+                    newContent += part;
+                }
+                else if (part.indexOf("=") !== -1) {
+                    newContent += part.replace("=", ":");
+                }
+                else {
+                    var values = part.split(".");
+                    var name_1 = values[values.length - 1];
+                    newContent += name_1 + ":" + part;
+                }
+                if (i < parts.length - 1) {
+                    newContent += ",";
+                }
+            }
+            selectorWork = selectorWork.substr(0, selectorWork.indexOf("=>")) + "=> return {" + newContent + "}";
+        }
+    }
+    var selectorFunction = Linq4JS.Helper.ConvertFunction(selectorWork, false, true);
     var newArray = new Array();
     for (var _i = 0, that_2 = that; _i < that_2.length; _i++) {
         var obj = that_2[_i];
@@ -784,4 +942,16 @@ var Linq4JS;
         OrderDirection[OrderDirection["Ascending"] = 0] = "Ascending";
         OrderDirection[OrderDirection["Descending"] = 1] = "Descending";
     })(OrderDirection = Linq4JS.OrderDirection || (Linq4JS.OrderDirection = {}));
+})(Linq4JS || (Linq4JS = {}));
+"use strict";
+var Linq4JS;
+(function (Linq4JS) {
+    var SelectEntry = (function () {
+        function SelectEntry(n, p) {
+            this.name = n;
+            this.property = p;
+        }
+        return SelectEntry;
+    }());
+    Linq4JS.SelectEntry = SelectEntry;
 })(Linq4JS || (Linq4JS = {}));

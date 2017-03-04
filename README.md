@@ -1,14 +1,14 @@
 # Linq4JS [![Build Status](https://travis-ci.org/morrisjdev/Linq4JS.svg?branch=master)](https://travis-ci.org/morrisjdev/Linq4JS)
 
-Linq methods for JavaScript/TypeScript for working with Arrays
+Linq methods for JavaScript/TypeScript for working with arrays
 
-This simple Extension works with array of complex Objects as well as simple arrays of strings etc. The whole thing is written in TypeScript but also usable in JavaScript
+This simple extension works with array of complex objects as well as simple arrays of strings etc. The whole thing is written in TypeScript but also usable in JavaScript
 
 ## Advantages
 
-This Extension is lightweight and fast and you can use your Lambda-Expression-Syntax to work with Arrays. The methods are mostly identically to .NET methods.
+This extension is lightweight and fast and you can use your Lambda-Expression-Syntax to work with arrays. The methods are mostly identically to .NET methods.
 
-As Expressions you can use the normal Function-Syntax:
+As expressions you can use the normal Function-Syntax:
 
 ```javascript
 array.Where(function(x){
@@ -28,7 +28,21 @@ or Lambda-Expressions as Strings (this Syntax works in IE):
 array.Where("x => x.Name == 'Max'");
 ```
 
-Conclusion:
+### SQL-Like
+
+Also a complete procedure as an sql-like string is supported
+
+```
+clone
+reverse
+where x => x.Age > 70
+order by x => x.Name
+then by x => x.FirstName descending
+for each x => console.log(x)
+select x => {x.Name}
+```
+
+### Conclusion
 
 * Works with multiple Browsers (even IE)
 * Angular Support (event directly in Views if using Strings as Expression-Syntax)
@@ -557,6 +571,20 @@ array.Select("i => i.Value");
 array.Select("i => {Custom: i.Id, Name: i.Value}");
 ```
 
+When using the string syntax it is also possible to assign objects by the following methods
+```javascript
+var array = [{Id: 1, Value: "item1"}, {Id: 2, Value: "item2"}];
+	
+//[{Value: item1}, {Value: item2}]
+array.Select("i => {i.Value}");
+
+//[{C: item1}, {C: item2}]
+array.Select("i => {C: i.Value}");
+
+//[{C: item1}, {C: item2}]
+array.Select("i => {C = i.Value}");
+```
+
 ### Take
 
 Limits the number of entries taken
@@ -706,6 +734,58 @@ var array = ["item1", "item2", "item2", "item3", "item4"];
 array.Distinct("x => x");
 array.Distinct();
 ```
+
+### Evaluate
+
+Evaluates SQL-String for array
+
+```javascript
+var array = [...];
+
+array.Evaluate("...");
+```
+
+Example SQL-string
+
+```
+clone
+reverse
+where x => x.Age > 70
+order by x => x.Name
+then by x => x.FirstName descending
+for each x => console.log(x)
+select x => {x.Name}
+```
+
+Supported methods (the methodname and aliases are not case-sensitive)
+
+| Methodname        | Alias                                                                                                                     | Examples                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| Clone             |                                                                                                                           | clone                            |
+| Reverse           |                                                                                                                           | reverse                          |
+| Where             |                                                                                                                           | where x => x.Id > 3              |
+| Select            |                                                                                                                           | select x => x.Id                 |
+| Get               |                                                                                                                           | get 4                            |
+| ForEach           | for each                                                                                                                  | for each x => console.log(x)     |
+| Count             |                                                                                                                           | count x => x.Id                  |
+| All               |                                                                                                                           | all x => x.Age > 4               |
+| Any               |                                                                                                                           | any x => x.Age > 4               |
+| Take              |                                                                                                                           | take 3                           |
+| Skip              |                                                                                                                           | skip 3                           |
+| Min               |                                                                                                                           | min x => x.Age                   |
+| Max               |                                                                                                                           | max x => x.Age                   |
+| GroupBy           | group by                                                                                                                  | group by x => x.Name             |
+| Distinct          |                                                                                                                           | distinct x => x.Id               |
+| FindLastIndex     | find last index<br>find index ... last<br>findindex ... last                                                                  | find index x => x.Age == 3 last  |
+| FindIndex         | find index<br>find first index<br>findfirstindex<br>find index ... first<br>findindex ... first                                   | find index x => x.Age == 3 first |
+| OrderByDescending | order by ... descending<br>orderby ... descending<br>orderby descending<br>order by descending<br>orderbydescending               | order by x => x.Age descending   |
+| OrderBy           | order by ... ascending<br>orderby ... ascending<br>orderby ascending<br>order by ascending<br>orderbyascending<br>order by<br>orderby | order by x => x.Age ascending    |
+| FirstOrDefault    | first or default                                                                                                          | first or default                 |
+| LastOrDefault     | last or default                                                                                                           | last or default                  |
+| First             |                                                                                                                           | first                            |
+| Last              |                                                                                                                           | last                             |
+| ThenByDescending  | thenby ... descending<br>then by ... descending<br>thenbydescending<br>then by descending                                       | then by x => x.Name descending   |
+| ThenBy            | thenby ... ascending<br>then by ... ascending<br>thenbyascending<br>then byascending<br>thenby<br>then by                           | then by x => x.Name ascending    |
 
 ## Author
 

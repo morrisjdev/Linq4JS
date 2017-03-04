@@ -11,6 +11,16 @@
 <body>
     <h1>TypeScript HTML App</h1>
 
-    <div id="content"></div>
+    <div id="arrayPreview"></div><br>
+
+    <textarea id="sqltext" cols="200" rows="15" onchange="updateFunction()" onkeyup="updateFunction()" placeholder="Custom command"></textarea>
+    
+    <div id="error"></div>
+
+    <h3>Result</h3>
+    
+    <div id="resultdisplay">
+        
+    </div>
 </body>
 </html>

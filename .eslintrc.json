@@ -2,7 +2,7 @@
     "rules": {
         "no-cond-assign": "error",
         "no-console": "error",
-        "no-constant-condition": "error",
+        //"no-constant-condition": "error",
         "no-control-regex": "error",
         "no-dupe-args": "error",
         "no-dupe-keys": "error",
