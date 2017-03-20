@@ -9,7 +9,7 @@
         if (selectStatement.match(/^\s*{.*}\s*$/) != null) {
             selectStatement = selectStatement.replace(/^\s*{(.*)}\s*$/, "$1");
 
-            let parts = selectStatement.split(",");
+            let parts = selectStatement.split(/,(?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)/g);
             let newContent = "";
 
             for (let i = 0; i < parts.length; i++) {

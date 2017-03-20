@@ -2,6 +2,7 @@ var gulp = require("gulp");
 
 var merge = require("merge2");
 var concat = require("gulp-concat");
+var sourcemaps = require("gulp-sourcemaps");
 var minify = require("gulp-minify");
 var watch = require("gulp-watch");
 var tslint = require("gulp-tslint");
@@ -28,13 +29,11 @@ gulp.task("demots", function () {
 gulp.task("typescript", function () {
     gulp.start("tslint");
 
-    var tsResult = devTS.src()
-        .pipe(devTS());
-
-    return merge([
-        tsResult.dts.pipe(gulp.dest("dist")),
-        tsResult.js.pipe(gulp.dest("dist"))
-    ]);
+    return devTS.src()
+        .pipe(sourcemaps.init())
+        .pipe(devTS())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest("dist"));
 });
 
 gulp.task("minifyJS", ["typescript"], function () {

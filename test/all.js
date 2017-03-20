@@ -100,8 +100,9 @@ var Linq4JS;
         Helper.OrderCompareFunction = function (valueSelector, a, b, invert) {
             var value_a = valueSelector(a);
             var value_b = valueSelector(b);
-            var type = typeof value_a;
-            if (type === "string") {
+            var type_a = typeof value_a;
+            var type_b = typeof value_b;
+            if (type_a === "string" && type_a === type_b) {
                 var value_a_string = value_a;
                 value_a_string = value_a_string.toLowerCase();
                 var value_b_string = value_b;
@@ -116,12 +117,12 @@ var Linq4JS;
                     return 0;
                 }
             }
-            else if (type === "number") {
+            else if (type_a === "number" && type_a === type_b) {
                 var value_a_number = value_a;
                 var value_b_number = value_b;
                 return invert === true ? value_b_number - value_a_number : value_a_number - value_b_number;
             }
-            else if (type === "boolean") {
+            else if (type_a === "boolean" && type_a === type_b) {
                 var value_a_bool = value_a;
                 var value_b_bool = value_b;
                 if (value_a_bool === value_b_bool) {
@@ -137,7 +138,16 @@ var Linq4JS;
                 }
             }
             else {
-                throw new Error("Linq4JS: Cannot map type '" + type + "' for compare");
+                if (type_a === "undefined" && type_a === type_b) {
+                    return 0;
+                }
+                else if (type_a === "undefined") {
+                    return invert ? 1 : -1;
+                }
+                else if (type_b === "undefined") {
+                    return invert ? -1 : 1;
+                }
+                return 0;
             }
         };
         Helper.SplitCommand = function (command) {
@@ -221,7 +231,7 @@ Array.prototype.Add = function (object, generateId) {
         if (generateId === true) {
             var newIndex_1;
             var castedObject = object;
-            var last = that.LastOrDefault();
+            var last = that.Where(function (x) { return x._GeneratedId_ != null; }).OrderBy(function (x) { return x._GeneratedId_; }).LastOrDefault();
             if (last != null) {
                 newIndex_1 = last._GeneratedId_ != null ? last._GeneratedId_ : 1;
                 while (that.Any(function (x) {
@@ -673,7 +683,7 @@ Array.prototype.Select = function (selector) {
         var selectStatement = selectorWork.substr(selectorWork.indexOf("=>") + ("=>").length);
         if (selectStatement.match(/^\s*{.*}\s*$/) != null) {
             selectStatement = selectStatement.replace(/^\s*{(.*)}\s*$/, "$1");
-            var parts = selectStatement.split(",");
+            var parts = selectStatement.split(/,(?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)/g);
             var newContent = "";
             for (var i = 0; i < parts.length; i++) {
                 var part = parts[i];

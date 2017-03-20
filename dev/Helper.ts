@@ -50,9 +50,10 @@
             let value_a: any = valueSelector(a);
             let value_b: any = valueSelector(b);
 
-            let type: string = typeof value_a;
+            let type_a: string = typeof value_a;
+            let type_b: string = typeof value_b;
 
-            if (type === "string") {
+            if (type_a === "string" && type_a === type_b) {
                 let value_a_string: string = value_a;
                 value_a_string = value_a_string.toLowerCase();
                 let value_b_string: string = value_b;
@@ -66,12 +67,12 @@
                     return 0;
                 }
 
-            } else if (type === "number") {
+            } else if (type_a === "number" && type_a === type_b) {
                 let value_a_number: number = value_a;
                 let value_b_number: number = value_b;
 
                 return invert === true ? value_b_number - value_a_number : value_a_number - value_b_number;
-            } else if (type === "boolean") {
+            } else if (type_a === "boolean" && type_a === type_b) {
                 let value_a_bool: boolean = value_a;
                 let value_b_bool: boolean = value_b;
 
@@ -85,7 +86,15 @@
                     }
                 }
             } else {
-                throw new Error(`Linq4JS: Cannot map type '${type}' for compare`);
+                if (type_a === "undefined" && type_a === type_b) {
+                    return 0;
+                } else if (type_a === "undefined") {
+                    return invert ? 1 : -1;
+                } else if (type_b === "undefined") {
+                    return invert ? -1 : 1;
+                }
+
+                return 0;
             }
         }
 

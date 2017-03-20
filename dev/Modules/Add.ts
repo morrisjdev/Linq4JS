@@ -6,7 +6,7 @@
             let newIndex: number;
 
             let castedObject: Linq4JS.GeneratedEntity = object as any;
-            let last: Linq4JS.GeneratedEntity = that.LastOrDefault() as any;
+            let last: Linq4JS.GeneratedEntity = that.Where((x: any) => x._GeneratedId_ != null).OrderBy((x: any) => x._GeneratedId_).LastOrDefault() as any;
             if (last != null) {
                 newIndex = last._GeneratedId_ != null ? last._GeneratedId_ : 1;
 

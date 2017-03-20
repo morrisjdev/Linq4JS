@@ -1,6 +1,6 @@
 {
   "name": "linq4js",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
   "main": "dist/linq4js.js",
   "typings": "dist/linq4js.d.ts",
@@ -35,6 +35,7 @@
     "gulp-jasmine": "^2.4.2",
     "gulp-jasmine-browser": "^1.7.1",
     "gulp-minify": "0.0.14",
+    "gulp-sourcemaps": "^2.4.1",
     "gulp-tslint": "^7.1.0",
     "gulp-typescript": "^3.1.4",
     "gulp-watch": "^4.3.11",
