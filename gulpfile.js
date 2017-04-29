@@ -19,6 +19,8 @@ var testTS = typescript.createProject("test/tsconfig.json");
 var browsersync = require("browser-sync").create();
 var connect = require("gulp-connect");
 
+var typedoc = require("gulp-typedoc");
+
 /*JS*/
 gulp.task("demots", function () {
     return demoTS.src()
@@ -103,6 +105,18 @@ gulp.task("testserver", function(){
         .pipe(watch(testFiles))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({port: 15665}));
+});
+
+/*Doc*/
+gulp.task("typedoc", function(){
+    return gulp.src(["dev/**/*.ts"])
+        .pipe(typedoc({
+            module: "commonjs",
+            target: "es5",
+            out: "docs",
+            name: "Linq4JS",
+            theme: "minimal"
+        }));
 });
 
 /*BrowserSync*/
