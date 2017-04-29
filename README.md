@@ -491,6 +491,47 @@ array.FirstOrDefault("i => i.match(/item/gi)");
 array.First("i => i == 'notgiven'");
 ```
 
+### Single
+
+Returns the only item of the array - Throws an exception if not exactly one item is in array
+
+```javascript
+var array = ["item1"];
+
+//"item1"
+array.Single();
+
+var array = ["item1", "item2"];
+
+//"item1"
+array.Single("x => x == 'item1'");
+
+//Exception
+array.Single();
+```
+
+### SingleOrDefault
+
+Returns the only item of the array - Throws an exception if not only one item is in array
+
+```javascript
+var array = ["item1"];
+
+//"item1"
+array.Single();
+
+var array = ["item1", "item2"];
+
+//"item1"
+array.Single("x => x == 'item1'");
+
+//Exception
+array.Single();
+
+//null
+array.Single("x => x == 'item3'");
+```
+
 ### Min
 
 Returns the smallest element in array
