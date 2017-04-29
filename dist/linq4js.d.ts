@@ -143,6 +143,16 @@ interface Array<T> {
      */
     FirstOrDefault(filter?: ((item: T) => boolean) | string): (T | null);
     /**
+     * Returns the only item of the array - Throws an exception if not exactly one item is in array
+     * @param filter If set the function returns the only item that matches the filter
+     */
+    Single(filter?: ((item: T) => boolean) | string): T;
+    /**
+     * Returns the only item of the array - Throws an exception if not only one item is in array
+     * @param filter If set the function returns the only item that matches the filter
+     */
+    SingleOrDefault(filter?: ((item: T) => boolean) | string): (T | null);
+    /**
      * Returns the last item of the array - Throws an exception if no item was found
      * @param filter If set the function returns the last item that matches the filter
      */
