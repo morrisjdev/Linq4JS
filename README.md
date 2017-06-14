@@ -77,7 +77,19 @@ Include this line in your project
 
 ### Using TypeScript
 
-Same thing, but also copy `linq4js.d.ts` to your project folder to get the tooling support.
+Use
+
+```
+import "linq4js";
+```
+
+or 
+
+```html
+<script type="text/javascript" src="linq4js.js"></script>
+```
+
+to import the scripts and optionally (if you are not using npm) install `@types/linq4js` to also get tooling support.
 
 ## Usage
 
