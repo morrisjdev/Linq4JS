@@ -1,11 +1,9 @@
-Array.prototype.Min = function <T>(this: T[], valueSelector?: ((item: T) => any) | string): (T | null) {
-    let that: T[] = this;
-
+Linq4JS.Helper.NonEnumerable("Min", function <T>(this: T[], valueSelector?: ((item: T) => any) | string): (T | null) {
     if (valueSelector != null) {
         let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
-        return that.OrderBy(valueSelectorFunction).FirstOrDefault();
+        return this.OrderBy(valueSelectorFunction).FirstOrDefault();
     } else {
-        return that.OrderBy(x => x).FirstOrDefault();
+        return this.OrderBy(x => x).FirstOrDefault();
     }
-};
+});

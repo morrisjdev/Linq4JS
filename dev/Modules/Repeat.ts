@@ -1,9 +1,7 @@
-Array.prototype.Repeat = function <T>(this: T[], object: T, count: number): T[] {
-    let that: T[] = this;
-
+Linq4JS.Helper.NonEnumerable("Repeat", function <T>(this: T[], object: T, count: number): T[] {
     for (let i = 0; i < count; i++) {
-        that.Add(object);
+        this.Add(object);
     }
 
-    return that;
-};
+    return this;
+});

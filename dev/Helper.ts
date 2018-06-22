@@ -103,7 +103,7 @@
 
             for (let cmd of this.Commands) {
                 for (let split of cmd.SplitRegex) {
-                     while (true) {
+                    while (true) {
                         let result = split.exec(command);
                         if (result != null) {
                             splitIndexes.push(result.index);
@@ -150,13 +150,19 @@
         public static Commands: EvaluateCommand[] = [
             new EvaluateCommand("Clone", "clone"),
             new EvaluateCommand("Reverse", "reverse"),
+            new EvaluateCommand("Contains", "contains {x}"),
+            new EvaluateCommand("Join", "join {x}"),
+            new EvaluateCommand("Sum", "sum {x}", "sum"),
+            new EvaluateCommand("Average", "average {x}", "average"),
             new EvaluateCommand("Where", "where {x}"),
+            new EvaluateCommand("SelectMany", "selectmany {x}", "select many {x}", "select {x} many"),
             new EvaluateCommand("Select", "select {x}"),
             new EvaluateCommand("Get", "get {x}"),
             new EvaluateCommand("ForEach", "foreach {x}", "for each {x}"),
             new EvaluateCommand("Count", "count", "count {x}"),
             new EvaluateCommand("All", "all {x}"),
             new EvaluateCommand("Any", "any {x}", "any"),
+            new EvaluateCommand("TakeWhile", "take while {x}", "take {x} while", "takewhile {x}"),
             new EvaluateCommand("Take", "take {x}"),
             new EvaluateCommand("Skip", "skip {x}"),
             new EvaluateCommand("Min", "min {x}", "min"),
@@ -176,5 +182,17 @@
             new EvaluateCommand("ThenByDescending", "thenby {x} descending", "then by {x} descending", "thenbydescending {x}", "then by descending {x}"),
             new EvaluateCommand("ThenBy", "thenby {x} ascending", "then by {x} ascending", "thenbyascending {x}", "then by ascending {x}", "thenby {x}", "then by {x}")
         ];
+
+        public static NonEnumerable(name: string, value: Function) {
+            Object.defineProperty(Array.prototype, name, {
+                value: value,
+                enumerable: false
+            });
+        }
     }
 }
+
+Object.defineProperty(Array.prototype, "_linq4js_", {
+    value: { Order: [] },
+    enumerable: false
+});

@@ -1,5 +1,3 @@
-﻿Array.prototype.Take = function<T> (this: T[], count: number): T[] {
-    let that: T[] = this;
-
-    return that.slice(0, count);
-};
+﻿Linq4JS.Helper.NonEnumerable("Take", function<T> (this: T[], count: number): T[] {
+    return this.slice(0, count);
+});

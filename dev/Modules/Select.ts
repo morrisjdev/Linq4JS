@@ -1,6 +1,4 @@
-﻿Array.prototype.Select = function<T> (this: T[], selector: ((item: T) => any) | string): any[] {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Select", function<T> (this: T[], selector: ((item: T) => any) | string): any[] {
     let selectorWork: ((item: T) => any) | string = selector;
 
     if (typeof selectorWork === "string") {
@@ -38,9 +36,9 @@
 
     let newArray: any[] = new Array();
 
-    for (let obj of that) {
+    for (let obj of this) {
         newArray.Add(selectorFunction(obj));
     }
 
     return newArray;
-};
+});

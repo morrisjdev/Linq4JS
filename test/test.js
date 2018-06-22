@@ -1,5 +1,5 @@
 "use strict";
-var User = (function () {
+var User = /** @class */ (function () {
     function User(_id, _firstName, _name, _age) {
         this.Id = _id;
         this.FirstName = _firstName;
@@ -8,7 +8,6 @@ var User = (function () {
     }
     return User;
 }());
-"use strict";
 var Users = [];
 var Fruits = [];
 var Numbers = [];
@@ -56,7 +55,6 @@ beforeEach(function () {
         true, false, false, true, false, true, true, false, false, false, true
     ];
 });
-"use strict";
 describe("Function Converter", function () {
     it("correct string", function () {
         expect(function () {
@@ -79,7 +77,6 @@ describe("Function Converter", function () {
         }).toThrow();
     });
 });
-"use strict";
 describe("Add", function () {
     it("string", function () {
         Fruits.Add("Fruit");
@@ -108,7 +105,6 @@ describe("Add", function () {
         expect(newUser2._GeneratedId_).toBe(2);
     });
 });
-"use strict";
 describe("AddRange", function () {
     it("strings", function () {
         Fruits.AddRange(["Fruit", "another Fruit"]);
@@ -135,7 +131,6 @@ describe("AddRange", function () {
         expect(newUser2._GeneratedId_).toBe(2);
     });
 });
-"use strict";
 describe("Any", function () {
     it("any", function () {
         expect(Users.Any()).toBe(true);
@@ -159,7 +154,6 @@ describe("Any", function () {
         expect(Users.Any("x => x.Age < 18")).toBe(false);
     });
 });
-"use strict";
 describe("Count", function () {
     it("all", function () {
         expect(Users.Count()).toBe(16);
@@ -177,7 +171,6 @@ describe("Count", function () {
         expect(Users.Count("x => x.Age < 18")).toBe(0);
     });
 });
-"use strict";
 describe("Distinct", function () {
     it("numbers", function () {
         expect(Numbers.Distinct().Count()).toBe(13);
@@ -186,7 +179,6 @@ describe("Distinct", function () {
         expect(Booleans.Distinct().Count()).toBe(2);
     });
 });
-"use strict";
 describe("Remove", function () {
     it("apple", function () {
         expect(Fruits.Remove("Apple").Count()).toBe(14);
@@ -213,7 +205,6 @@ describe("Remove", function () {
         expect(Users.Count()).toBe(16);
     });
 });
-"use strict";
 describe("RemoveRange", function () {
     it("apple, banana", function () {
         expect(Fruits.RemoveRange(["Apple", "Banana"]).Count()).toBe(13);
@@ -243,7 +234,6 @@ describe("RemoveRange", function () {
         }).toThrow();
     });
 });
-"use strict";
 describe("Where", function () {
     it("age > 70", function () {
         expect(Users.Where(function (x) { return x.Age > 70; }).Count()).toEqual(3);

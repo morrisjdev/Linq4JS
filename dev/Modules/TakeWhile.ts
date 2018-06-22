@@ -1,9 +1,8 @@
-﻿Array.prototype.TakeWhile = function<T> (
+﻿Linq4JS.Helper.NonEnumerable("TakeWhile", function<T> (
     this: T[],
     condition: ((item: T, storage?: any) => boolean) | string,
     initial?: ((storage: any) => void) | string,
     after?: ((item: T, storage: any) => void) | string): T[] {
-    let that: T[] = this;
 
     let conditionFunction: (item: T, storage?: any) => boolean =
         Linq4JS.Helper.ConvertFunction<(item: T, storage?: any) => boolean>(condition);
@@ -23,17 +22,15 @@
 
     let result: T[] = [];
 
-    for (let object of that){
+    for (let object of this){
         if (conditionFunction(object, storage) === true) {
             result.Add(object);
 
             if (afterFunction != null) {
                 afterFunction(object, storage);
             }
-        } else {
-            break;
         }
     }
 
     return result;
-};
+});

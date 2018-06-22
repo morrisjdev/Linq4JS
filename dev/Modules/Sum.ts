@@ -1,15 +1,13 @@
-﻿Array.prototype.Sum = function <T>(this: T[], selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Sum", function <T>(this: T[], selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number {
     let result: number = 0;
-    let array: any[] = [];
+    let array: any[] = this;
 
     if (filter != null) {
-        array = that.Where(filter);
+        array = array.Where(filter);
     }
 
     if (selector != null) {
-        array = that.Select(selector);
+        array = array.Select(selector);
     }
 
     array.ForEach(function(x){
@@ -17,4 +15,4 @@
     });
 
     return result;
-};
+});

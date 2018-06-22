@@ -1,8 +1,6 @@
-Array.prototype.SingleOrDefault = function<T> (this: T[], filter?: ((item: T) => boolean) | string): (T | null) {
-    let that: T[] = this;
-
+Linq4JS.Helper.NonEnumerable("SingleOrDefault", function<T> (this: T[], filter?: ((item: T) => boolean) | string): (T | null) {
     if (filter != null) {
-        let result: T[] = that.Where(filter);
+        let result: T[] = this.Where(filter);
 
         if (result.Count() === 1) {
             return result.Get(0);
@@ -14,14 +12,14 @@ Array.prototype.SingleOrDefault = function<T> (this: T[], filter?: ((item: T) =>
             }
         }
     } else {
-        if (that.Count() === 1) {
-            return that.Get(0);
+        if (this.Count() === 1) {
+            return this.Get(0);
         } else {
-            if (that.Count() > 1) {
+            if (this.Count() > 1) {
                 throw new Error("Linq4JS: The array contains more than one element");
             } else {
                 return null;
             }
         }
     }
-};
+});

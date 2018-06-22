@@ -1,4 +1,3 @@
-﻿Array.prototype.Reverse = function <T>(this: T[]): T[] {
-    let that: T[] = this;
-    return that.reverse();
-};
+﻿Linq4JS.Helper.NonEnumerable("Reverse", function <T>(this: T[]): T[] {
+    return this.reverse();
+});

@@ -932,7 +932,8 @@ img { max-width: 100%; }
 </code></pre>
 			<h3 id="sql-like">SQL-Like</h3>
 			<p>Also a complete procedure as an sql-like string is supported</p>
-			<pre><code>clone
+			<pre><code>array.Evaluate(<span class="hljs-string">"select x =&gt; x.Id sum"</span>)<span class="hljs-comment">;</span>
+</code></pre><pre><code>clone
 reverse
 where <span class="hljs-keyword">x</span> =&gt; <span class="hljs-keyword">x</span>.Age &gt; <span class="hljs-number">70</span>
 order by <span class="hljs-keyword">x</span> =&gt; <span class="hljs-keyword">x</span>.Name
@@ -960,7 +961,12 @@ for each <span class="hljs-keyword">x</span> =&gt; console.log(<span class="hljs
 			<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"linq4js.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 			<h3 id="using-typescript">Using TypeScript</h3>
-			<p>Same thing, but also copy <code>linq4js.d.ts</code> to your project folder to get the tooling support.</p>
+			<p>Use</p>
+			<pre><code><span class="hljs-keyword">import</span> <span class="hljs-string">"linq4js"</span>;
+</code></pre><p>or </p>
+			<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"linq4js.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+			<p>to import the scripts and optionally (if you are not using npm) install <code>@types/linq4js</code> to also get tooling support.</p>
 			<h2 id="usage">Usage</h2>
 			<h3 id="clone">Clone</h3>
 			<p>Creates a copy of the array</p>
@@ -1245,6 +1251,39 @@ array.FirstOrDefault(<span class="hljs-string">"i =&gt; i.match(/item/gi)"</span
 <span class="hljs-comment">//null</span>
 array.First(<span class="hljs-string">"i =&gt; i == 'notgiven'"</span>);
 </code></pre>
+			<h3 id="single">Single</h3>
+			<p>Returns the only item of the array - Throws an exception if not exactly one item is in array</p>
+			<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-string">"item1"</span>];
+
+<span class="hljs-comment">//"item1"</span>
+array.Single();
+
+<span class="hljs-keyword">var</span> array = [<span class="hljs-string">"item1"</span>, <span class="hljs-string">"item2"</span>];
+
+<span class="hljs-comment">//"item1"</span>
+array.Single(<span class="hljs-string">"x =&gt; x == 'item1'"</span>);
+
+<span class="hljs-comment">//Exception</span>
+array.Single();
+</code></pre>
+			<h3 id="singleordefault">SingleOrDefault</h3>
+			<p>Returns the only item of the array - Throws an exception if not only one item is in array</p>
+			<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-string">"item1"</span>];
+
+<span class="hljs-comment">//"item1"</span>
+array.Single();
+
+<span class="hljs-keyword">var</span> array = [<span class="hljs-string">"item1"</span>, <span class="hljs-string">"item2"</span>];
+
+<span class="hljs-comment">//"item1"</span>
+array.Single(<span class="hljs-string">"x =&gt; x == 'item1'"</span>);
+
+<span class="hljs-comment">//Exception</span>
+array.Single();
+
+<span class="hljs-comment">//null</span>
+array.Single(<span class="hljs-string">"x =&gt; x == 'item3'"</span>);
+</code></pre>
 			<h3 id="min">Min</h3>
 			<p>Returns the smallest element in array</p>
 			<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">-3</span>];
@@ -1316,6 +1355,13 @@ array.Select(<span class="hljs-string">"i =&gt; {C: i.Value}"</span>);
 
 <span class="hljs-comment">//[{C: item1}, {C: item2}]</span>
 array.Select(<span class="hljs-string">"i =&gt; {C = i.Value}"</span>);
+</code></pre>
+			<h3 id="selectmany">SelectMany</h3>
+			<p>Select the properties with an array as value and concats them</p>
+			<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> array = [[<span class="hljs-string">"item1"</span>, <span class="hljs-string">"item2"</span>], [<span class="hljs-string">"item1"</span>, <span class="hljs-string">"item2"</span>]];
+
+<span class="hljs-comment">//["item1", "item2", "item1", "item2"]</span>
+array.SelectMany(<span class="hljs-string">"i =&gt; i"</span>);
 </code></pre>
 			<h3 id="take">Take</h3>
 			<p>Limits the number of entries taken</p>
@@ -1629,6 +1675,7 @@ for each <span class="hljs-keyword">x</span> =&gt; console.log(<span class="hljs
 							<li class="tsd-kind-external-module"><a href="modules/_modules_repeat_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Repeat"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_modules_reverse_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Reverse"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_modules_select_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Select"</a></li>
+							<li class="tsd-kind-external-module"><a href="modules/_modules_selectmany_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Select<wbr>Many"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_modules_sequenceequal_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Sequence<wbr>Equal"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_modules_single_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Single"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_modules_singleordefault_.html" class="tsd-kind-icon">"<wbr>Modules/<wbr>Single<wbr>OrDefault"</a></li>

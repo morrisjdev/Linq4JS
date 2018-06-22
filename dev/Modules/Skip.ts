@@ -1,5 +1,3 @@
-﻿Array.prototype.Skip = function<T> (this: T[], count: number): T[] {
-    let that: T[] = this;
-
-    return that.slice(count, that.Count());
-};
+﻿Linq4JS.Helper.NonEnumerable("Skip", function<T> (this: T[], count: number): T[] {
+    return this.slice(count, this.Count());
+});

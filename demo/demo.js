@@ -1,10 +1,11 @@
 "use strict";
 var User = (function () {
-    function User(_id, _firstName, _name, _age) {
+    function User(_id, _firstName, _name, _age, _pets) {
         this.Id = _id;
         this.FirstName = _firstName;
         this.Name = _name;
         this.Age = _age;
+        this.Pets = _pets;
     }
     return User;
 }());
@@ -77,22 +78,22 @@ console.log(array.FindLastIndex(x => x == "item2"));
 //console.log(test);
 //console.log(test.Count(x => x.Id > 3));
 var userArray = [
-    new User(1, "Brenda", "Thompson", 49),
-    new User(2, "Kelly", "Grady", 62),
-    new User(3, "Lavina", "Baskin", 34),
-    new User(4, "Corey", "Medina", 53),
-    new User(5, "Walter", "Pankey", 61),
-    new User(6, "Virginia", "Ayala", 54),
-    new User(7, "Allison", "Israel", 38),
-    new User(8, "Christine", "Starkey", 19),
-    new User(9, "Robert", "Humphreys", 22),
-    new User(10, "Daniel", "Stanley", 85),
-    new User(11, "Frank", "Brown", 73),
-    new User(12, "Juan", "Barnhart", 56),
-    new User(13, "Timothy", "Olson", 29),
-    new User(14, "Christina", "Holland", 81),
-    new User(15, "Albert", "Dunn", 58),
-    new User(16, "Kelly", "Grady", 48)
+    new User(1, "Brenda", "Thompson", 49, ["Dog", "Cat"]),
+    new User(2, "Kelly", "Grady", 62, ["Dog", "Cat"]),
+    new User(3, "Lavina", "Baskin", 34, ["Dog", "Cat"]),
+    new User(4, "Corey", "Medina", 53, ["Dog", "Cat"]),
+    new User(5, "Walter", "Pankey", 61, ["Dog", "Cat"]),
+    new User(6, "Virginia", "Ayala", 54, ["Dog", "Cat"]),
+    new User(7, "Allison", "Israel", 38, ["Dog", "Cat"]),
+    new User(8, "Christine", "Starkey", 19, ["Dog", "Cat"]),
+    new User(9, "Robert", "Humphreys", 22, ["Dog", "Cat"]),
+    new User(10, "Daniel", "Stanley", 85, ["Dog", "Cat"]),
+    new User(11, "Frank", "Brown", 73, ["Dog", "Cat"]),
+    new User(12, "Juan", "Barnhart", 56, ["Dog", "Cat"]),
+    new User(13, "Timothy", "Olson", 29, ["Dog", "Cat"]),
+    new User(14, "Christina", "Holland", 81, ["Dog", "Cat"]),
+    new User(15, "Albert", "Dunn", 58, ["Dog", "Cat"]),
+    new User(16, "Kelly", "Grady", 48, ["Dog", "Cat"])
 ];
 window.onload = function () {
     arrayPreview.innerHTML = JSON.stringify(userArray);

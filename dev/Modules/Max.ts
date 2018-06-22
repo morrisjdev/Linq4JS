@@ -1,10 +1,8 @@
-Array.prototype.Max = function <T>(this: T[], valueSelector?: ((item: T) => any) | string): (T | null) {
-    let that: T[] = this;
-
+Linq4JS.Helper.NonEnumerable("Max", function <T>(this: T[], valueSelector?: ((item: T) => any) | string): (T | null) {
     if (valueSelector != null) {
         let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
-        return that.OrderBy(valueSelectorFunction).LastOrDefault();
+        return this.OrderBy(valueSelectorFunction).LastOrDefault();
     } else {
-        return that.OrderBy(x => x).LastOrDefault();
+        return this.OrderBy(x => x).LastOrDefault();
     }
-};
+});

@@ -1,6 +1,4 @@
-﻿Array.prototype.Aggregate = function<T> (this: T[], method: ((result: any, item: T) => any) | string, startVal?: any): string {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Aggregate", function<T> (this: T[], method: ((result: any, item: T) => any) | string, startVal?: any): string {
     let result: any;
 
     if (startVal != null) {
@@ -11,9 +9,9 @@
 
     let methodFunction = Linq4JS.Helper.ConvertFunction<(result: any, item: T) => any>(method);
 
-    that.ForEach(function(x){
+    this.ForEach(function(x){
         result = methodFunction(result, x);
     });
 
     return result;
-};
+});

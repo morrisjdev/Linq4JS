@@ -1,4 +1,4 @@
-﻿Array.prototype.RemoveRange = function<T> (this: T[], objects: T[], primaryKeySelector?: ((item: T) => any) | string): T[] {
+﻿Linq4JS.Helper.NonEnumerable("RemoveRange", function<T> (this: T[], objects: T[], primaryKeySelector?: ((item: T) => any) | string): T[] {
     let that: T[] = this;
 
     if (primaryKeySelector != null) {
@@ -14,4 +14,4 @@
     }
 
     return that;
-};
+});

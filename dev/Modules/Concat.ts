@@ -1,5 +1,3 @@
-﻿Array.prototype.Concat = function<T> (this: T[], array: T[]): T[] {
-    let that: T[] = this;
-    that = that.concat(array);
-    return that;
-};
+﻿Linq4JS.Helper.NonEnumerable("Concat", function<T> (this: T[], array: T[]): T[] {
+    return this.concat(array);
+});

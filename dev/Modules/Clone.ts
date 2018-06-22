@@ -1,11 +1,9 @@
-﻿Array.prototype.Clone = function<T> (this: T[]): T[] {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Clone", function<T> (this: T[]): T[] {
     let newArray: T[] = [];
 
-    for (let obj of that) {
+    for (let obj of this) {
         newArray.Add(obj);
     }
 
     return newArray;
-};
+});

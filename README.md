@@ -33,6 +33,10 @@ array.Where("x => x.Name == 'Max'");
 Also a complete procedure as an sql-like string is supported
 
 ```
+array.Evaluate("select x => x.Id sum");
+```
+
+```
 clone
 reverse
 where x => x.Age > 70
@@ -636,6 +640,17 @@ array.Select("i => {C: i.Value}");
 
 //[{C: item1}, {C: item2}]
 array.Select("i => {C = i.Value}");
+```
+
+### SelectMany
+
+Select the properties with an array as value and concats them
+
+```javascript
+var array = [["item1", "item2"], ["item1", "item2"]];
+	
+//["item1", "item2", "item1", "item2"]
+array.SelectMany("i => i");
 ```
 
 ### Take

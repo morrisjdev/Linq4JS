@@ -1,9 +1,7 @@
-﻿Array.prototype.Count = function <T>(this: T[], filter?: ((item: T) => boolean) | string): number {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Count", function <T>(this: T[], filter?: ((item: T) => boolean) | string): number {
     if (filter != null) {
-        return that.Where(filter).length;
+        return this.Where(filter).length;
     } else {
-        return that.length;
+        return this.length;
     }
-};
+});

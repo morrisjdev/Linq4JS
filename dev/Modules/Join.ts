@@ -1,11 +1,9 @@
-﻿Array.prototype.Join = function <T>(this: T[], char: string, selector?: ((item: T) => any) | string): string {
-    let that: T[] = this;
-
-    let array: any[] = that;
+﻿Linq4JS.Helper.NonEnumerable("Join", function <T>(this: T[], char: string, selector?: ((item: T) => any) | string): string {
+    let array: any[] = this;
 
     if (selector != null) {
-        array = that.Select(selector);
+        array = this.Select(selector);
     }
 
     return array.join(char);
-};
+});

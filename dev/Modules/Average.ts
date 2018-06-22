@@ -1,8 +1,6 @@
-﻿Array.prototype.Average = function <T>(this: T[], selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("Average", function <T>(this: T[], selector?: ((item: T) => any) | string, filter?: ((item: T) => boolean) | string): number {
     let result: number = 0;
-    let array: any[] = that;
+    let array: any[] = this;
 
     if (filter != null) {
         array = array.Where(filter);
@@ -17,4 +15,4 @@
     });
 
     return result / array.Count();
-};
+});

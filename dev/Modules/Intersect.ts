@@ -1,9 +1,9 @@
-Array.prototype.Intersect = function<T> (this: T[], array: T[]): T[] {
+Linq4JS.Helper.NonEnumerable("Intersect", function<T> (this: T[], array: T[]): T[] {
     let that: T[] = this;
 
     let newArray: T[] = [];
 
-    that.ForEach(x => {
+    this.ForEach(x => {
         if (array.Contains(x)) {
             newArray.Add(x);
         }
@@ -16,4 +16,4 @@ Array.prototype.Intersect = function<T> (this: T[], array: T[]): T[] {
     });
 
     return newArray.Distinct();
-};
+});

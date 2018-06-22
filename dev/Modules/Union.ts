@@ -1,4 +1,3 @@
-﻿Array.prototype.Union = function<T> (this: T[], array: T[]): T[] {
-    let that: T[] = this;
-    return that.Concat(array).Distinct();
-};
+﻿Linq4JS.Helper.NonEnumerable("Union", function<T> (this: T[], array: T[]): T[] {
+    return this.Concat(array).Distinct();
+});

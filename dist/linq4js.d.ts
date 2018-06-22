@@ -25,11 +25,14 @@ declare namespace Linq4JS {
         static SplitCommand(command: string): string[];
         static MatchCommand(cmd: string): EvaluateCommandResult;
         static Commands: EvaluateCommand[];
+        static NonEnumerable(name: string, value: Function): void;
     }
 }
 interface Array<T> {
-    Order: Linq4JS.OrderEntry[];
-    GroupValue: any;
+    _linq4js_: {
+        Order: Linq4JS.OrderEntry[];
+        GroupValue: any;
+    };
     /**
      * Executes actions defined in the command-string
      * @param command The command-string for execution
@@ -167,6 +170,11 @@ interface Array<T> {
      * @param selector A function (or a function-string) that returns a new object
      */
     Select(selector: ((item: T) => any) | string): any[];
+    /**
+     * Select the properties with an array as value and concats them
+     * @param selector A function (or a function-string) that returns the array with elements to select
+     */
+    SelectMany(selector: ((item: T) => any) | string): any[];
     /**
      * Limits the number of entries taken
      * @param count The count of elements taken

@@ -1,11 +1,9 @@
-﻿Array.prototype.GroupBy = function<T> (this: T[], selector: ((item: T) => any) | string): T[][] {
-    let that: T[] = this;
-
+﻿Linq4JS.Helper.NonEnumerable("GroupBy", function<T> (this: T[], selector: ((item: T) => any) | string): T[][] {
     let selectorFunction: (item: T) => any = Linq4JS.Helper.ConvertFunction<(item: T) => any>(selector);
 
     let newArray: T[][] = [];
 
-    let ordered: T[] = that.OrderBy(selectorFunction);
+    let ordered: T[] = this.OrderBy(selectorFunction);
 
     let prev: T;
     let newSub: T[] = [];
@@ -15,10 +13,10 @@
             if (selectorFunction(prev) !== selectorFunction(x)) {
                 newArray.Add(newSub);
                 newSub = [];
-                newSub.GroupValue = selectorFunction(x);
+                newSub._linq4js_.GroupValue = selectorFunction(x);
             }
         } else {
-            newSub.GroupValue = selectorFunction(x);
+            newSub._linq4js_.GroupValue = selectorFunction(x);
         }
 
         newSub.Add(x);
@@ -30,4 +28,4 @@
     }
 
     return newArray;
-};
+});

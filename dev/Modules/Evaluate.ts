@@ -1,9 +1,7 @@
-Array.prototype.Evaluate = function<T> (this: T[], command: string): any {
-    let that: T[] = this;
-
+Linq4JS.Helper.NonEnumerable("Evaluate", function<T> (this: T[], command: string): any {
     let commandParts: string[] = Linq4JS.Helper.SplitCommand(command);
 
-    let computeObject: any = that;
+    let computeObject: any = this;
 
     for (let cmd of commandParts) {
         let cmdResult = Linq4JS.Helper.MatchCommand(cmd);
@@ -12,4 +10,4 @@ Array.prototype.Evaluate = function<T> (this: T[], command: string): any {
     }
 
     return computeObject;
-};
+});
