@@ -1,5 +1,5 @@
-﻿Linq4JS.Helper.NonEnumerable("Select", function<T> (this: T[], selector: ((item: T) => any) | string): any[] {
-    let selectorWork: ((item: T) => any) | string = selector;
+﻿Linq4JS.Helper.NonEnumerable("Select", function<T, Y> (this: T[], selector: ((item: T) => Y) | string): Y[] {
+    let selectorWork: ((item: T) => Y) | string = selector;
 
     if (typeof selectorWork === "string") {
         let selectStatement = selectorWork.substr(selectorWork.indexOf("=>") + ("=>").length);
@@ -34,7 +34,7 @@
 
     let selectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(selectorWork, false, true);
 
-    let newArray: any[] = new Array();
+    let newArray: Y[] = [];
 
     for (let obj of this) {
         newArray.Add(selectorFunction(obj));

@@ -1,7 +1,7 @@
 {
   "name": "linq4js",
-  "version": "2.1.9",
-  "description": "Linq methods for JavaScript/TypeScript for working with Arrays",
+  "version": "2.2.1",
+  "description": "Linq methods for JavaScript/TypeScript to work with Arrays",
   "main": "dist/linq4js.js",
   "typings": "dist/linq4js.d.ts",
   "repository": {
@@ -44,5 +44,9 @@
     "tslint": "^4.4.2",
     "typedoc": "^0.6.0",
     "typescript": "^2.1.5"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }

@@ -5,7 +5,7 @@
         for (let i = 0; i < this.length; i++) {
             let obj: T = this[i];
 
-            if (filterFunction(obj) === true) {
+            if (filterFunction(obj)) {
                 return i;
             }
         }

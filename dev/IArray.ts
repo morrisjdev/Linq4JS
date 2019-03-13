@@ -74,6 +74,7 @@
     /**
      * Adds objects to the array
      * @param objects The array of objects to add
+     * @param generateId Auto-generate a property to identify object in later processes
      */
     AddRange(objects: T[], generateId?: boolean): T[];
 
@@ -162,13 +163,13 @@
      * Select the properties for a new array
      * @param selector A function (or a function-string) that returns a new object
      */
-    Select(selector: ((item: T) => any) | string): any[];
+    Select<Y>(selector: ((item: T) => Y) | string): Y[];
 
     /**
      * Select the properties with an array as value and concats them
      * @param selector A function (or a function-string) that returns the array with elements to select
      */
-    SelectMany(selector: ((item: T) => any) | string): any[];
+    SelectMany<Y>(selector: ((item: T) => Y[]) | string): Y[];
 
     /**
      * Limits the number of entries taken
@@ -310,7 +311,7 @@
      * @param array The array to combine
      * @param result The function (or function-string) to combine elements
      */
-    Zip<T, X>(array: X[], result: ((first: T, second: X) => any) | string): any[];
+    Zip<T, X, Y>(array: X[], result: ((first: T, second: X) => Y) | string): Y[];
 
     /**
      * Combines two arrays without duplicates
@@ -323,5 +324,6 @@
      * @param keySelector The selector-function (or function-string) to select property for key
      * @param valueSelector A selector-function (or function-string) to select property for value
      */
-    ToDictionary(keySelector: ((item: T) => any) | string, valueSelector?: ((item: T) => any) | string): any;
+    ToDictionary<Y>(keySelector: ((item: T) => (string|number)) | string, valueSelector?: ((item: T) => Y) | string):
+        { [prop: string]: Y, [prop: number]: Y };
 }

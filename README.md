@@ -827,33 +827,41 @@ select x => {x.Name}
 
 Supported methods (the methodname and aliases are not case-sensitive)
 
-| Methodname        | Alias                                                                                                                     | Examples                         |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| Clone             |                                                                                                                           | clone                            |
-| Reverse           |                                                                                                                           | reverse                          |
-| Where             |                                                                                                                           | where x => x.Id > 3              |
-| Select            |                                                                                                                           | select x => x.Id                 |
-| Get               |                                                                                                                           | get 4                            |
-| ForEach           | for each                                                                                                                  | for each x => console.log(x)     |
-| Count             |                                                                                                                           | count x => x.Id                  |
-| All               |                                                                                                                           | all x => x.Age > 4               |
-| Any               |                                                                                                                           | any x => x.Age > 4               |
-| Take              |                                                                                                                           | take 3                           |
-| Skip              |                                                                                                                           | skip 3                           |
-| Min               |                                                                                                                           | min x => x.Age                   |
-| Max               |                                                                                                                           | max x => x.Age                   |
-| GroupBy           | group by                                                                                                                  | group by x => x.Name             |
-| Distinct          |                                                                                                                           | distinct x => x.Id               |
-| FindLastIndex     | find last index<br>find index ... last<br>findindex ... last                                                                  | find index x => x.Age == 3 last  |
-| FindIndex         | find index<br>find first index<br>findfirstindex<br>find index ... first<br>findindex ... first                                   | find index x => x.Age == 3 first |
-| OrderByDescending | order by ... descending<br>orderby ... descending<br>orderby descending<br>order by descending<br>orderbydescending               | order by x => x.Age descending   |
+| Methodname        | Alias                                                                                                                                 | Examples                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| Clone             |                                                                                                                                       | clone                            |
+| Reverse           |                                                                                                                                       | reverse                          |
+| Contains          |                                                                                                                                       | contains 5                       |
+| Join              |                                                                                                                                       | join 5                           |
+| Sum               |                                                                                                                                       | sum                              |
+| Average           |                                                                                                                                       | average                          |
+| Where             |                                                                                                                                       | where x => x.Id > 3              |
+| Select            |                                                                                                                                       | select x => x.Id                 |
+| SelectMany        | select many<br> select ... many                                                                                                       | select many x => x.Pets          |
+| Get               |                                                                                                                                       | get 4                            |
+| ForEach           | for each                                                                                                                              | for each x => console.log(x)     |
+| Count             |                                                                                                                                       | count x => x.Id                  |
+| All               |                                                                                                                                       | all x => x.Age > 4               |
+| Any               |                                                                                                                                       | any x => x.Age > 4               |
+| Take              |                                                                                                                                       | take 3                           |
+| TakeWhile         | take while<br> take ... while                                                                                                         | take while x => x.Age > 10       |
+| Skip              |                                                                                                                                       | skip 3                           |
+| Min               |                                                                                                                                       | min x => x.Age                   |
+| Max               |                                                                                                                                       | max x => x.Age                   |
+| GroupBy           | group by                                                                                                                              | group by x => x.Name             |
+| Distinct          |                                                                                                                                       | distinct x => x.Id               |
+| FindLastIndex     | find last index<br>find index ... last<br>findindex ... last                                                                          | find index x => x.Age == 3 last  |
+| FindIndex         | find index<br>find first index<br>findfirstindex<br>find index ... first<br>findindex ... first                                       | find index x => x.Age == 3 first |
+| OrderByDescending | order by ... descending<br>orderby ... descending<br>orderby descending<br>order by descending<br>orderbydescending                   | order by x => x.Age descending   |
 | OrderBy           | order by ... ascending<br>orderby ... ascending<br>orderby ascending<br>order by ascending<br>orderbyascending<br>order by<br>orderby | order by x => x.Age ascending    |
-| FirstOrDefault    | first or default                                                                                                          | first or default                 |
-| LastOrDefault     | last or default                                                                                                           | last or default                  |
-| First             |                                                                                                                           | first                            |
-| Last              |                                                                                                                           | last                             |
-| ThenByDescending  | thenby ... descending<br>then by ... descending<br>thenbydescending<br>then by descending                                       | then by x => x.Name descending   |
-| ThenBy            | thenby ... ascending<br>then by ... ascending<br>thenbyascending<br>then byascending<br>thenby<br>then by                           | then by x => x.Name ascending    |
+| FirstOrDefault    | first or default                                                                                                                      | first or default                 |
+| LastOrDefault     | last or default                                                                                                                       | last or default                  |
+| SingleOrDefault   | single or default                                                                                                                     | single or default                |
+| First             |                                                                                                                                       | first                            |
+| Last              |                                                                                                                                       | last                             |
+| Single            |                                                                                                                                       | single                           |
+| ThenByDescending  | thenby ... descending<br>then by ... descending<br>thenbydescending<br>then by descending                                             | then by x => x.Name descending   |
+| ThenBy            | thenby ... ascending<br>then by ... ascending<br>thenbyascending<br>then byascending<br>thenby<br>then by                             | then by x => x.Name ascending    |
 
 ## Author
 

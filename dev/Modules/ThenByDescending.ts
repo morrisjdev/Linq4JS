@@ -1,7 +1,7 @@
 ﻿Linq4JS.Helper.NonEnumerable("ThenByDescending", function<T> (this: T[], valueSelector: ((item: T) => any) | string): T[] {
     let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
-    if (this._linq4js_.Order == null || this._linq4js_.Order.Count() === 0) {
+    if (this._linq4js_ == null || this._linq4js_.Order == null || this._linq4js_.Order.Count() === 0) {
         throw new Error("Linq4JS: Please call OrderBy or OrderByDescending before ThenByDescending");
     }
 

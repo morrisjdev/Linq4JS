@@ -189,10 +189,12 @@
                 enumerable: false
             });
         }
+
+        public static CreateArrayData(array: any[], value: any = {}) {
+            Object.defineProperty(array, "_linq4js_", {
+               value: value,
+               enumerable: false
+            });
+        }
     }
 }
-
-Object.defineProperty(Array.prototype, "_linq4js_", {
-    value: { Order: [] },
-    enumerable: false
-});

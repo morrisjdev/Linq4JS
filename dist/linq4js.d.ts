@@ -19,13 +19,14 @@ declare namespace Linq4JS {
 }
 declare namespace Linq4JS {
     class Helper {
-        private static ConvertStringFunction(functionString, noAutoReturn?, noBracketReplace?);
+        private static ConvertStringFunction;
         static ConvertFunction<T>(testFunction: string | T, noAutoReturn?: boolean, noBracketReplace?: boolean): T;
         static OrderCompareFunction<T>(valueSelector: (item: T) => any, a: T, b: T, invert: boolean): number;
         static SplitCommand(command: string): string[];
         static MatchCommand(cmd: string): EvaluateCommandResult;
         static Commands: EvaluateCommand[];
         static NonEnumerable(name: string, value: Function): void;
+        static CreateArrayData(array: any[], value?: any): void;
     }
 }
 interface Array<T> {
@@ -95,6 +96,7 @@ interface Array<T> {
     /**
      * Adds objects to the array
      * @param objects The array of objects to add
+     * @param generateId Auto-generate a property to identify object in later processes
      */
     AddRange(objects: T[], generateId?: boolean): T[];
     /**
@@ -169,12 +171,12 @@ interface Array<T> {
      * Select the properties for a new array
      * @param selector A function (or a function-string) that returns a new object
      */
-    Select(selector: ((item: T) => any) | string): any[];
+    Select<Y>(selector: ((item: T) => Y) | string): Y[];
     /**
      * Select the properties with an array as value and concats them
      * @param selector A function (or a function-string) that returns the array with elements to select
      */
-    SelectMany(selector: ((item: T) => any) | string): any[];
+    SelectMany<Y>(selector: ((item: T) => Y[]) | string): Y[];
     /**
      * Limits the number of entries taken
      * @param count The count of elements taken
@@ -291,7 +293,7 @@ interface Array<T> {
      * @param array The array to combine
      * @param result The function (or function-string) to combine elements
      */
-    Zip<T, X>(array: X[], result: ((first: T, second: X) => any) | string): any[];
+    Zip<T, X, Y>(array: X[], result: ((first: T, second: X) => Y) | string): Y[];
     /**
      * Combines two arrays without duplicates
      * @param array The array to combine
@@ -302,7 +304,10 @@ interface Array<T> {
      * @param keySelector The selector-function (or function-string) to select property for key
      * @param valueSelector A selector-function (or function-string) to select property for value
      */
-    ToDictionary(keySelector: ((item: T) => any) | string, valueSelector?: ((item: T) => any) | string): any;
+    ToDictionary<Y>(keySelector: ((item: T) => (string | number)) | string, valueSelector?: ((item: T) => Y) | string): {
+        [prop: string]: Y;
+        [prop: number]: Y;
+    };
 }
 declare namespace Linq4JS {
     class OrderEntry {
@@ -312,7 +317,7 @@ declare namespace Linq4JS {
     }
     enum OrderDirection {
         Ascending = 0,
-        Descending = 1,
+        Descending = 1
     }
 }
 declare namespace Linq4JS {

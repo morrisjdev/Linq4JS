@@ -13,9 +13,11 @@
             if (selectorFunction(prev) !== selectorFunction(x)) {
                 newArray.Add(newSub);
                 newSub = [];
+                Linq4JS.Helper.CreateArrayData(newSub, {});
                 newSub._linq4js_.GroupValue = selectorFunction(x);
             }
         } else {
+            Linq4JS.Helper.CreateArrayData(newSub, {});
             newSub._linq4js_.GroupValue = selectorFunction(x);
         }
 

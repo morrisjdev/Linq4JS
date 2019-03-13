@@ -2,6 +2,7 @@
     let valueSelectorFunction = Linq4JS.Helper.ConvertFunction<(item: T) => any>(valueSelector);
 
     let ordered: T[] = this.Clone();
+    Linq4JS.Helper.CreateArrayData(ordered, {});
     ordered._linq4js_.Order = new Array<Linq4JS.OrderEntry>(new Linq4JS.OrderEntry(Linq4JS.OrderDirection.Descending, valueSelectorFunction));
 
     return ordered.sort(function (a, b) {
