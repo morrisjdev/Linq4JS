@@ -36,6 +36,10 @@
 
     let newArray: Y[] = [];
 
+    if (this._linq4js_ && this._linq4js_.GroupValue) {
+        newArray._linq4js_ = { GroupValue: this._linq4js_.GroupValue, Order: [] };
+    }
+
     for (let obj of this) {
         newArray.Add(selectorFunction(obj));
     }
